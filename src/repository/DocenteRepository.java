@@ -3,12 +3,14 @@ package repository;
 import entity.Docente;
 import entity.Papel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DocenteRepository {
     public List<Docente> listaDocentes;
 
-    DocenteRepository(){
+    public DocenteRepository(){
+        listaDocentes = new ArrayList<Docente>();
         listaDocentes.add(new Docente(
                 123,
                 "Geraldo",

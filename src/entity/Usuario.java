@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.List;
+
 public class Usuario {
     private Integer id;
     private String nome;
@@ -8,6 +10,7 @@ public class Usuario {
     private Papel papel;
     private Boolean ativo;
 
+    private List<Oportunidade> listaDeOp;
     public Usuario(Integer id, String nome, String email, String senha, Papel papel, Boolean ativo) {
         this.id = id;
         this.nome = nome;
@@ -63,5 +66,9 @@ public class Usuario {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public List<Oportunidade> getListaOportunidades(){
+        return listaDeOp;
     }
 }

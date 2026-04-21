@@ -5,12 +5,14 @@ import entity.Papel;
 
 import repository.CursoRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DiscenteRepository {
     public List<Discente> listaDiscente;
 
     public DiscenteRepository() {
+        listaDiscente = new ArrayList<Discente>();
         CursoRepository listaCurso = new CursoRepository();
         listaDiscente.add(new Discente(
                 123,
