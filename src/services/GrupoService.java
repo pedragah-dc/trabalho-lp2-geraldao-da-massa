@@ -1,6 +1,5 @@
 package services;
 
-import entity.Grupo;
 import entity.Usuario;
 
 public class GrupoService {

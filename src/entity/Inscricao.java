@@ -54,7 +54,7 @@ public class Inscricao {
         this.motivacao = motivacao;
     }
 
-    public void aprovar(Discente dis){
+    public void aprovar(Discente discente){
     }
     public void rejeitar(){
 

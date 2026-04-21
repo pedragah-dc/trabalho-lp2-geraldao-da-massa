@@ -10,16 +10,15 @@ import java.util.List;
 
 
 public class InscricaoService {
-    private List<Inscricao> modelSubs;
+    private List<Inscricao> listIncricoes;
 
     public InscricaoService() {
-        modelSubs = new ArrayList<Inscricao>();
+        listIncricoes = new ArrayList<Inscricao>();
     }
-    public void criarInscricao(Oportunidade op, Discente id_dis, String motiv){
-        Inscricao node = new Inscricao(op, id_dis, motiv);
-        modelSubs.add(node);
-        node.setStatus(StatusInscricao.PENDENTE);
-        System.out.println("INSCRICAO CRIADA COM SUCESSO");
+    public void criarInscricao(Oportunidade oportunidade, Discente discente, String motivo){
+        Inscricao inscricao = new Inscricao(oportunidade, discente, motivo);
+        listIncricoes.add(inscricao);
+        inscricao.setStatus(StatusInscricao.PENDENTE);
     }
 
     public void aprovar(){
@@ -30,7 +29,7 @@ public class InscricaoService {
     }
     //metodos
     public String getInscricao(){
-        return modelSubs.get(0).getOportunidade().getTitulo();
+        return listIncricoes.get(0).getOportunidade().getTitulo();
     }
 
 }
