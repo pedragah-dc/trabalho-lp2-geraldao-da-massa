@@ -13,6 +13,7 @@ public class DiscenteRepository {
     public DiscenteRepository() {
         CursoRepository listaCurso = new CursoRepository();
         listaDiscente.add(new Discente(
+                123,
                 "Diego",
                 "diego.ot@discente.ufma.br",
                 "12345678",
