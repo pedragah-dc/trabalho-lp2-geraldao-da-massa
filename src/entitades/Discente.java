@@ -1,9 +1,12 @@
 package entitades;
 
+import services.InscricaoService;
+
 public class Discente extends Usuario {
     private String matricula;
     private Integer semestreAtual;
     private Curso curso;
+
 
     public Discente(String nome, String email, String senha, Papel papel, Boolean ativo, String matricula, Integer semestreAtual, Curso curso) {
         super(nome, email, senha, papel, ativo);

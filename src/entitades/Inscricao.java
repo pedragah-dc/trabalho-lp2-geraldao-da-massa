@@ -4,7 +4,7 @@ import entitades.enums.StatusInscricao;
 
 public class Inscricao {
     Oportunidade oportunidade;
-    Discente discente;
+    Discente discente;//hmmm acoplamento
     Enum<StatusInscricao> status;
     String motivacao;
 
@@ -12,6 +12,13 @@ public class Inscricao {
         this.oportunidade = oportunidade;
         this.discente = discente;
         this.status = status;
+        this.motivacao = motivacao;
+    }
+    //eu não acho que faça sentido ter o enum de status declarado na criação de uma inscrição
+    //vou criar um ou construtor
+    public Inscricao(Oportunidade op, Discente discente, String motivacao){
+        this.oportunidade = oportunidade;
+        this.discente = discente;
         this.motivacao = motivacao;
     }
 
@@ -45,5 +52,11 @@ public class Inscricao {
 
     public void setMotivacao(String motivacao) {
         this.motivacao = motivacao;
+    }
+
+    public void aprovar(Discente dis){
+    }
+    public void rejeitar(){
+
     }
 }
