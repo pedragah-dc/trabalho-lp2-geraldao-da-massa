@@ -12,7 +12,7 @@ import java.util.List;
 public class InscricaoService {
     private List<Inscricao> listIncricoes;
 
-    public InscricaoService(Oportunidade op, Discente dis, String motiv){
+    public InscricaoService() {
         listIncricoes = new ArrayList<Inscricao>();
     }
     public void criarInscricao(Oportunidade oportunidade, Discente discente, String motivo){
