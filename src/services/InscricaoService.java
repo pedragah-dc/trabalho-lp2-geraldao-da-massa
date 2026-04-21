@@ -10,17 +10,15 @@ import java.util.List;
 
 
 public class InscricaoService {
-    private List<Inscricao> modelSubs;
+    private List<Inscricao> listIncricoes;
 
     public InscricaoService(Oportunidade op, Discente dis, String motiv){
-        modelSubs = new ArrayList<Inscricao>();
+        listIncricoes = new ArrayList<Inscricao>();
     }
-    public void criarInscricao(Oportunidade op, Discente id_dis, String motiv){
-        Inscricao node = new Inscricao(op, id_dis, motiv);
-        modelSubs.add(node);
-        node.setStatus(StatusInscricao.PENDENTE);
-
-
+    public void criarInscricao(Oportunidade oportunidade, Discente discente, String motivo){
+        Inscricao inscricao = new Inscricao(oportunidade, discente, motivo);
+        listIncricoes.add(inscricao);
+        inscricao.setStatus(StatusInscricao.PENDENTE);
     }
 
 
