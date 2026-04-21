@@ -10,6 +10,7 @@ public class DocenteRepository {
 
     DocenteRepository(){
         listaDocentes.add(new Docente(
+                123,
                 "Geraldo",
                 "geraldo_algumacoisa@docente.ufma.br",
                 "54321",
