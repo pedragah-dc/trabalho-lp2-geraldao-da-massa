@@ -1,4 +1,4 @@
-package entitades;
+package entity;
 
 import java.util.Date;
 
@@ -6,12 +6,12 @@ public class Certificados {
     String uuidHash;
     Discente discente;
     Oportunidade oportunidade;
-    Date dataEmissao;
+    LocalDateTime dataEmissao;
     Integer horas;
     String certificadoPath;
     Boolean statusAssinatura;
 
-    public Certificados(String uuidHash, Discente discente, Oportunidade oportunidade, Date dataEmissao, Integer horas, String certificadoPath, Boolean statusAssinatura) {
+    public Certificados(String uuidHash, Discente discente, Oportunidade oportunidade, LocalDateTime dataEmissao, Integer horas, String certificadoPath, Boolean statusAssinatura) {
         this.uuidHash = uuidHash;
         this.discente = discente;
         this.oportunidade = oportunidade;
@@ -45,11 +45,11 @@ public class Certificados {
         this.oportunidade = oportunidade;
     }
 
-    public Date getDataEmissao() {
+    public LocalDateTime getDataEmissao() {
         return dataEmissao;
     }
 
-    public void setDataEmissao(Date dataEmissao) {
+    public void setDataEmissao(LocalDateTime dataEmissao) {
         this.dataEmissao = dataEmissao;
     }
 

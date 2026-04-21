@@ -1,6 +1,6 @@
-package entitades;
+package entity;
 
-import entitades.enums.StatusGrupo;
+import entity.enums.StatusGrupo;
 
 public class Grupo {
     private String nome;
@@ -8,13 +8,15 @@ public class Grupo {
     private String email;
     private String descricao;
     private Enum<StatusGrupo> status;
+    private Docente responsavel;
 
-    public Grupo(String nome, String tipo, String email, String descricao, Enum<StatusGrupo> status) {
+    public Grupo(String nome, String tipo, String email, String descricao, Enum<StatusGrupo> status, Docente responsavel) {
         this.nome = nome;
         this.tipo = tipo;
         this.email = email;
         this.descricao = descricao;
         this.status = status;
+        this.responsavel = responsavel;
     }
 
     public String getNome() {
@@ -55,5 +57,13 @@ public class Grupo {
 
     public void setStatus(Enum<StatusGrupo> status) {
         this.status = status;
+    }
+
+    public Docente getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(Docente responsavel) {
+        this.responsavel = responsavel;
     }
 }

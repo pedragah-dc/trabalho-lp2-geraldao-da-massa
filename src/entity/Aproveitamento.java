@@ -1,6 +1,6 @@
-package entitades;
+package entity;
 
-import entitades.enums.StatusAproveitamento;
+import entity.enums.StatusAproveitamento;
 
 public class Aproveitamento {
     private Discente discente;

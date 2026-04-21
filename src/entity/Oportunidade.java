@@ -1,25 +1,26 @@
-package entitades;
+package entity;
 
-import entitades.enums.StatusOportunidade;
-import entitades.enums.TiposOportunidade;
-import entitades.enums.TiposModalidade;
+import entity.enums.StatusOportunidade;
+import entity.enums.TiposOportunidade;
+import entity.enums.TiposModalidade;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class Oportunidade {
-    String titulo;
-    String descricao;
-    Enum<TiposOportunidade> tipo;
-    Enum<TiposModalidade> modalidade;
-    Integer cargaHoraria;
-    Integer vagas;
-    Enum<StatusOportunidade> statusOportunidade;
-    Date inicio;
-    Date fim;
-    Usuario autor;
-    Docente docente;
+    private String titulo;
+    private String descricao;
+    private Enum<TiposOportunidade> tipo;
+    private Enum<TiposModalidade> modalidade;
+    private Integer cargaHoraria;
+    private Integer vagas;
+    private Enum<StatusOportunidade> statusOportunidade;
+    private LocalDateTime inicio;
+    private LocalDateTime fim;
+    private Usuario autor;
+    private Docente docente;
 
-    public Oportunidade(String titulo, String descricao, Enum<TiposOportunidade> tipo, Enum<TiposModalidade> modalidade, Integer cargaHoraria, Integer vagas, Enum<StatusOportunidade> statusOportunidade, Date inicio, Date fim, Usuario autor, Docente docente) {
+    public Oportunidade(String titulo, String descricao, Enum<TiposOportunidade> tipo, Enum<TiposModalidade> modalidade, Integer cargaHoraria, Integer vagas, Enum<StatusOportunidade> statusOportunidade, LocalDateTime inicio, LocalDateTime fim, Usuario autor, Docente docente) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.tipo = tipo;
@@ -89,19 +90,23 @@ public class Oportunidade {
         this.statusOportunidade = statusOportunidade;
     }
 
-    public Date getInicio() {
+    public LocalDateTime getInicio() {
         return inicio;
     }
 
-    public void setInicio(Date inicio) {
+    public void setInicio(LocalDateTime inicio) {
         this.inicio = inicio;
     }
 
-    public Date getFim() {
+    public LocalDateTime getFim() {
         return fim;
     }
 
-    public void setFim(Date fim) {
+    public Boolean isFinalizada(){
+        return LocalDateTime.now().isAfter(this.fim);
+    }
+
+    public void setFim(LocalDateTime fim) {
         this.fim = fim;
     }
 
