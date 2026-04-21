@@ -4,6 +4,7 @@ import repository.DiscenteRepository;
 import repository.DocenteRepository;
 import repository.OportunidadeRepository;
 import services.InscricaoService;
+import services.OportunidadesService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,11 @@ public class Main {
         InscricaoService serviceIns = new InscricaoService();
         serviceIns.criarInscricao(opRepo.get(0), listDis.get(0), "sla sla");
 
-        //
+        //quem postou?
+        OportunidadesService opService = new OportunidadesService();
+        //foi inscrito?
         System.out.println("vc foi inscritor em: "+serviceIns.getInscricao());
+
 
 
 
