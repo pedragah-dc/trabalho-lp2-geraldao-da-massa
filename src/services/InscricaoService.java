@@ -9,7 +9,7 @@ public class InscricaoService {
     //o discente pode criar varias inscricoes, entao faz sentido criar uma inscricao no construtor?
     private Inscricao modelSubs;
 
-    public InscricaoService(Oportunidade op, Discente dis, StatusInscricao status, String motiv){
+    public InscricaoService(Oportunidade op, Discente dis, String motiv){
         modelSubs = new Inscricao(op, dis, motiv);
     }
     public void setStatus(StatusInscricao st){
