@@ -11,6 +11,7 @@ public class InscricaoService {
 
     public InscricaoService(Oportunidade op, Discente dis, String motiv){
         modelSubs = new Inscricao(op, dis, motiv);
+        setStatus(StatusInscricao.PENDENTE);//poderia ser o valor defaultgit
     }
     public void setStatus(StatusInscricao st){
         modelSubs.setStatus(st);
