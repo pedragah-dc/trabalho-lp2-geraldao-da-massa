@@ -1,7 +1,6 @@
 package services;
 
-import entitades.Grupo;
-import entitades.Usuario;
+import entity.Usuario;
 
 public class GrupoService {
 

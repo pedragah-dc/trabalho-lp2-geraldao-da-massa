@@ -1,9 +1,9 @@
 package services;
 
-import entitades.Discente;
-import entitades.Inscricao;
-import entitades.Oportunidade;
-import entitades.enums.StatusInscricao;
+import entity.Discente;
+import entity.Inscricao;
+import entity.Oportunidade;
+import entity.enums.StatusInscricao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,10 @@ public class InscricaoService {
         Inscricao node = new Inscricao(op, id_dis, motiv);
         modelSubs.add(node);
         node.setStatus(StatusInscricao.PENDENTE);
+
+
     }
+
 
     public void aprovar(){
 

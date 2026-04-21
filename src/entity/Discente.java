@@ -1,6 +1,4 @@
-package entitades;
-
-import services.InscricaoService;
+package entity;
 
 public class Discente extends Usuario {
     private String matricula;

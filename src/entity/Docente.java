@@ -1,4 +1,4 @@
-package entitades;
+package entity;
 
 public class Docente extends Usuario{
     private String siape;
