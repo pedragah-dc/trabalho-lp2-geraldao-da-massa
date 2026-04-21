@@ -1,6 +1,6 @@
-package entitades;
+package entity;
 
-import entitades.enums.StatusInscricao;
+import entity.enums.StatusInscricao;
 
 public class Inscricao {
     Oportunidade oportunidade;

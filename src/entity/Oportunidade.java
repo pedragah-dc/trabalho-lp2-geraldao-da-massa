@@ -1,8 +1,8 @@
-package entitades;
+package entity;
 
-import entitades.enums.StatusOportunidade;
-import entitades.enums.TiposOportunidade;
-import entitades.enums.TiposModalidade;
+import entity.enums.StatusOportunidade;
+import entity.enums.TiposOportunidade;
+import entity.enums.TiposModalidade;
 
 import java.util.Date;
 

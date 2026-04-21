@@ -1,6 +1,6 @@
-package entitades;
+package entity;
 
-import entitades.enums.StatusGrupo;
+import entity.enums.StatusGrupo;
 
 public class Grupo {
     private String nome;

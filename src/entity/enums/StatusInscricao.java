@@ -1,4 +1,4 @@
-package entitades.enums;
+package entity.enums;
 
 public enum StatusInscricao {
     PENDENTE,

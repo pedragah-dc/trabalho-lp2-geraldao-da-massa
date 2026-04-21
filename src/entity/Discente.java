@@ -1,4 +1,4 @@
-package entitades;
+package entity;
 
 public class Discente extends Usuario {
     private String matricula;
