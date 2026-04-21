@@ -9,7 +9,7 @@ import entitades.enums.StatusInscricao;
 public class InscricaoService {
     //o discente pode criar varias inscricoes, entao faz sentido criar uma inscricao no construtor?
     private Inscricao modelSubs;
-    //seria melhor teer um service que cria inscricoes e guarda numa Lista
+    //seria melhor ter uma lista de inscricoes e lidar com cada uma
     public InscricaoService(Oportunidade op, Discente dis, String motiv){
         //acoplamento forte
         modelSubs = new Inscricao(op, dis, motiv);
