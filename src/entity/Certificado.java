@@ -1,8 +1,8 @@
 package entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class Certificados {
+public class Certificado {
     String uuidHash;
     Discente discente;
     Oportunidade oportunidade;
@@ -11,7 +11,7 @@ public class Certificados {
     String certificadoPath;
     Boolean statusAssinatura;
 
-    public Certificados(String uuidHash, Discente discente, Oportunidade oportunidade, LocalDateTime dataEmissao, Integer horas, String certificadoPath, Boolean statusAssinatura) {
+    public Certificado(String uuidHash, Discente discente, Oportunidade oportunidade, LocalDateTime dataEmissao, Integer horas, String certificadoPath, Boolean statusAssinatura) {
         this.uuidHash = uuidHash;
         this.discente = discente;
         this.oportunidade = oportunidade;

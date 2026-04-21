@@ -16,7 +16,7 @@ public class Inscricao {
     }
     //eu não acho que faça sentido ter o enum de status declarado na criação de uma inscrição
     //vou criar um ou construtor
-    public Inscricao(Oportunidade op, Discente discente, String motivacao){
+    public Inscricao(Oportunidade oportunidade, Discente discente, String motivacao){
         this.oportunidade = oportunidade;
         this.discente = discente;
         this.motivacao = motivacao;

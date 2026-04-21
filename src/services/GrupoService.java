@@ -5,7 +5,7 @@ import entity.Usuario;
 
 public class GrupoService {
 
-   public void adicionarMembro(Usuario member){
-
+   public void adicionarMembro(Grupo grupo, Usuario member){
+      //grupo.listaMembros.add(member);
    }
 }

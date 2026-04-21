@@ -15,6 +15,7 @@ public class InscricaoService {
     public InscricaoService(Oportunidade op, Discente dis, String motiv){
         modelSubs = new ArrayList<Inscricao>();
     }
+
     public void criarInscricao(Oportunidade op, Discente id_dis, String motiv){
         Inscricao node = new Inscricao(op, id_dis, motiv);
         modelSubs.add(node);
