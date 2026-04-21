@@ -6,7 +6,7 @@ import entity.enums.StatusOportunidade;
 import entity.enums.TiposModalidade;
 import entity.enums.TiposOportunidade;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class OportunidadeRepository {
@@ -24,8 +24,8 @@ public class OportunidadeRepository {
                             48,
                             100,
                             StatusOportunidade.PENDENTE,
-                            new Date(),
-                            new Date(System.currentTimeMillis() + 864000000L),
+                            LocalDateTime.now(),
+                            LocalDateTime.now().plusDays(3),
                             listaDocentes.listaDocentes.get(0),
                             listaDocentes.listaDocentes.get(0)
                     )
