@@ -45,7 +45,7 @@ public class Main {
 
             OportunidadesService oportunidadesService = new OportunidadesService(oportunidadeRepo);
             DocenteService docenteService = new DocenteService(oportunidadesService);
-            UsuarioService usuarioService = new UsuarioService();
+            UsuarioService usuarioService = new UsuarioService(0);
             GrupoService grupoService = new GrupoService();
             InscricaoService inscricaoService = new InscricaoService();
 

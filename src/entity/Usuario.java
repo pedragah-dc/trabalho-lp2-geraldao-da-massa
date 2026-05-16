@@ -1,5 +1,7 @@
 package entity;
 
+import entity.enums.RolesUsuario;
+
 import java.util.List;
 
 public class Usuario {
@@ -9,8 +11,10 @@ public class Usuario {
     private String senha;
     private Papel papel;
     private Boolean ativo;
+    private Enum<RolesUsuario> role;
 
     private List<Oportunidade> listaDeOp;
+
     public Usuario(Integer id, String nome, String email, String senha, Papel papel, Boolean ativo) {
         this.id = id;
         this.nome = nome;
@@ -70,5 +74,13 @@ public class Usuario {
 
     public List<Oportunidade> getListaOportunidades(){
         return listaDeOp;
+    }
+
+    public Enum<RolesUsuario> getRole(){
+        return role;
+    }
+
+    public void setRole(Enum<RolesUsuario> role){
+        this.role = role;
     }
 }

@@ -25,7 +25,7 @@ public class UsuarioServiceTest {
             System.out.println("  Usuário: " + usuario.getNome());
             System.out.println("  Senha anterior: " + usuario.getSenha());
 
-            UsuarioService service = new UsuarioService();
+            UsuarioService service = new UsuarioService(0);
             String novaSenha = "novaSenha456";
             service.mudarSenha(usuario, novaSenha);
 
@@ -44,7 +44,7 @@ public class UsuarioServiceTest {
             Papel papel = new Papel("Docente");
             Usuario usuario = new Usuario(2, "Prof. Maria", "maria@email.com", "senhaInicial", papel, true);
 
-            UsuarioService service = new UsuarioService();
+            UsuarioService service = new UsuarioService(0);
 
             System.out.println("  Usuário: " + usuario.getNome());
             System.out.println("  Senha inicial: " + usuario.getSenha());
@@ -68,7 +68,7 @@ public class UsuarioServiceTest {
     public static void testObterOportunidades() {
         System.out.println("TEST 3: Obter Oportunidades Disponíveis");
         try {
-            UsuarioService service = new UsuarioService();
+            UsuarioService service = new UsuarioService(0);
             var oportunidades = service.obterOportunidades();
 
             System.out.println("✓ Oportunidades carregadas!");
