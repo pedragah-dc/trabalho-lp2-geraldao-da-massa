@@ -26,7 +26,7 @@ public class Main {
         serviceIns.criarInscricao(opRepo.get(0), listDis.get(0), "sla sla");
 
         //quem postou?
-        OportunidadesService opService = new OportunidadesService();
+       // OportunidadesService opService = new OportunidadesService();
         //foi inscrito?
         System.out.println("vc foi inscritor em: "+serviceIns.getInscricao());
 

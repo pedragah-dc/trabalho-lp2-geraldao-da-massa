@@ -20,6 +20,7 @@ public class Grupo {
         this.descricao = descricao;
         this.status = status;
         this.responsavel = responsavel;
+        membros = new ArrayList<MembroGrupo>();
     }
 
     public String getNome() {

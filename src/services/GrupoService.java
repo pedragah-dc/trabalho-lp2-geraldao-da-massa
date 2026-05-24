@@ -11,9 +11,9 @@ public class GrupoService {
       //TODO validação
       return new Grupo(nome, tipo, email,descricao, status, responsavel);
    }
-   public void adicionarMembro(Grupo grupo, Discente discente){
+   public void adicionarMembro(Grupo grupo, Usuario usuario){
       System.out.println("adicionado");
-      MembroGrupo membro = new MembroGrupo(discente);
+      MembroGrupo membro = new MembroGrupo(usuario);
       grupo.adicionarMembro(membro);
    }
    //na teoria, só na tela do docente vai ter uma opção pra retirar e adiocionar cargos, entao nao acho que seja necessario uma verificacaao

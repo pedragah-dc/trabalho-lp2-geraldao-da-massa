@@ -9,13 +9,13 @@ import java.util.HashSet;
 import java.util.Hashtable;
 
 public class MembroGrupo {
-    private Discente discente;
+    private Usuario membro;
     private CargoNoGrupo cargo;
     private LocalDateTime time;
     private Historico historico;
 
-    public MembroGrupo(Discente discente) {
-        this.discente = discente;
+    public MembroGrupo(Usuario user) {
+        this.membro = user;
         this.cargo = CargoNoGrupo.MEMBRO;
         historico = new Historico();
         historico.atualize(LocalDateTime.now(), cargo);
@@ -24,12 +24,12 @@ public class MembroGrupo {
 
     //USADO SOMENTE PARA COPIA
     public MembroGrupo(MembroGrupo copy) {
-        this.discente = copy.getDiscente();//acho que seria bom criar uma copia do discente tmb, pq afinal é uma referencia(eu acho)
+        this.membro = copy.getMembro();
         this.cargo = copy.getCargo();
     }
 
-    public Discente getDiscente() {
-        return discente;
+    public Usuario getMembro() {
+        return membro;
     }
 
 
@@ -43,7 +43,7 @@ public class MembroGrupo {
     }
 
     public String getNome() {
-        return discente.getNome();
+        return membro.getNome();
     }
 
     //classe aninhadas

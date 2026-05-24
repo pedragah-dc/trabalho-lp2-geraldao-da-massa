@@ -1,5 +1,6 @@
 package test;
 import entity.*;
+import entity.enums.StatusGrupo;
 import services.GrupoService;
 
 /**
@@ -17,17 +18,21 @@ public class GrupoServiceTest {
 
     public static void testAdicionarMembroSimples() {
         System.out.println("TEST 1: Adicionar Membro em um Grupo");
+
+
         try {
             Papel papel = new Papel("Discente");
             Curso curso = new Curso("Engenharia", 1001, 120, "PPC v1.0");
             Usuario membro = new Discente(1, "Ana Silva", "ana@email.com", "123", papel, true, "2024001", 2, curso);
-
+            Docente docente = new Docente(21323, "Paulo", "paulo@hotmail.com", "afdsaf", new Papel("dasd"),true, "fasdf", "computacao");
             GrupoService service = new GrupoService();
+
+            Grupo grupo = service.criarGrupo("discentes", "tipo", "bla@gmail.com", "grupo do boxe", StatusGrupo.ATIVO,docente);
 
             System.out.println("  Membro: " + membro.getNome());
             System.out.println("  Email: " + membro.getEmail());
             
-            service.adicionarMembro(membro);
+            service.adicionarMembro(grupo, membro);
 
             System.out.println("✓ Membro adicionado com sucesso ao grupo!");
             System.out.println();
@@ -52,15 +57,17 @@ public class GrupoServiceTest {
             // Criando membro docente
             Docente docente = new Docente(3, "Prof. Lucas", "lucas@email.com", "prof123", papelDocente, true, "777777", "Computação");
 
+            Grupo grupo = service.criarGrupo("sonicquers", "tipo", "bla@gmail.com", "grupo do boxe", StatusGrupo.ATIVO,docente);
+
             System.out.println("  Adicionando discentes:");
-            service.adicionarMembro(discente1);
+            service.adicionarMembro(grupo, discente1);
             System.out.println("    ✓ " + discente1.getNome() + " (" + discente1.getClass().getSimpleName() + ")");
             
-            service.adicionarMembro(discente2);
+            service.adicionarMembro(grupo, discente2);
             System.out.println("    ✓ " + discente2.getNome() + " (" + discente2.getClass().getSimpleName() + ")");
 
             System.out.println("  Adicionando docente:");
-            service.adicionarMembro(docente);
+            service.adicionarMembro(grupo, docente);
             System.out.println("    ✓ " + docente.getNome() + " (" + docente.getClass().getSimpleName() + ")");
 
             System.out.println("✓ Múltiplos membros adicionados com sucesso!");
@@ -78,12 +85,13 @@ public class GrupoServiceTest {
             Docente coordenador = new Docente(4, "Prof. Thiago", "thiago@email.com", "prof456", papelDocente, true, "888888", "Engenharia");
 
             GrupoService service = new GrupoService();
+            Grupo grupo = service.criarGrupo("Hq mistery", "tipo", "bla@gmail.com", "grupo do boxe", StatusGrupo.ATIVO,coordenador);
 
             System.out.println("  Coordenador: " + coordenador.getNome());
             System.out.println("  SIAPE: " + coordenador.getSiape());
             System.out.println("  Departamento: " + coordenador.getDepartamento());
             
-            service.adicionarMembro(coordenador);
+            service.adicionarMembro(grupo, coordenador);
 
             System.out.println("✓ Docente adicionado como coordenador do grupo!");
             System.out.println();
