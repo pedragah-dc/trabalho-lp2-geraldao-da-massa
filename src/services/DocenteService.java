@@ -1,8 +1,7 @@
 package services;
 
-import entity.Docente;
-import entity.Oportunidade;
-import entity.Usuario;
+import entity.*;
+import entity.enums.StatusGrupo;
 import entity.enums.StatusOportunidade;
 import entity.enums.TiposModalidade;
 import entity.enums.TiposOportunidade;
@@ -21,4 +20,11 @@ public class DocenteService {
         System.out.println("Criando uma Oportunidade...");
         return this.oportunidadeService.publicar(titulo, descricao, tipo, modalidade, cargaHoraria, vagas, statusOportunidade, inicio, fim, autor, docente);
     }
+
+//    public void addMembroAoGrupo(Grupo grupo, Discente discente){
+//        GrupoService gpService = new GrupoService();
+//        gpService.adicionarMembro(grupo, discente);
+//
+//    }
+
 }
