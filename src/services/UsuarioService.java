@@ -6,6 +6,9 @@ import entity.Usuario;
 import repository.OportunidadeRepository;
 
 import java.util.List;
+import java.util.Scanner;
+
+import static utils.ConsoleUtils.lerStringValida;
 
 public class UsuarioService {
     private Integer numUsuarios;
@@ -36,41 +39,18 @@ public class UsuarioService {
 
 
     public Usuario autocadastroUsuario(UsuarioService servicoUsuario){
+        Scanner scanner = new Scanner(System.in);
         Integer id = servicoUsuario.getNumUsuarios();
 
-        System.out.println("insira o seu nome: ");
-        String nome = System.console().readLine();
-        System.out.println("insira o seu email: ");
-
-        //verificação de email e envio do email para o usuário
-
-        String email = System.console().readLine();
-        System.out.println("insira a sua senha: ");
-        String senha = System.console().readLine();
-        System.out.println("insira a sua descrição: ");
-
-        System.out.println("insira a sua matricula: ");
-        String matricula = System.console().readLine();
-
-        //    if (verificaMatricula(matricula)) != NULL{
-        //      if (verificaMatricula(matricula)) == "DISCENTE"{}
-        //      else if (verificaMatricula(matricula)) == "DOCENTE"{}
-        //    }
-
+        String nome = lerStringValida(scanner, "insira o seu nome: ");
+        String email = lerStringValida(scanner, "insira o seu email: ");
+        String senha =  lerStringValida(scanner, "insira a senha: ");
+        String matricula = lerStringValida(scanner, "insira a matricula: ");
 
         id += 1;
 
         servicoUsuario.setNumUsuarios(id);
 
-        return new Usuario(id, nome, email, senha, null,  true);
-
+        return new Usuario(id, nome, email, senha, null,  true, null, null);
     }
-
-
-
-
-
-
-
-
 }
