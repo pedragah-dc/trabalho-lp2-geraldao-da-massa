@@ -13,9 +13,8 @@ public class Usuario {
     private Boolean ativo;
     private Enum<RolesUsuario> role;
 
-    private List<Oportunidade> listaDeOp;
 
-    public Usuario(Integer id, String nome, String email, String senha, Papel papel, Boolean ativo,  Enum<RolesUsuario> role, List<Oportunidade> listaDeOp) {
+    public Usuario(Integer id, String nome, String email, String senha, Papel papel, Boolean ativo,  Enum<RolesUsuario> role) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -23,7 +22,6 @@ public class Usuario {
         this.papel = papel;
         this.ativo = ativo;
         this.role = role;
-        this.listaDeOp = listaDeOp;
     }
 
     public Integer getId() {
@@ -72,10 +70,6 @@ public class Usuario {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
-    }
-
-    public List<Oportunidade> getListaOportunidades(){
-        return listaDeOp;
     }
 
     public Enum<RolesUsuario> getRole(){

@@ -1,44 +1,61 @@
 package services;
 
+import entity.Docente;
 import entity.Papel;
 import entity.Usuario;
+import entity.enums.RolesUsuario;
+import repository.DocenteRepository;
+
+import java.util.Scanner;
+
+import static utils.ConsoleUtils.lerStringValida;
 
 public class AdministradorService {
+    static UsuarioService usuarioService;
+    static DocenteRepository docenterepository;
 
 
+    public Docente cadastroDocente(UsuarioService servicoUsuario){
+        Scanner scanner = new Scanner(System.in);
 
-    public Usuario cadastroGestor(UsuarioService servicoUsuario){
-        Integer id = servicoUsuario.getNumUsuarios();
+        RolesUsuario role;
 
-        System.out.println("insira o seu nome: ");
-        String nome = System.console().readLine();
-        System.out.println("insira o seu email: ");
+        Usuario usuario = usuarioService.autocadastroUsuario(usuarioService);
 
-        //verificação de email e envio do email para o usuário
+        String siape = lerStringValida(scanner, "insira a matricula siape: ");
+        String departamento = lerStringValida(scanner, "insira a departamento: ");
 
-        String email = System.console().readLine();
-        System.out.println("insira a sua senha: ");
-        String senha = System.console().readLine();
+        System.out.println("Escolha a função do docente: ");
+        System.out.println("1 - Docente");
+        System.out.println("2 - Coordenador");
+        System.out.println("3 - Comissão");
+        System.out.println("3 - Secretaria");
+        int opcao = scanner.nextInt();
+        switch (opcao) {
+            case 1:
+                role = RolesUsuario.DOCENTE;
+                break;
+            case 2:
+                role = RolesUsuario.COORDENADOR;
+                break;
+            case 3:
+                role = RolesUsuario.COMISSAO;
+                break;
+            case 4:
+                role = RolesUsuario.SECRETARIA;
+                break;
+            default:
+                System.out.println("Opção inválida!");
+                return null;
 
-        System.out.println("insira a descrição do cargo: ");
-        String descricao = System.console().readLine();
-        Papel papel = new Papel(descricao);
+        }
 
-        System.out.println("insira a sua matricula: ");
-        String matricula = System.console().readLine();
+        Docente docente = new Docente(usuario.getId(), usuario.getNome(), usuario.getEmail(),
+                usuario.getSenha(), usuario.getPapel(), usuario.getAtivo(), role, siape, departamento);
 
-        //    if (verificaMatricula(matricula)) != NULL{
-        //      if (verificaMatricula(matricula)) == "DOCENTE"{}
-        //      else if (verificaMatricula(matricula)) == "COORDENADOR"{}
-        //      else if (verificaMatricula(matricula)) == "SECRETARIA"{}
-        //      else if (verificaMatricula(matricula)) == "COMISSÃO{}
-        //    }
+        docenterepository.listaDocentes.add(docente);
 
-
-        id += 1;
-
-
-        return new Usuario(id, nome, email, senha, papel, true);
-
+        return docente;
     }
+
 }

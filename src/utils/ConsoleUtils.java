@@ -7,7 +7,7 @@ public class ConsoleUtils {
     public static String lerStringValida(Scanner sc, String mensagem) {
         while (true) {
             System.out.print(mensagem);
-            String input = sc.nextLine().trim();
+            String input = sc.nextLine();
             if (!input.isEmpty()) {
                 return input;
             }

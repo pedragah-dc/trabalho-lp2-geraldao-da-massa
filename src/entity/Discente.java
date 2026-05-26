@@ -9,11 +9,14 @@ public class Discente extends Usuario {
     private Integer semestreAtual;
     private Curso curso;
 
-    public Discente(Integer id, String nome, String email, String senha, Papel papel, Boolean ativo, Enum<RolesUsuario> role, List<Oportunidade> listaOp, String matricula, Integer semestreAtual, Curso curso) {
-        super(id, nome, email, senha, papel, ativo, role, listaOp);
+    private List<Oportunidade> listaDeOp;
+
+    public Discente(Integer id, String nome, String email, String senha, Papel papel, Boolean ativo, List<Oportunidade> listaOp, String matricula, Integer semestreAtual, Curso curso, Enum<RolesUsuario> role) {
+        super(id, nome, email, senha, papel, ativo, role);
         this.matricula = matricula;
         this.semestreAtual = semestreAtual;
         this.curso = curso;
+        this.listaDeOp = listaOp;
     }
 
     public String getMatricula() {
@@ -38,5 +41,9 @@ public class Discente extends Usuario {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
+    }
+
+    public List<Oportunidade> getListaDeOp(){
+        return listaDeOp;
     }
 }

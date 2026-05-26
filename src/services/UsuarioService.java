@@ -45,12 +45,23 @@ public class UsuarioService {
         String nome = lerStringValida(scanner, "insira o seu nome: ");
         String email = lerStringValida(scanner, "insira o seu email: ");
         String senha =  lerStringValida(scanner, "insira a senha: ");
-        String matricula = lerStringValida(scanner, "insira a matricula: ");
 
         id += 1;
 
         servicoUsuario.setNumUsuarios(id);
 
-        return new Usuario(id, nome, email, senha, null,  true, null, null);
+        return new Usuario(id, nome, email, senha, null,  true, null);
+    }
+
+    public Usuario mataUsuario(Usuario usuario, UsuarioService servicoUsuario){
+        usuario.setSenha(null);
+        usuario.setNome(null);
+        usuario.setEmail(null);
+        usuario.setId(null);
+
+        Integer novoId = servicoUsuario.getNumUsuarios() - 1;
+        servicoUsuario.setNumUsuarios(novoId);
+
+        return usuario;
     }
 }

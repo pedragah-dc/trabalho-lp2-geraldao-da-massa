@@ -2,6 +2,7 @@ package repository;
 
 import entity.Docente;
 import entity.Papel;
+import entity.enums.RolesUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,8 @@ public class DocenteRepository {
                 "54321",
                 new Papel("Dar aula"),
                 true,
-                "???",
+                RolesUsuario.DOCENTE,
+                "1234567",
                 "Computação"
         ));
     }
