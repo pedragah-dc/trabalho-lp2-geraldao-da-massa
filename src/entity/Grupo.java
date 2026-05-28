@@ -72,6 +72,7 @@ public class Grupo {
     }
 
     public void adicionarMembro(MembroGrupo membro){
-        membros.add(membro);
+
+        if(membro != null) membros.add(membro);
     }
 }
