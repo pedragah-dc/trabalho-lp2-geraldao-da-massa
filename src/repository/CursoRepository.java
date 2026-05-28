@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CursoRepository {
-    public static List<Curso> listaCursos;
+    public List<Curso> listaCursos;
 
     public CursoRepository() {
         listaCursos = new ArrayList<Curso>();

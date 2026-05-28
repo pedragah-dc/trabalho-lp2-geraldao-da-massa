@@ -1,10 +1,15 @@
 package services;
 
+import entity.AlteracaoPermissao;
 import entity.Oportunidade;
 import entity.Papel;
 import entity.Usuario;
+import entity.enums.RolesUsuario;
+import entity.enums.TipoOperacao;
+import repository.AlteracaoPermissaoRepository;
 import repository.OportunidadeRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,8 +17,7 @@ import static utils.ConsoleUtils.lerStringValida;
 
 public class UsuarioService {
     private Integer numUsuarios;
-
-
+    private AlteracaoPermissaoRepository alteracaoRepositorio;
 
     public UsuarioService(Integer numUser){
         this.numUsuarios = numUser;
@@ -37,14 +41,21 @@ public class UsuarioService {
         return listaOportunidades.listaOportunidades;
     }
 
+    public void mudarPermissao(Usuario usuario, RolesUsuario role){
+        AlteracaoPermissao alteracao = new AlteracaoPermissao();
+        usuario.setRole(role);
 
-    public Usuario autocadastroUsuario(UsuarioService servicoUsuario){
-        Scanner scanner = new Scanner(System.in);
+        alteracao.setUsuario(usuario);
+        alteracao.setDataAlteracao(LocalDateTime.now());
+        alteracao.setTipoOperacao(TipoOperacao.ALTERAR);
+
+
+        alteracaoRepositorio.getListaAlteracaoPermissao().add(alteracao);
+
+    }
+
+    public Usuario autocadastroUsuario(UsuarioService servicoUsuario, String nome, String email, String senha){
         Integer id = servicoUsuario.getNumUsuarios();
-
-        String nome = lerStringValida(scanner, "insira o seu nome: ");
-        String email = lerStringValida(scanner, "insira o seu email: ");
-        String senha =  lerStringValida(scanner, "insira a senha: ");
 
         id += 1;
 
@@ -53,7 +64,7 @@ public class UsuarioService {
         return new Usuario(id, nome, email, senha, null,  true, null);
     }
 
-    public Usuario mataUsuario(Usuario usuario, UsuarioService servicoUsuario){
+    public void excluirUsuario(Usuario usuario, UsuarioService servicoUsuario){
         usuario.setSenha(null);
         usuario.setNome(null);
         usuario.setEmail(null);
@@ -61,7 +72,5 @@ public class UsuarioService {
 
         Integer novoId = servicoUsuario.getNumUsuarios() - 1;
         servicoUsuario.setNumUsuarios(novoId);
-
-        return usuario;
     }
 }

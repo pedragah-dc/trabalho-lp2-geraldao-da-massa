@@ -127,7 +127,7 @@ public class Main {
                             System.out.print("Duração em dias (ex: 30): ");
                             int dias = Integer.parseInt(scanner.nextLine());
 
-                            Usuario autor = new Usuario(999, "Prof Simulador", "sim@local", "sim", new Papel("Docente"), true);
+                            Usuario autor = new Usuario(999, "Prof Simulador", "sim@local", "sim", new Papel("Docente"), true, null);
                             Docente docente = docenteRepo.listaDocentes.get(0);
 
                             Oportunidade criada = oportunidadesService.publicar(titulo, descricao, tipo, mod, ch, vagas, status, java.time.LocalDateTime.now(), java.time.LocalDateTime.now().plusDays(dias), autor, docente);

@@ -24,8 +24,8 @@ public class OportunidadesServiceTest {
         System.out.println("TEST 1: Publicar uma Oportunidade");
         try {
             Papel papel = new Papel("Docente");
-            Docente docente = new Docente(1, "Prof. Lucia", "lucia@email.com", "lucia123", papel, true, "444444", "Engenharia");
-            Usuario autor = new Usuario(2, "Admin", "admin@email.com", "admin123", new Papel("Admin"), true);
+            Docente docente = new Docente(1, "Prof. Lucia", "lucia@email.com", "lucia123", papel, true, RolesUsuario.DOCENTE, "444444", "Engenharia");
+            Usuario autor = new Usuario(2, "Admin", "admin@email.com", "admin123", new Papel("Admin"), true, null);
 
             OportunidadeRepository repository = new OportunidadeRepository();
             OportunidadesService service = new OportunidadesService(repository);
@@ -55,8 +55,8 @@ public class OportunidadesServiceTest {
         System.out.println("TEST 2: Fechar Inscrições de uma Oportunidade");
         try {
             Papel papel = new Papel("Docente");
-            Docente docente = new Docente(2, "Prof. Roberto", "roberto@email.com", "roberto", papel, true, "555555", "Computação");
-            Usuario autor = new Usuario(3, "Admin", "admin@email.com", "admin", new Papel("Admin"), true);
+            Docente docente = new Docente(2, "Prof. Roberto", "roberto@email.com", "roberto", papel, true, RolesUsuario.DOCENTE,"555555", "Computação");
+            Usuario autor = new Usuario(3, "Admin", "admin@email.com", "admin", new Papel("Admin"), true, null);
 
             LocalDateTime agora = LocalDateTime.now();
             LocalDateTime finalEsperado = agora.plusDays(10);
@@ -93,8 +93,8 @@ public class OportunidadesServiceTest {
         System.out.println("TEST 3: Publicar Múltiplas Oportunidades");
         try {
             Papel papel = new Papel("Docente");
-            Docente docente = new Docente(3, "Prof. Fernanda", "fernanda@email.com", "fernanda", papel, true, "666666", "Sistemas");
-            Usuario autor = new Usuario(4, "Admin", "admin@email.com", "admin", new Papel("Admin"), true);
+            Docente docente = new Docente(3, "Prof. Fernanda", "fernanda@email.com", "fernanda", papel, true, RolesUsuario.DOCENTE, "666666", "Sistemas");
+            Usuario autor = new Usuario(4, "Admin", "admin@email.com", "admin", new Papel("Admin"), true, null);
             
             OportunidadeRepository repository = new OportunidadeRepository();
             OportunidadesService service = new OportunidadesService(repository);

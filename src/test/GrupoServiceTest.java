@@ -1,5 +1,6 @@
 package test;
 import entity.*;
+import entity.enums.RolesUsuario;
 import services.GrupoService;
 
 /**
@@ -20,7 +21,7 @@ public class GrupoServiceTest {
         try {
             Papel papel = new Papel("Discente");
             Curso curso = new Curso("Engenharia", 1001, 120, "PPC v1.0");
-            Usuario membro = new Discente(1, "Ana Silva", "ana@email.com", "123", papel, true, "2024001", 2, curso);
+            Usuario membro = new Discente(1, "Ana Silva", "ana@email.com", "123", papel, true, null, "2024001", 2, curso, RolesUsuario.DISCENTE);
 
             GrupoService service = new GrupoService();
 
@@ -46,11 +47,11 @@ public class GrupoServiceTest {
 
             // Criando membros discentes
             Curso curso = new Curso("Computação", 1002, 120, "PPC v2.0");
-            Discente discente1 = new Discente(1, "Carlos Santos", "carlos@email.com", "pass1", papelDiscente, true, "2024002", 3, curso);
-            Discente discente2 = new Discente(2, "Beatriz Costa", "beatriz@email.com", "pass2", papelDiscente, true, "2024003", 2, curso);
+            Discente discente1 = new Discente(1, "Carlos Santos", "carlos@email.com", "pass1", papelDiscente, true, null, "2024002", 3, curso, RolesUsuario.DISCENTE);
+            Discente discente2 = new Discente(2, "Beatriz Costa", "beatriz@email.com", "pass2", papelDiscente, true, null, "2024003", 2, curso, RolesUsuario.DISCENTE);
 
             // Criando membro docente
-            Docente docente = new Docente(3, "Prof. Lucas", "lucas@email.com", "prof123", papelDocente, true, "777777", "Computação");
+            Docente docente = new Docente(3, "Prof. Lucas", "lucas@email.com", "prof123", papelDocente, true, RolesUsuario.DOCENTE, "123456", "Computação");
 
             System.out.println("  Adicionando discentes:");
             service.adicionarMembro(discente1);
@@ -75,7 +76,7 @@ public class GrupoServiceTest {
         System.out.println("TEST 3: Adicionar Docente como Coordenador do Grupo");
         try {
             Papel papelDocente = new Papel("Docente");
-            Docente coordenador = new Docente(4, "Prof. Thiago", "thiago@email.com", "prof456", papelDocente, true, "888888", "Engenharia");
+            Docente coordenador = new Docente(4, "Prof. Thiago", "thiago@email.com", "prof456", papelDocente, true, RolesUsuario.DOCENTE,   "888888", "Engenharia");
 
             GrupoService service = new GrupoService();
 

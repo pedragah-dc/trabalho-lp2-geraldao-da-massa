@@ -20,7 +20,7 @@ public class UsuarioServiceTest {
         System.out.println("TEST 1: Alterar Senha de Usuário");
         try {
             Papel papel = new Papel("Discente");
-            Usuario usuario = new Usuario(1, "João Silva", "joao@email.com", "senhaAntiga123", papel, true);
+            Usuario usuario = new Usuario(1, "João Silva", "joao@email.com", "senhaAntiga123", papel, true, null);
 
             System.out.println("  Usuário: " + usuario.getNome());
             System.out.println("  Senha anterior: " + usuario.getSenha());
@@ -42,7 +42,7 @@ public class UsuarioServiceTest {
         System.out.println("TEST 2: Alterar Senha Múltiplas Vezes");
         try {
             Papel papel = new Papel("Docente");
-            Usuario usuario = new Usuario(2, "Prof. Maria", "maria@email.com", "senhaInicial", papel, true);
+            Usuario usuario = new Usuario(2, "Prof. Maria", "maria@email.com", "senhaInicial", papel, true, null);
 
             UsuarioService service = new UsuarioService(0);
 

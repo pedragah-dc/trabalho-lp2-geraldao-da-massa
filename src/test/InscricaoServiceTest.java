@@ -25,11 +25,11 @@ public class InscricaoServiceTest {
             // Criar dados de teste
             Papel papel = new Papel("Discente");
             Curso curso = new Curso("Engenharia de Software", 1001, 120, "PPC v2.0");
-            Discente discente = new Discente(1, "João Silva", "joao@email.com", "senha123", papel, true, "2024001", 3, curso);
+            Discente discente = new Discente(1, "João Silva", "joao@email.com", "senha123", papel, true, null, "2024001", 3, curso, RolesUsuario.DISCENTE);
 
             Papel papelDoc = new Papel("Docente");
-            Docente docente = new Docente(2, "Prof. Maria", "maria@email.com", "prof123", papelDoc, true, "123456", "Computação");
-            Usuario autor = new Usuario(3, "Admin", "admin@email.com", "admin123", new Papel("Admin"), true);
+            Docente docente = new Docente(2, "Prof. Maria", "maria@email.com", "prof123", papelDoc, true, RolesUsuario.DOCENTE, "123456", "Computação");
+            Usuario autor = new Usuario(3, "Admin", "admin@email.com", "admin123", new Papel("Admin"), true, null);
 
             Oportunidade oportunidade = new Oportunidade(
                 "Projeto de IA", 
@@ -64,11 +64,11 @@ public class InscricaoServiceTest {
         try {
             Papel papel = new Papel("Discente");
             Curso curso = new Curso("Engenharia", 1002, 120, "PPC v1.0");
-            Discente discente = new Discente(1, "Maria", "maria@email.com", "123", papel, true, "2024002", 2, curso);
+            Discente discente = new Discente(1, "Maria", "maria@email.com", "123", papel, true, null, "2024002", 2, curso, RolesUsuario.DISCENTE);
 
             Papel papelDoc = new Papel("Docente");
-            Docente docente = new Docente(2, "Prof. João", "joao@email.com", "456", papelDoc, true, "654321", "TI");
-            Usuario autor = new Usuario(3, "Admin", "admin@email.com", "789", new Papel("Admin"), true);
+            Docente docente = new Docente(2, "Prof. João", "joao@email.com", "456", papelDoc, true, RolesUsuario.DOCENTE,   "654321", "TI");
+            Usuario autor = new Usuario(3, "Admin", "admin@email.com", "789", new Papel("Admin"), true, null);
 
             Oportunidade oportunidade = new Oportunidade(
                 "Workshop Python",
@@ -102,11 +102,11 @@ public class InscricaoServiceTest {
         try {
             Papel papel = new Papel("Discente");
             Curso curso = new Curso("Cursos", 1003, 100, "PPC v1.0");
-            Discente discente = new Discente(2, "Pedro", "pedro@email.com", "pass", papel, true, "2024003", 1, curso);
+            Discente discente = new Discente(2, "Pedro", "pedro@email.com", "pass", papel, true, null, "2024003", 1, curso, RolesUsuario.DISCENTE);
 
             Papel papelDoc = new Papel("Docente");
-            Docente docente = new Docente(3, "Prof. Ana", "ana@email.com", "prof", papelDoc, true, "789123", "Eng");
-            Usuario autor = new Usuario(4, "Admin", "admin@email.com", "adm", new Papel("Admin"), true);
+            Docente docente = new Docente(3, "Prof. Ana", "ana@email.com", "prof", papelDoc, true, RolesUsuario.DOCENTE, "789123", "Eng");
+            Usuario autor = new Usuario(4, "Admin", "admin@email.com", "adm", new Papel("Admin"), true, null);
 
             Oportunidade oportunidade = new Oportunidade(
                 "Seminário Tech",

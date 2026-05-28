@@ -9,29 +9,21 @@ import java.util.Scanner;
 
 import entity.enums.RolesUsuario;
 import repository.DiscenteRepository;
-import services.UsuarioService;
-import services.CursoService;
 
 import repository.CursoRepository;
 
-import static utils.ConsoleUtils.lerInteiroValido;
 import static utils.ConsoleUtils.lerStringValida;
 
 public class DiscenteService {
     private static DiscenteRepository discenteRepository;
-    private static CursoRepository cursoRepository;
-    private static CursoService cursoService;
     private static UsuarioService usuarioService;
 
 
 
-    public Discente autocadastroDiscente() {
-        Scanner scanner = new Scanner(System.in);
-        Usuario usuario = usuarioService.autocadastroUsuario(usuarioService);
+    public Discente autocadastroDiscente(String nome, String email, String senha, String matricula) {
+        Usuario usuario = usuarioService.autocadastroUsuario(usuarioService, nome, email, senha);
 
-
-        String matricula = lerStringValida(scanner, "insira a matricula: ");
-        Curso curso = cursoService.escolheCursos(cursoRepository.getListaCursos(), scanner);
+        Curso curso = verificaCurso(discenteRepository.listaDiscente, matricula);
 
         if (verificaMatriculaDiscente(matricula, discenteRepository.listaDiscente)) {
             Discente discente = new Discente(
@@ -51,8 +43,8 @@ public class DiscenteService {
             return discente;
 
         }
-        else {
-            usuario = usuarioService.mataUsuario(usuario, usuarioService);
+        else{
+            usuarioService.excluirUsuario(usuario, usuarioService);
             return null;
         }
     }
@@ -64,6 +56,15 @@ public class DiscenteService {
             }
         }
         return false;
+    }
+
+    public Curso verificaCurso (List <Discente> repositorio, String matricula){
+        for (Discente d: repositorio){
+            if (d.getMatricula().equals(matricula)) {
+                return d.getCurso();
+            }
+        }
+        return null;
     }
 }
 
