@@ -7,13 +7,22 @@ import repository.OportunidadeRepository;
 import java.util.List;
 
 public class UsuarioService {
-    public void mudarSenha(Usuario usuario, String novaSenha){
-        usuario.setSenha(novaSenha);
-        System.out.println("MUDADO");
 
+    private OportunidadeRepository oportunidadeRepository;
+
+    public UsuarioService(OportunidadeRepository oportunidadeRepository) {
+        this.oportunidadeRepository = oportunidadeRepository;
     }
-    public List<Oportunidade> obterOportunidades(){
-        OportunidadeRepository listaOportunidades = new OportunidadeRepository();
-        return listaOportunidades.listaOportunidades;
+
+    public void mudarSenha(Usuario usuario, String novaSenha) {
+        if (novaSenha == null || novaSenha.isBlank()) {
+            throw new IllegalArgumentException("Nova senha não pode ser vazia.");
+        }
+        usuario.setSenha(novaSenha);
+        System.out.println("Senha alterada para o usuário: " + usuario.getNome());
+    }
+
+    public List<Oportunidade> obterOportunidades() {
+        return oportunidadeRepository.listarTodas();
     }
 }

@@ -1,18 +1,19 @@
 package entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Certificados {
-    String uuidHash;
-    Discente discente;
-    Oportunidade oportunidade;
-    LocalDateTime dataEmissao;
-    Integer horas;
-    String certificadoPath;
-    Boolean statusAssinatura;
+    private String uuidHash;
+    private Discente discente;
+    private Oportunidade oportunidade;
+    private LocalDateTime dataEmissao;
+    private Integer horas;
+    private String certificadoPath;
+    private Boolean statusAssinatura;
 
-    public Certificados(String uuidHash, Discente discente, Oportunidade oportunidade, LocalDateTime dataEmissao, Integer horas, String certificadoPath, Boolean statusAssinatura) {
+    public Certificados(String uuidHash, Discente discente, Oportunidade oportunidade,
+                        LocalDateTime dataEmissao, Integer horas,
+                        String certificadoPath, Boolean statusAssinatura) {
         this.uuidHash = uuidHash;
         this.discente = discente;
         this.oportunidade = oportunidade;
@@ -22,59 +23,24 @@ public class Certificados {
         this.statusAssinatura = statusAssinatura;
     }
 
-    public String getUuidHash() {
-        return uuidHash;
-    }
+    public String getUuidHash() { return uuidHash; }
+    public void setUuidHash(String uuidHash) { this.uuidHash = uuidHash; }
 
-    public void setUuidHash(String uuidHash) {
-        this.uuidHash = uuidHash;
-    }
+    public Discente getDiscente() { return discente; }
+    public void setDiscente(Discente discente) { this.discente = discente; }
 
-    public Discente getDiscente() {
-        return discente;
-    }
+    public Oportunidade getOportunidade() { return oportunidade; }
+    public void setOportunidade(Oportunidade oportunidade) { this.oportunidade = oportunidade; }
 
-    public void setDiscente(Discente discente) {
-        this.discente = discente;
-    }
+    public LocalDateTime getDataEmissao() { return dataEmissao; }
+    public void setDataEmissao(LocalDateTime dataEmissao) { this.dataEmissao = dataEmissao; }
 
-    public Oportunidade getOportunidade() {
-        return oportunidade;
-    }
+    public Integer getHoras() { return horas; }
+    public void setHoras(Integer horas) { this.horas = horas; }
 
-    public void setOportunidade(Oportunidade oportunidade) {
-        this.oportunidade = oportunidade;
-    }
+    public String getCertificadoPath() { return certificadoPath; }
+    public void setCertificadoPath(String certificadoPath) { this.certificadoPath = certificadoPath; }
 
-    public LocalDateTime getDataEmissao() {
-        return dataEmissao;
-    }
-
-    public void setDataEmissao(LocalDateTime dataEmissao) {
-        this.dataEmissao = dataEmissao;
-    }
-
-    public Integer getHoras() {
-        return horas;
-    }
-
-    public void setHoras(Integer horas) {
-        this.horas = horas;
-    }
-
-    public String getCertificadoPath() {
-        return certificadoPath;
-    }
-
-    public void setCertificadoPath(String certificadoPath) {
-        this.certificadoPath = certificadoPath;
-    }
-
-    public Boolean getStatusAssinatura() {
-        return statusAssinatura;
-    }
-
-    public void setStatusAssinatura(Boolean statusAssinatura) {
-        this.statusAssinatura = statusAssinatura;
-    }
+    public Boolean getStatusAssinatura() { return statusAssinatura; }
+    public void setStatusAssinatura(Boolean statusAssinatura) { this.statusAssinatura = statusAssinatura; }
 }

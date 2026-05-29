@@ -1,126 +1,88 @@
 package test;
 
-import entity.*;
-import entity.enums.*;
+import entity.Docente;
+import entity.Oportunidade;
+import entity.Papel;
+import entity.enums.StatusOportunidade;
+import entity.enums.TiposModalidade;
+import entity.enums.TiposOportunidade;
 import repository.OportunidadeRepository;
 import services.OportunidadesService;
 
 import java.time.LocalDateTime;
 
-/**
- * Testes para OportunidadesService
- */
 public class OportunidadesServiceTest {
 
     public static void main(String[] args) {
-        System.out.println("=== TESTES DO SERVIÇO DE OPORTUNIDADES ===\n");
 
-        testPublicarOportunidade();
-        testFecharInscricoes();
-        testPublicarMultiplasOportunidades();
-    }
+        // --- Montando o cenário de teste ---
+        Papel papelDocente = new Papel("DOCENTE");
+        Docente docente = new Docente(1, "Prof. Carlos", "carlos@ufma.br", "123", papelDocente, true, "1234", "Computação");
 
-    public static void testPublicarOportunidade() {
-        System.out.println("TEST 1: Publicar uma Oportunidade");
-        try {
-            Papel papel = new Papel("Docente");
-            Docente docente = new Docente(1, "Prof. Lucia", "lucia@email.com", "lucia123", papel, true, "444444", "Engenharia");
-            Usuario autor = new Usuario(2, "Admin", "admin@email.com", "admin123", new Papel("Admin"), true);
+        OportunidadeRepository repo = new OportunidadeRepository();
+        OportunidadesService service = new OportunidadesService(repo);
 
-            OportunidadeRepository repository = new OportunidadeRepository();
-            OportunidadesService service = new OportunidadesService(repository);
-
-            System.out.println("  Oportunidades antes: " + repository.listaOportunidades.size());
-            service.publicar("Internship - Desenvolvimento",
-                "Oportunidade de estágio em desenvolvimento",
-                TiposOportunidade.PROJETO,
+        System.out.println("=== RF011: Criando oportunidade ===");
+        Oportunidade op = service.criarOportunidade(
+                "Workshop de Java",
+                "Aprenda POO na prática",
+                TiposOportunidade.OFICINA,
                 TiposModalidade.PRESENCIAL,
                 20,
-                2,
-                StatusOportunidade.PUBLICADA,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusMonths(6),
-                autor,
-                docente);
-            System.out.println("  Oportunidades depois: " + repository.listaOportunidades.size());
-            System.out.println("✓ Oportunidade publicada com sucesso!");
-            System.out.println();
-        } catch (Exception e) {
-            System.out.println("✗ FALHA: " + e.getMessage());
-            System.out.println();
-        }
-    }
-
-    public static void testFecharInscricoes() {
-        System.out.println("TEST 2: Fechar Inscrições de uma Oportunidade");
-        try {
-            Papel papel = new Papel("Docente");
-            Docente docente = new Docente(2, "Prof. Roberto", "roberto@email.com", "roberto", papel, true, "555555", "Computação");
-            Usuario autor = new Usuario(3, "Admin", "admin@email.com", "admin", new Papel("Admin"), true);
-
-            LocalDateTime agora = LocalDateTime.now();
-            LocalDateTime finalEsperado = agora.plusDays(10);
-
-            Oportunidade oportunidade = new Oportunidade(
-                "Bolsa de Pesquisa",
-                "Bolsa para pesquisa acadêmica",
-                TiposOportunidade.PROJETO,
-                TiposModalidade.PRESENCIAL,
-                40,
-                5,
-                StatusOportunidade.PUBLICADA,
-                agora,
-                finalEsperado,
-                autor,
+                30,
+                LocalDateTime.now().plusDays(15),
+                LocalDateTime.now().plusDays(45),
+                LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusDays(10),
+                docente,
                 docente
-            );
-            OportunidadeRepository repository = new OportunidadeRepository();
-            OportunidadesService service = new OportunidadesService(repository);
+        );
+        System.out.println("Status após criar: " + op.getStatus()); // deve ser RASCUNHO
 
-            System.out.println("  Fim original: " + oportunidade.getFim());
-            service.fecharInscricoes(oportunidade);
-            System.out.println("  Novo fim: " + oportunidade.getFim());
-            System.out.println("✓ Inscrições fechadas com sucesso!");
-            System.out.println("  - Status finalizado: " + oportunidade.isFinalizada());
-            System.out.println();
-        } catch (Exception e) {
-            System.out.println("✗ FALHA: " + e.getMessage());
-            System.out.println();
-        }
-    }
+        System.out.println("\n=== RF011: Submetendo para aprovação ===");
+        service.submeterParaAprovacao(op);
+        System.out.println("Status após submeter: " + op.getStatus()); // deve ser AGUARDANDO_APROVACAO
 
-    public static void testPublicarMultiplasOportunidades() {
-        System.out.println("TEST 3: Publicar Múltiplas Oportunidades");
+        System.out.println("\n=== RF012: Docente APROVA a oportunidade ===");
+        service.aprovarOportunidade(op, docente);
+        System.out.println("Status após aprovação: " + op.getStatus()); // deve ser APROVADA ou EM_INSCRICOES
+
+        System.out.println("\n=== RF012: Testando reprovação ===");
+        // Cria outra oportunidade para testar reprovação
+        Oportunidade op2 = service.criarOportunidade(
+                "Evento de extensão",
+                "Descrição",
+                TiposOportunidade.EVENTO,
+                TiposModalidade.REMOTO,
+                8,
+                50,
+                LocalDateTime.now().plusDays(20),
+                LocalDateTime.now().plusDays(21),
+                LocalDateTime.now().plusDays(5),
+                LocalDateTime.now().plusDays(15),
+                docente,
+                docente
+        );
+        service.submeterParaAprovacao(op2);
+        service.reprovarOportunidade(op2, docente, "Carga horária insuficiente para o tipo de atividade.");
+        System.out.println("Status após reprovação: " + op2.getStatus()); // deve ser REPROVADA
+        System.out.println("Feedback: " + op2.getFeedbackReprovacao());
+
+        System.out.println("\n=== Tentando submeter novamente uma reprovada ===");
         try {
-            Papel papel = new Papel("Docente");
-            Docente docente = new Docente(3, "Prof. Fernanda", "fernanda@email.com", "fernanda", papel, true, "666666", "Sistemas");
-            Usuario autor = new Usuario(4, "Admin", "admin@email.com", "admin", new Papel("Admin"), true);
-            
-            OportunidadeRepository repository = new OportunidadeRepository();
-            OportunidadesService service = new OportunidadesService(repository);
-
-            System.out.println("  Contagem inicial: " + repository.listaOportunidades.size());
-
-            for (int i = 1; i <= 3; i++) {
-                service.publicar("Oportunidade " + i,
-                    "Descrição da oportunidade " + i,
-                    TiposOportunidade.PROJETO,
-                    TiposModalidade.REMOTO,
-                    20,
-                    i * 10,
-                    StatusOportunidade.PUBLICADA,
-                    LocalDateTime.now(),
-                    LocalDateTime.now().plusDays(30),
-                    autor,
-                    docente);
-            }
-
-            System.out.println("  Contagem final: " + repository.listaOportunidades.size());
-            System.out.println("✓ Todas as 3 oportunidades foram publicadas!");
-            System.out.println();
-        } catch (Exception e) {
-            System.out.println("✗ FALHA: " + e.getMessage());
-            System.out.println();
+            service.submeterParaAprovacao(op2); // deve lançar exceção
+        } catch (IllegalStateException e) {
+            System.out.println("Erro esperado capturado: " + e.getMessage());
         }
+
+        System.out.println("\n=== Validações de campos obrigatórios ===");
+        try {
+            service.criarOportunidade("", null, null, null, 0, 0,
+                    null, null, null, null, docente, docente);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro esperado capturado: " + e.getMessage());
+        }
+
+        System.out.println("\n✓ Testes de RF011 e RF012 concluídos.");
     }
 }

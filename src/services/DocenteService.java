@@ -2,23 +2,40 @@ package services;
 
 import entity.Docente;
 import entity.Oportunidade;
-import entity.Usuario;
-import entity.enums.StatusOportunidade;
 import entity.enums.TiposModalidade;
 import entity.enums.TiposOportunidade;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class DocenteService {
+
     private final OportunidadesService oportunidadeService;
 
     public DocenteService(OportunidadesService oportunidadeService) {
         this.oportunidadeService = oportunidadeService;
     }
 
-    public Oportunidade criarOportunidade(String titulo, String descricao, Enum<TiposOportunidade> tipo, Enum<TiposModalidade> modalidade, Integer cargaHoraria, Integer vagas, Enum<StatusOportunidade> statusOportunidade, LocalDateTime inicio, LocalDateTime fim, Usuario autor, Docente docente){
-        System.out.println("Criando uma Oportunidade...");
-        return this.oportunidadeService.publicar(titulo, descricao, tipo, modalidade, cargaHoraria, vagas, statusOportunidade, inicio, fim, autor, docente);
+    // Docente também pode criar oportunidades
+    public Oportunidade criarOportunidade(String titulo, String descricao,
+                                          TiposOportunidade tipo, TiposModalidade modalidade,
+                                          Integer cargaHoraria, Integer vagas,
+                                          LocalDateTime inicio, LocalDateTime fim,
+                                          LocalDateTime dataInicioInscricoes, LocalDateTime dataFimInscricoes,
+                                          Docente autor, Docente docenteResponsavel) {
+
+        return oportunidadeService.criarOportunidade(titulo, descricao, tipo, modalidade,
+                cargaHoraria, vagas, inicio, fim,
+                dataInicioInscricoes, dataFimInscricoes,
+                autor, docenteResponsavel);
+    }
+
+    // Docente aprova oportunidade de discente
+    public void aprovar(Oportunidade oportunidade, Docente docente) {
+        oportunidadeService.aprovarOportunidade(oportunidade, docente);
+    }
+
+    // Docente reprova com motivo
+    public void reprovar(Oportunidade oportunidade, Docente docente, String motivo) {
+        oportunidadeService.reprovarOportunidade(oportunidade, docente, motivo);
     }
 }

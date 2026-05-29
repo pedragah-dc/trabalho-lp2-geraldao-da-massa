@@ -4,5 +4,7 @@ public enum TiposOportunidade {
     PROJETO,
     CURSO,
     EVENTO,
-    OFICINA
+    OFICINA,
+    PROGRAMA,           // modalidade oficial exigida pelos requisitos
+    PRESTACAO_SERVICO   // modalidade oficial exigida pelos requisitos
 }

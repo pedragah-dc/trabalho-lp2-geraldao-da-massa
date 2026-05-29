@@ -3,60 +3,36 @@ package entity;
 import entity.enums.StatusInscricao;
 
 public class Inscricao {
-    Oportunidade oportunidade;
-    Discente discente;//hmmm acoplamento
-    Enum<StatusInscricao> status;
-    String motivacao;
+    private Oportunidade oportunidade;
+    private Discente discente;
+    private StatusInscricao status;
+    private String motivacao;
+    private Inscricao sustituidoPor; // RF017: aponta para a inscrição do substituto
 
-    public Inscricao(Oportunidade oportunidade, Discente discente, Enum<StatusInscricao> status, String motivacao) {
-        this.oportunidade = oportunidade;
-        this.discente = discente;
-        this.status = status;
-        this.motivacao = motivacao;
-    }
-    //eu não acho que faça sentido ter o enum de status declarado na criação de uma inscrição
-    //vou criar um ou construtor
-    public Inscricao(Oportunidade oportunidade, Discente discente, String motivacao){
+    public Inscricao(Oportunidade oportunidade, Discente discente, String motivacao) {
         this.oportunidade = oportunidade;
         this.discente = discente;
         this.motivacao = motivacao;
+        this.status = StatusInscricao.PENDENTE;
     }
 
-    public Oportunidade getOportunidade() {
-        return oportunidade;
-    }
+    public Oportunidade getOportunidade() { return oportunidade; }
+    public void setOportunidade(Oportunidade oportunidade) { this.oportunidade = oportunidade; }
 
-    public void setOportunidade(Oportunidade oportunidade) {
-        this.oportunidade = oportunidade;
-    }
+    public Discente getDiscente() { return discente; }
+    public void setDiscente(Discente discente) { this.discente = discente; }
 
-    public Discente getDiscente() {
-        return discente;
-    }
+    public StatusInscricao getStatus() { return status; }
+    public void setStatus(StatusInscricao status) { this.status = status; }
 
-    public void setDiscente(Discente discente) {
-        this.discente = discente;
-    }
+    public String getMotivacao() { return motivacao; }
+    public void setMotivacao(String motivacao) { this.motivacao = motivacao; }
 
-    public Enum<StatusInscricao> getStatus() {
-        return status;
-    }
+    public Inscricao getSustituidoPor() { return sustituidoPor; }
+    public void setSustituidoPor(Inscricao sustituidoPor) { this.sustituidoPor = sustituidoPor; }
 
-    public void setStatus(Enum<StatusInscricao> status) {
-        this.status = status;
-    }
-
-    public String getMotivacao() {
-        return motivacao;
-    }
-
-    public void setMotivacao(String motivacao) {
-        this.motivacao = motivacao;
-    }
-
-    public void aprovar(Discente discente){
-    }
-    public void rejeitar(){
-
+    @Override
+    public String toString() {
+        return "Inscricao{discente='" + discente.getNome() + "', status=" + status + "}";
     }
 }
