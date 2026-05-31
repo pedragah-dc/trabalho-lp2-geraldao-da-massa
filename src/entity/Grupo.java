@@ -2,6 +2,8 @@ package entity;
 
 import entity.enums.StatusGrupo;
 
+import java.util.ArrayList;
+
 public class Grupo {
     private String nome;
     private String tipo;
@@ -9,6 +11,7 @@ public class Grupo {
     private String descricao;
     private Enum<StatusGrupo> status;
     private Docente responsavel;
+    private ArrayList<MembroGrupo> membros;
 
     public Grupo(String nome, String tipo, String email, String descricao, Enum<StatusGrupo> status, Docente responsavel) {
         this.nome = nome;
@@ -17,6 +20,7 @@ public class Grupo {
         this.descricao = descricao;
         this.status = status;
         this.responsavel = responsavel;
+        membros = new ArrayList<MembroGrupo>();
     }
 
     public String getNome() {
@@ -65,5 +69,10 @@ public class Grupo {
 
     public void setResponsavel(Docente responsavel) {
         this.responsavel = responsavel;
+    }
+
+    public void adicionarMembro(MembroGrupo membro){
+
+        if(membro != null) membros.add(membro);
     }
 }

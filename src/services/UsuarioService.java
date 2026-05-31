@@ -12,6 +12,7 @@ public class UsuarioService {
         System.out.println("MUDADO");
 
     }
+    //kkkkkkkkkk
     public List<Oportunidade> obterOportunidades(){
         OportunidadeRepository listaOportunidades = new OportunidadeRepository();
         return listaOportunidades.listaOportunidades;
