@@ -1,5 +1,6 @@
 package services;
 
+import entity.Discente;
 import entity.Docente;
 import entity.Oportunidade;
 import entity.Usuario;
@@ -43,4 +44,18 @@ public class OportunidadesService {
             System.out.println("finalizado");
         }
     }
+
+    public List<Oportunidade> retornaOportunidadeDiscente(List<Oportunidade> lista, Discente discente ){
+        List<Oportunidade> retorno = new ArrayList<>();
+        for(Oportunidade i : lista){
+            for (Oportunidade j : discente.getListaDeOp()){
+                if (i.equals(j)){
+                    retorno.add(j);
+                }
+            }
+        }
+        return retorno;
+    }
+
+
 }

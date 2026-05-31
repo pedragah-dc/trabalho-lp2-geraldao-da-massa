@@ -1,5 +1,6 @@
 package repository;
 
+import entity.Discente;
 import entity.Docente;
 import entity.Oportunidade;
 import entity.Usuario;

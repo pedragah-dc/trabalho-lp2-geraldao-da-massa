@@ -5,12 +5,15 @@ import entity.enums.StatusGrupo;
 import entity.enums.StatusOportunidade;
 import entity.enums.TiposModalidade;
 import entity.enums.TiposOportunidade;
+import repository.DocenteRepository;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 public class DocenteService {
     private final OportunidadesService oportunidadeService;
+
 
     public DocenteService(OportunidadesService oportunidadeService) {
         this.oportunidadeService = oportunidadeService;
@@ -19,5 +22,15 @@ public class DocenteService {
     public Oportunidade criarOportunidade(String titulo, String descricao, Enum<TiposOportunidade> tipo, Enum<TiposModalidade> modalidade, Integer cargaHoraria, Integer vagas, Enum<StatusOportunidade> statusOportunidade, LocalDateTime inicio, LocalDateTime fim, Usuario autor, Docente docente){
         System.out.println("Criando uma Oportunidade...");
         return this.oportunidadeService.publicar(titulo, descricao, tipo, modalidade, cargaHoraria, vagas, statusOportunidade, inicio, fim, autor, docente);
+    }
+
+
+    public Boolean verificaSiapeDocente(String siape, DocenteRepository repositorio){
+        for (Docente docente : repositorio.listaDocentes) {
+            if (docente.getSiape().equals(siape)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
