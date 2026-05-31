@@ -1,10 +1,13 @@
 package entity;
 
+import java.util.List;
+
 public class Curso {
     private String nome;
     private Integer codigo;
     private Integer cargaHoraria;
     private String versaoPPC;
+    private List<AlteracaoPermissao> listaAlteracaoPPC;
 
     public Curso(String nome, Integer codigo, Integer cargaHoraria, String versaoPPC) {
         this.nome = nome;
@@ -43,5 +46,12 @@ public class Curso {
 
     public void setVersaoPPC(String versaoPPC) {
         this.versaoPPC = versaoPPC;
+    }
+
+    public List<AlteracaoPermissao> getListaAlteracaoPPC() {
+        return listaAlteracaoPPC;
+    }
+    public void setListaAlteracaoPPC(List<AlteracaoPermissao> listaAlteracaoPPC) {
+        this.listaAlteracaoPPC = listaAlteracaoPPC;
     }
 }

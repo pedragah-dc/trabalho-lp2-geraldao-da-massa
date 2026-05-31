@@ -6,6 +6,8 @@ import repository.*;
 import services.*;
 
 import java.util.List;
+import repository.AlteracaoPermissaoRepository;
+import services.UsuarioService;
 
 public class UsuarioServiceTest {
 
@@ -26,6 +28,11 @@ public class UsuarioServiceTest {
             UsuarioService service = new UsuarioService(0);
             service.mudarSenha(usuario, "novaSenha123");
             System.out.println("Senha atualizada: " + usuario.getSenha());
+            System.out.println("  Usuário: " + usuario.getNome());
+            System.out.println("  Senha anterior: " + usuario.getSenha());
+
+            String novaSenha = "novaSenha456";
+            service.mudarSenha(usuario, novaSenha);
 
             System.out.println("✓ Senha alterada com sucesso!");
             System.out.println();
@@ -41,7 +48,7 @@ public class UsuarioServiceTest {
             Papel papel = new Papel("Docente");
             Usuario usuario = new Usuario(2, "Prof. Maria", "maria@email.com", "senhaInicial", papel, true, null);
 
-            UsuarioService service = new UsuarioService(0);
+            UsuarioService service = new UsuarioService(0, new AlteracaoPermissaoRepository());
 
             System.out.println("  Usuário: " + usuario.getNome());
             System.out.println("  Senha inicial: " + usuario.getSenha());

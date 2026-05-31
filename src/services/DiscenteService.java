@@ -50,6 +50,11 @@ public class DiscenteService {
     public List<SolicitacaoOportunidade> listarSolicitacoesDoDiscente(Discente discente, SolicitacaoOportunidadeRepository repo){
         return repo.listarPorDiscente(discente);
     }
+    public DiscenteService(DiscenteRepository discenteRepository, UsuarioService usuarioService) {
+        this.discenteRepository = discenteRepository;
+        this.usuarioService = usuarioService;
+    }
+
 
     public Discente autocadastroDiscente(String nome, String email, String senha, String matricula) {
         Usuario usuario = usuarioService.autocadastroUsuario(usuarioService, nome, email, senha);
