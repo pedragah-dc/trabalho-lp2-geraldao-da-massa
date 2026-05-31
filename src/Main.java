@@ -19,6 +19,8 @@ public class Main {
     private static OportunidadeRepository oportunidadeRepo;
     private static InscricaoRepository inscricaoRepo;
     private static AlteracaoPermissaoRepository alteracaoRepo;
+    private static CursoRepository cursoRepo;
+    private static SolicitacaoOportunidadeRepository solicitacaoRepo;
 
     // Services globais
     private static OportunidadesService oportunidadesService;
@@ -30,6 +32,7 @@ public class Main {
     private static AdministradorService administradorService;
     private static AproveitamentoService aproveitamentoService;
     private static GrupoService grupoService;
+    private static CoordenadorService coordenadorService;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -60,13 +63,206 @@ public class Main {
         
         scanner.close();
     }
+
+    private static void menuAdministrador(Scanner scanner) {
+        boolean voltar = false;
+        while (!voltar) {
+            System.out.println("\n╔════════════════════════════════════════════════════════╗");
+            System.out.println("║           MENU - AÇÕES RESTRITAS DO ADMINISTRADOR      ║");
+            System.out.println("╚════════════════════════════════════════════════════════╝");
+            System.out.println("1 - Cadastrar/Atualizar PPC ");
+            System.out.println("2 - Alterar Permissão de usuário");
+            System.out.println("3 - Cadastrar Docente (sem passar por coordenador) ");
+            System.out.println("4 - Cadastrar Administrador");
+            System.out.println("0 - Voltar\n");
+            System.out.print("Escolha: ");
+
+            String opcao = scanner.nextLine().trim();
+            switch (opcao) {
+                case "1":
+                    cadastrarPPCAdministrador(scanner);
+                    break;
+                case "2":
+                    alterarPermissaoComoAdministrador(scanner);
+                    break;
+                case "3":
+                    cadastrarDocente(scanner);
+                    break;
+                case "0":
+                    voltar = true;
+                    break;
+                default:
+                    System.out.println("❌ Opção inválida!");
+            }
+        }
+    }
     
+    private static void cadastrarPPCAdministrador(Scanner scanner) {
+        System.out.println("\n--- Cadastrar/Atualizar PPC (Administrador) ---");
+
+        try {
+            // Escolher curso ou criar novo
+            System.out.println("Cursos disponíveis:");
+            for (int i = 0; i < cursoRepo.listaCursos.size(); i++) {
+                Curso c = cursoRepo.listaCursos.get(i);
+                System.out.printf("%d) %s (Código: %d, CH: %d, Versão: %s)\n", i+1, c.getNome(), c.getCodigo(), c.getCargaHoraria(), c.getVersaoPPC());
+            }
+
+            System.out.print("Deseja criar um novo curso? (S/N): ");
+            String criar = scanner.nextLine().trim().toUpperCase();
+            Curso cursoSelecionado = null;
+            if (criar.equals("S")) {
+                System.out.print("Nome do curso: ");
+                String nome = scanner.nextLine();
+                System.out.print("Código do curso (numero): ");
+                Integer codigo = Integer.parseInt(scanner.nextLine());
+                System.out.print("Carga horária total: ");
+                Integer ch = Integer.parseInt(scanner.nextLine());
+                System.out.print("Versão inicial do PPC: ");
+                String versao = scanner.nextLine();
+
+                Curso novo = new Curso(nome, codigo, ch, versao);
+                novo.setListaAlteracaoPPC(new java.util.ArrayList<>());
+                cursoRepo.listaCursos.add(novo);
+                cursoSelecionado = novo;
+            } else {
+                System.out.print("Selecione o curso (número): ");
+                int idx = Integer.parseInt(scanner.nextLine()) - 1;
+                if (idx < 0 || idx >= cursoRepo.listaCursos.size()) {
+                    System.out.println("Índice inválido!");
+                    return;
+                }
+                cursoSelecionado = cursoRepo.listaCursos.get(idx);
+            }
+
+            if (cursoSelecionado.getListaAlteracaoPPC() == null) {
+                cursoSelecionado.setListaAlteracaoPPC(new java.util.ArrayList<>());
+            }
+
+            System.out.print("Versão do PPC (nova): ");
+            String novaVersao = scanner.nextLine();
+            System.out.print("Carga horária (numero): ");
+            Integer novaCH = Integer.parseInt(scanner.nextLine());
+
+            Papel papelAdmin = new Papel("Admin");
+            Administrador admin = new Administrador(0, "Administrador", "admin@local", "admin", papelAdmin, true, RolesUsuario.ADMINISTRADOR);
+
+            administradorService.cadastrarPPC(cursoSelecionado, novaVersao, novaCH, admin);
+            System.out.println("✓ PPC cadastrado/atualizado com sucesso para o curso: " + cursoSelecionado.getNome());
+
+        } catch (Exception e) {
+            System.out.println("❌ Erro ao cadastrar PPC: " + e.getMessage());
+        }
+    }
+
+    private static void cadastrarPPCCoordenador(Scanner scanner) {
+        System.out.println("\n--- Cadastrar/Atualizar PPC (Coordenador) ---");
+
+        try {
+            if (docenteRepo.listaDocentes.isEmpty()) {
+                System.out.println("Nenhum docente cadastrado. Cadastre um docente primeiro.");
+                return;
+            }
+
+            listarDocentes();
+            System.out.print("Selecione o docente coordenador (número): ");
+            int dIdx = Integer.parseInt(scanner.nextLine()) - 1;
+            if (dIdx < 0 || dIdx >= docenteRepo.listaDocentes.size()) {
+                System.out.println("Índice inválido!");
+                return;
+            }
+            Docente coordenador = docenteRepo.listaDocentes.get(dIdx);
+
+            // Escolher curso
+            System.out.println("Cursos disponíveis:");
+            for (int i = 0; i < cursoRepo.listaCursos.size(); i++) {
+                Curso c = cursoRepo.listaCursos.get(i);
+                System.out.printf("%d) %s (Código: %d, CH: %d, Versão: %s)\n", i+1, c.getNome(), c.getCodigo(), c.getCargaHoraria(), c.getVersaoPPC());
+            }
+            System.out.print("Selecione o curso (número): ");
+            int cIdx = Integer.parseInt(scanner.nextLine()) - 1;
+            if (cIdx < 0 || cIdx >= cursoRepo.listaCursos.size()) {
+                System.out.println("Índice inválido!");
+                return;
+            }
+            Curso curso = cursoRepo.listaCursos.get(cIdx);
+            if (curso.getListaAlteracaoPPC() == null) curso.setListaAlteracaoPPC(new java.util.ArrayList<>());
+
+            System.out.print("Versão do PPC (nova): ");
+            String versao = scanner.nextLine();
+            System.out.print("Carga horária (numero): ");
+            Integer ch = Integer.parseInt(scanner.nextLine());
+
+            coordenadorService.cadastrarPPC(curso, versao, ch, coordenador);
+            System.out.println("✓ PPC cadastrado/atualizado com sucesso pelo coordenador: " + coordenador.getNome());
+
+        } catch (Exception e) {
+            System.out.println("❌ Erro: " + e.getMessage());
+        }
+    }
+
+    private static void alterarPermissaoComoAdministrador(Scanner scanner) {
+        System.out.println("\n--- Alterar Permissão (Administrador) ---");
+
+        try {
+            System.out.println("1 - Alterar permissão de Discente");
+            System.out.println("2 - Alterar permissão de Docente");
+            System.out.print("Escolha: ");
+            String opt = scanner.nextLine().trim();
+            Usuario alvo = null;
+
+            if (opt.equals("1")) {
+                listarDiscentes();
+                System.out.print("Selecione o discente (número): ");
+                int idx = Integer.parseInt(scanner.nextLine()) - 1;
+                if (idx < 0 || idx >= discenteRepo.listaDiscente.size()) {
+                    System.out.println("Índice inválido!");
+                    return;
+                }
+                alvo = discenteRepo.listaDiscente.get(idx);
+            } else if (opt.equals("2")) {
+                listarDocentes();
+                System.out.print("Selecione o docente (número): ");
+                int idx = Integer.parseInt(scanner.nextLine()) - 1;
+                if (idx < 0 || idx >= docenteRepo.listaDocentes.size()) {
+                    System.out.println("Índice inválido!");
+                    return;
+                }
+                alvo = docenteRepo.listaDocentes.get(idx);
+            } else {
+                System.out.println("Opção inválida.");
+                return;
+            }
+
+            System.out.println("Papéis disponíveis:");
+            RolesUsuario[] valores = RolesUsuario.values();
+            for (int i = 0; i < valores.length; i++) {
+                System.out.printf("%d) %s\n", i+1, valores[i]);
+            }
+            System.out.print("Selecione o papel (número): ");
+            int rIdx = Integer.parseInt(scanner.nextLine()) - 1;
+            if (rIdx < 0 || rIdx >= valores.length) {
+                System.out.println("Índice inválido!");
+                return;
+            }
+
+            RolesUsuario novoRole = valores[rIdx];
+            usuarioService.mudarPermissao(alvo, novoRole);
+            System.out.println("✓ Permissão alterada para " + novoRole + " no usuário " + alvo.getNome());
+
+        } catch (Exception e) {
+            System.out.println("❌ Erro ao alterar permissão: " + e.getMessage());
+        }
+    }
+
     private static void inicializarServicos() {
         discenteRepo = new DiscenteRepository();
         docenteRepo = new DocenteRepository();
         oportunidadeRepo = new OportunidadeRepository();
         inscricaoRepo = new InscricaoRepository();
         alteracaoRepo = new AlteracaoPermissaoRepository();
+        cursoRepo = new CursoRepository();
+        solicitacaoRepo = new SolicitacaoOportunidadeRepository(new java.util.ArrayList<>());
 
         oportunidadesService = new OportunidadesService(oportunidadeRepo);
         inscricaoService = new InscricaoService(inscricaoRepo);
@@ -75,6 +271,7 @@ public class Main {
         usuarioService = new UsuarioService(alteracaoRepo);
         discenteService = new DiscenteService(discenteRepo, usuarioService);
         administradorService = new AdministradorService(usuarioService, docenteRepo);
+        coordenadorService = new CoordenadorService(solicitacaoRepo);
         aproveitamentoService = new AproveitamentoService();
         grupoService = new GrupoService();
     }
@@ -105,6 +302,9 @@ public class Main {
                 case "6":
                     menuRelatorios(scanner);
                     break;
+                case "7":
+                    menuAdministrador(scanner);
+                    break;
                 case "0":
                     System.out.println("\n✓ Encerrando simulação...");
                     continuar = false;
@@ -125,6 +325,7 @@ public class Main {
         System.out.println("4 - Inscrições e Participantes (RF015, RF016, RF017)");
         System.out.println("5 - Encerramento e Certificados (RF019)");
         System.out.println("6 - Relatórios e Consultas");
+        System.out.println("7 - Menu Administrador (ações restritas)");
         System.out.println("0 - Sair da Simulação\n");
     }
     
@@ -135,10 +336,10 @@ public class Main {
             System.out.println("║        MENU - GERENCIAR PERFIS E USUÁRIOS              ║");
             System.out.println("╚════════════════════════════════════════════════════════╝");
             System.out.println("1 - Cadastrar Novo Discente");
-            System.out.println("2 - Cadastrar Novo Docente (via Administrador)");
-            System.out.println("3 - Listar Discentes");
-            System.out.println("4 - Listar Docentes");
-            System.out.println("5 - Alterar Senha de Usuário");
+            System.out.println("2 - Listar Discentes");
+            System.out.println("3 - Listar Docentes");
+            System.out.println("4 - Alterar Senha de Usuário");
+            System.out.println("5 - Cadastrar/Atualizar PPC (Coordenador)");
             System.out.println("0 - Voltar ao Menu Principal\n");
             System.out.print("Escolha: ");
             
@@ -148,16 +349,16 @@ public class Main {
                     cadastrarDiscente(scanner);
                     break;
                 case "2":
-                    cadastrarDocente(scanner);
-                    break;
-                case "3":
                     listarDiscentes();
                     break;
-                case "4":
+                case "3":
                     listarDocentes();
                     break;
-                case "5":
+                case "4":
                     alterarSenhaUsuario(scanner);
+                    break;
+                case "5":
+                    cadastrarPPCCoordenador(scanner);
                     break;
                 case "0":
                     voltar = true;
