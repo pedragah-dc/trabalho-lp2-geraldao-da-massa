@@ -2,23 +2,20 @@ package test;
 
 import entity.*;
 import entity.enums.*;
-import repository.OportunidadeRepository;
-import services.DocenteService;
-import services.OportunidadesService;
+import repository.*;
+import services.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-/**
- * Testes para DocenteService
- */
 public class DocenteServiceTest {
 
     public static void main(String[] args) {
-        System.out.println("=== TESTES DO SERVIÇO DE DOCENTE ===\n");
 
-        testCriarOportunidade();
-        testCriarOportunidadeComDiferentesModalidades();
-        testCriarOportunidadeComCarateristica();
+        Papel papelDocente = new Papel("DOCENTE");
+        Docente docente1 = new Docente(1, "Prof. Silva", "silva@ufma.br", "123", papelDocente, true, "1111", "CC");
+        Docente docente2 = new Docente(2, "Prof. Lima",  "lima@ufma.br",  "123", papelDocente, true, "2222", "SI");
+
     }
 
     public static void testCriarOportunidade() {
@@ -44,15 +41,30 @@ public class DocenteServiceTest {
                 docente
             );
 
-            System.out.println("✓ Oportunidade criada com sucesso!");
-            System.out.println("  - Título: " + oportunidade.getTitulo());
-            System.out.println("  - Carga Horária: " + oportunidade.getCargaHoraria() + " horas");
-            System.out.println("  - Vagas: " + oportunidade.getVagas());
-            System.out.println("  - Status: " + oportunidade.getStatusOportunidade());
-            System.out.println();
+        System.out.println("=== Docente cria oportunidade ===");
+        Oportunidade op = docSrv.criarOportunidade(
+                "Seminário de IA", "Palestras sobre IA",
+                TiposOportunidade.EVENTO, TiposModalidade.PRESENCIAL,
+                8, 50,
+                LocalDateTime.now().plusDays(5), LocalDateTime.now().plusDays(6),
+                LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(4),
+                docente1, docente1);
+
+        System.out.println("Status: " + op.getStatus());
+
+        System.out.println("\n=== Submete e aprova ===");
+        service.submeterParaAprovacao(op);
+        docSrv.aprovar(op, docente1);
+        System.out.println("Status: " + op.getStatus());
+
+        System.out.println("\n=== Listagem de oportunidades ===");
+        List<Oportunidade> todas = service.listarTodas();
+        for (Oportunidade o : todas) {
+            System.out.println("  - " + o.getTitulo() + " | Status: " + o.getStatus());
+        }
+
         } catch (Exception e) {
             System.out.println("✗ FALHA: " + e.getMessage());
-            System.out.println();
         }
     }
 

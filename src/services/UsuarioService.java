@@ -18,6 +18,7 @@ import static utils.ConsoleUtils.lerStringValida;
 public class UsuarioService {
     private Integer numUsuarios;
     private AlteracaoPermissaoRepository alteracaoRepositorio;
+    private OportunidadeRepository oportunidadeRepository;
 
     public UsuarioService(Integer numUser){
         this.numUsuarios = numUser;
@@ -31,16 +32,23 @@ public class UsuarioService {
     }
 
 
-    public void mudarSenha(Usuario usuario, String novaSenha){
-        usuario.setSenha(novaSenha);
-        System.out.println("MUDADO");
+    public UsuarioService(OportunidadeRepository oportunidadeRepository) {
+        this.oportunidadeRepository = oportunidadeRepository;
+    }
+    
+    public List<Oportunidade> obterOportunidades(){
+        return oportunidadeRepository.getListaOportunidades();
 
     }
-    //kkkkkkkkkk
-    public List<Oportunidade> obterOportunidades(){
-        OportunidadeRepository listaOportunidades = new OportunidadeRepository();
-        return listaOportunidades.listaOportunidades;
+
+    public boolean mudarSenha(Usuario usuario, String novaSenha) {
+        if (novaSenha == null || novaSenha.isBlank()) {
+            throw new IllegalArgumentException("Nova senha não pode ser vazia.");
+        }
+        usuario.setSenha(novaSenha);
+        return true;
     }
+
 
     public void mudarPermissao(Usuario usuario, RolesUsuario role){
         AlteracaoPermissao alteracao = new AlteracaoPermissao();

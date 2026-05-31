@@ -3,37 +3,59 @@ package repository;
 import entity.Discente;
 import entity.Docente;
 import entity.Oportunidade;
-import entity.Usuario;
-import entity.enums.StatusOportunidade;
 import entity.enums.TiposModalidade;
 import entity.enums.TiposOportunidade;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-//kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
 public class OportunidadeRepository {
-    public List<Oportunidade> listaOportunidades;
+
+    private List<Oportunidade> oportunidades;
 
     public OportunidadeRepository() {
-        List<Docente> listaDocentes = new DocenteRepository().listaDocentes;
-        listaOportunidades = new ArrayList<Oportunidade>();
-        for(int i = 0; i < 5; i++){
-            listaOportunidades.add(
-                    new Oportunidade(
-                            "Oportunidade " + i,
-                            "Teste",
-                            TiposOportunidade.PROJETO,
-                            TiposModalidade.HIBRIDO,
-                            48,
-                            100,
-                            StatusOportunidade.PENDENTE,
-                            LocalDateTime.now(),
-                            LocalDateTime.now().plusDays(3),
-                            listaDocentes.get(0),
-                            listaDocentes.get(0)
-                    )
-            );
+        oportunidades = new ArrayList<>();
+
+        // Dados de exemplo para testes
+        // Agora o construtor de Oportunidade não recebe mais StatusOportunidade
+        // porque o status inicial é sempre RASCUNHO (definido internamente)
+        List<Docente> docentes = new DocenteRepository().listaDocentes;
+        if (!docentes.isEmpty()) {
+            Docente docente = docentes.get(0);
+            for (int i = 0; i < 3; i++) {
+                oportunidades.add(new Oportunidade(
+                        "Oportunidade Exemplo " + i,
+                        "Descrição de teste " + i,
+                        TiposOportunidade.PROJETO,
+                        TiposModalidade.HIBRIDO,
+                        48,
+                        20,
+                        LocalDateTime.now().plusDays(10),
+                        LocalDateTime.now().plusDays(40),
+                        LocalDateTime.now().plusDays(1),
+                        LocalDateTime.now().plusDays(8),
+                        docente,
+                        docente
+                ));
+            }
         }
+    }
+
+    public void salvar(Oportunidade oportunidade) {
+        oportunidades.add(oportunidade);
+    }
+
+    public List<Oportunidade> listarTodas() {
+        return new ArrayList<>(oportunidades);
+    }
+
+    public Oportunidade buscarPorTitulo(String titulo) {
+        for (Oportunidade op : oportunidades) {
+            if (op.getTitulo().equalsIgnoreCase(titulo)) {
+                return op;
+            }
+        }
+        return null;
     }
 }

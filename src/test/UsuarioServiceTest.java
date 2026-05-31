@@ -1,16 +1,16 @@
 package test;
 
 import entity.*;
-import services.UsuarioService;
+import entity.enums.*;
+import repository.*;
+import services.*;
 
-/**
- * Testes para UsuarioService
- */
+import java.util.List;
+
 public class UsuarioServiceTest {
 
     public static void main(String[] args) {
-        System.out.println("=== TESTES DO SERVIÇO DE USUÁRIO ===\n");
-
+        // Executa os testes
         testMudarSenha();
         testMudarSenhaMultiplasVezes();
         testObterOportunidades();
@@ -22,14 +22,11 @@ public class UsuarioServiceTest {
             Papel papel = new Papel("Discente");
             Usuario usuario = new Usuario(1, "João Silva", "joao@email.com", "senhaAntiga123", papel, true, null);
 
-            System.out.println("  Usuário: " + usuario.getNome());
-            System.out.println("  Senha anterior: " + usuario.getSenha());
-
+            System.out.println("=== Mudar senha ===");
             UsuarioService service = new UsuarioService(0);
-            String novaSenha = "novaSenha456";
-            service.mudarSenha(usuario, novaSenha);
+            service.mudarSenha(usuario, "novaSenha123");
+            System.out.println("Senha atualizada: " + usuario.getSenha());
 
-            System.out.println("  Senha nova: " + usuario.getSenha());
             System.out.println("✓ Senha alterada com sucesso!");
             System.out.println();
         } catch (Exception e) {
@@ -69,7 +66,7 @@ public class UsuarioServiceTest {
         System.out.println("TEST 3: Obter Oportunidades Disponíveis");
         try {
             UsuarioService service = new UsuarioService(0);
-            var oportunidades = service.obterOportunidades();
+            List<Oportunidade> oportunidades = service.obterOportunidades();
 
             System.out.println("✓ Oportunidades carregadas!");
             System.out.println("  Total de oportunidades: " + oportunidades.size());
@@ -79,8 +76,8 @@ public class UsuarioServiceTest {
                 for (int i = 0; i < Math.min(3, oportunidades.size()); i++) {
                     Oportunidade op = oportunidades.get(i);
                     System.out.println("  " + (i + 1) + ". " + op.getTitulo() + 
-                                     " - Vagas: " + op.getVagas() +
-                                     " - Status: " + op.getStatusOportunidade());
+                                    " - Vagas: " + op.getVagas() +
+                                    " - Status: " + op.getStatusOportunidade());
                 }
             } else {
                 System.out.println("  Nenhuma oportunidade disponível no momento");
