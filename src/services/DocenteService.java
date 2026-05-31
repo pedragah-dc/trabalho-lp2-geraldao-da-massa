@@ -21,4 +21,8 @@ public class DocenteService {
         System.out.println("Criando uma Oportunidade...");
         return this.oportunidadeService.publicar(titulo, descricao, tipo, modalidade, cargaHoraria, vagas, statusOportunidade, inicio, fim, autor, docente);
     }
+
+    public boolean aceitarSolicitacao(Docente coordenador, Oportunidade oportunidade){
+
+    }
 }
