@@ -12,10 +12,11 @@ public class DocenteServiceTest {
 
     public static void main(String[] args) {
 
-        Papel papelDocente = new Papel("DOCENTE");
-        Docente docente1 = new Docente(1, "Prof. Silva", "silva@ufma.br", "123", papelDocente, true, RolesUsuario.DOCENTE, "1111", "CC");
-        Docente docente2 = new Docente(2, "Prof. Lima",  "lima@ufma.br",  "123", papelDocente, true, RolesUsuario.DOCENTE, "2222", "SI");
-
+        // Executa os testes do DocenteService
+        // Executa os testes do DocenteService
+        testCriarOportunidade();
+        testCriarOportunidadeComDiferentesModalidades();
+        testCriarOportunidadeComCarateristica();
     }
 
     public static void testCriarOportunidade() {
@@ -23,8 +24,9 @@ public class DocenteServiceTest {
         try {
             Papel papel = new Papel("Docente");
             Docente docente = new Docente(1, "Prof. Carlos", "carlos@email.com", "prof123", papel, true, RolesUsuario.DOCENTE, "111111", "Computação");
-            Usuario autor = new Usuario(2, "Admin", "admin@email.com", "admin123", new Papel("Admin"), true, null);
-            OportunidadesService oportunidadeService = new OportunidadesService(new OportunidadeRepository());
+            // usar o próprio docente como autor (DocenteService espera Docente autor)
+            OportunidadeRepository repo = new OportunidadeRepository();
+            OportunidadesService oportunidadeService = new OportunidadesService(repo);
             DocenteService service = new DocenteService(oportunidadeService);
 
             Oportunidade oportunidade = service.criarOportunidade(
@@ -38,9 +40,10 @@ public class DocenteServiceTest {
                 LocalDateTime.now().plusMonths(4),
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusMonths(3),
-                autor,
+                docente,
                 docente
             );
+            System.out.println("  Oportunidade criada: " + oportunidade.getTitulo());
 
         System.out.println("=== Docente cria oportunidade ===");
         Oportunidade op = service.criarOportunidade(
@@ -49,17 +52,17 @@ public class DocenteServiceTest {
                 8, 50,
                 LocalDateTime.now().plusDays(5), LocalDateTime.now().plusDays(6),
                 LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(4),
-                docente1, docente1);
+                docente, docente);
 
         System.out.println("Status: " + op.getStatus());
 
         System.out.println("\n=== Submete e aprova ===");
-        service.submeterParaAprovacao(op);
-        docSrv.aprovar(op, docente1);
+        oportunidadeService.submeterParaAprovacao(op);
+        oportunidadeService.aprovarOportunidade(op, docente);
         System.out.println("Status: " + op.getStatus());
 
         System.out.println("\n=== Listagem de oportunidades ===");
-        List<Oportunidade> todas = service.listarTodas();
+        List<Oportunidade> todas = oportunidadeService.listarTodas();
         for (Oportunidade o : todas) {
             System.out.println("  - " + o.getTitulo() + " | Status: " + o.getStatus());
         }
@@ -74,8 +77,6 @@ public class DocenteServiceTest {
         try {
             Papel papel = new Papel("Docente");
             Docente docente = new Docente(2, "Prof. Helena", "helena@email.com", "helena", papel, true, RolesUsuario.DOCENTE, "222222", "Engenharia");
-            Usuario autor = new Usuario(3, "Admin", "admin@email.com", "admin", new Papel("Admin"), true, null);
-
             OportunidadeRepository repository = new OportunidadeRepository();
             OportunidadesService oportunidadeService = new OportunidadesService(repository);
             DocenteService service = new DocenteService(oportunidadeService);
@@ -92,7 +93,7 @@ public class DocenteServiceTest {
                 LocalDateTime.now().plusDays(5),
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(4),
-                autor,
+                docente,
                 docente
             );
 
@@ -108,7 +109,7 @@ public class DocenteServiceTest {
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
-                autor,
+                docente,
                 docente
             );
 
@@ -124,7 +125,7 @@ public class DocenteServiceTest {
                 LocalDateTime.now().plusDays(60),
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(59),
-                autor,
+                docente,
                 docente
             );
 
@@ -144,7 +145,6 @@ public class DocenteServiceTest {
         try {
             Papel papel = new Papel("Docente");
             Docente docente = new Docente(3, "Prof. Ricardo", "ricardo@email.com", "ricardo", papel, true, RolesUsuario.DOCENTE, "333333", "Sistemas");
-            Usuario autor = new Usuario(4, "Admin", "admin@email.com", "admin", new Papel("Admin"), true, null);
 
             OportunidadeRepository repository = new OportunidadeRepository();
             OportunidadesService oportunidadeService = new OportunidadesService(repository);
@@ -161,7 +161,7 @@ public class DocenteServiceTest {
                 LocalDateTime.now().plusDays(3),
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
-                autor,
+                docente,
                 docente
             );
 
@@ -176,7 +176,7 @@ public class DocenteServiceTest {
                 LocalDateTime.now().plusDays(90),
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(89),
-                autor,
+                docente,
                 docente
             );
 

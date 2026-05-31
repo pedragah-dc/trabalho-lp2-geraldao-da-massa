@@ -25,6 +25,7 @@ public class GrupoServiceTest {
             Papel papel = new Papel("Discente");
             Curso curso = new Curso("Engenharia", 1001, 120, "PPC v1.0");
             Usuario membro = new Discente(1, "Ana Silva", "ana@email.com", "123", papel, true, null, "2024001", 2, curso, RolesUsuario.DISCENTE);
+            Docente docente = new Docente(2, "Prof. João", "joao@email.com", "prof123", new Papel("Docente"), true, RolesUsuario.DOCENTE, "123456", "Engenharia");
 
             GrupoService service = new GrupoService();
 

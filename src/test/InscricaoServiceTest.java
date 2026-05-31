@@ -80,7 +80,7 @@ public class InscricaoServiceTest {
             );
 
             // Teste
-            InscricaoService service = new InscricaoService();
+            InscricaoService service = new InscricaoService(inscRepo);
             service.criarInscricao(oportunidade, discente, "Quero aprender mais sobre IA");
 
             System.out.println("✓ Inscrição criada com sucesso!");
@@ -117,18 +117,21 @@ public class InscricaoServiceTest {
                 TiposModalidade.REMOTO,
                 20,
                 3,
-                StatusOportunidade.PUBLICADA,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(15),
+                LocalDateTime.now(),
+                LocalDateTime.now().plusDays(10),
                 autor,
                 docente
             );
+            // deixa aberta para inscrições para esse teste
+            oportunidade.setStatus(StatusOportunidade.EM_INSCRICOES);
 
-            InscricaoService service = new InscricaoService();
+            InscricaoService service = new InscricaoService(inscRepo);
             service.criarInscricao(oportunidade, discente, "Tenho interesse");
             service.criarInscricao(oportunidade, discente, "Outro motivo");
 
-            var inscricoes = service.getInscricao();
+            List<Inscricao> inscricoes = inscRepo.listarTodas();
             System.out.println("✓ Total de inscrições: " + inscricoes.size());
             System.out.println();
         } catch (Exception e) {
@@ -154,17 +157,20 @@ public class InscricaoServiceTest {
                 TiposModalidade.REMOTO,
                 10,
                 2,
-                StatusOportunidade.EM_PROGRESSO,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(7),
+                LocalDateTime.now().minusDays(1),
+                LocalDateTime.now().plusDays(5),
                 autor,
                 docente
             );
+            oportunidade.setStatus(StatusOportunidade.EM_INSCRICOES);
 
-            InscricaoService service = new InscricaoService();
+            InscricaoRepository inscRepoLocal = new InscricaoRepository();
+            InscricaoService service = new InscricaoService(inscRepoLocal);
             service.criarInscricao(oportunidade, discente, "Interessa");
 
-            var inscricoes = service.getInscricao();
+            List<Inscricao> inscricoes = inscRepoLocal.listarTodas();
             Inscricao inscricao = inscricoes.get(0);
             inscricao.setStatus(StatusInscricao.APROVADO);
 
