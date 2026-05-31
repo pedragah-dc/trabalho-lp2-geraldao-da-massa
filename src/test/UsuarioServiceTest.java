@@ -1,6 +1,7 @@
 package test;
 
 import entity.*;
+import repository.AlteracaoPermissaoRepository;
 import services.UsuarioService;
 
 /**
@@ -25,7 +26,7 @@ public class UsuarioServiceTest {
             System.out.println("  Usuário: " + usuario.getNome());
             System.out.println("  Senha anterior: " + usuario.getSenha());
 
-            UsuarioService service = new UsuarioService(0);
+            UsuarioService service = new UsuarioService(0, new AlteracaoPermissaoRepository());
             String novaSenha = "novaSenha456";
             service.mudarSenha(usuario, novaSenha);
 
@@ -44,7 +45,7 @@ public class UsuarioServiceTest {
             Papel papel = new Papel("Docente");
             Usuario usuario = new Usuario(2, "Prof. Maria", "maria@email.com", "senhaInicial", papel, true, null);
 
-            UsuarioService service = new UsuarioService(0);
+            UsuarioService service = new UsuarioService(0, new AlteracaoPermissaoRepository());
 
             System.out.println("  Usuário: " + usuario.getNome());
             System.out.println("  Senha inicial: " + usuario.getSenha());
@@ -68,7 +69,7 @@ public class UsuarioServiceTest {
     public static void testObterOportunidades() {
         System.out.println("TEST 3: Obter Oportunidades Disponíveis");
         try {
-            UsuarioService service = new UsuarioService(0);
+            UsuarioService service = new UsuarioService(0,  new AlteracaoPermissaoRepository());
             var oportunidades = service.obterOportunidades();
 
             System.out.println("✓ Oportunidades carregadas!");

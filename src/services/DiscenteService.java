@@ -15,9 +15,14 @@ import repository.CursoRepository;
 import static utils.ConsoleUtils.lerStringValida;
 
 public class DiscenteService {
-    private static DiscenteRepository discenteRepository;
-    private static UsuarioService usuarioService;
+    private final DiscenteRepository discenteRepository;
+    private final UsuarioService usuarioService;
 
+
+    public DiscenteService(DiscenteRepository discenteRepository, UsuarioService usuarioService) {
+        this.discenteRepository = discenteRepository;
+        this.usuarioService = usuarioService;
+    }
 
 
     public Discente autocadastroDiscente(String nome, String email, String senha, String matricula) {

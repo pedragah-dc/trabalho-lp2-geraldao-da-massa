@@ -1,9 +1,6 @@
 import entity.*;
 import entity.enums.*;
-import repository.CursoRepository;
-import repository.DiscenteRepository;
-import repository.DocenteRepository;
-import repository.OportunidadeRepository;
+import repository.*;
 import services.*;
 import test.*;
 
@@ -11,6 +8,8 @@ import test.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
+
+import static utils.ConsoleUtils.lerStringValida;
 
 
 public class Main {
@@ -42,26 +41,30 @@ public class Main {
             DocenteRepository docenteRepo = new DocenteRepository();
             CursoRepository cursoRepo = new CursoRepository();
             OportunidadeRepository oportunidadeRepo = new OportunidadeRepository();
+            AlteracaoPermissaoRepository alteracaoRepositorio = new AlteracaoPermissaoRepository();
 
             OportunidadesService oportunidadesService = new OportunidadesService(oportunidadeRepo);
             DocenteService docenteService = new DocenteService(oportunidadesService);
-            UsuarioService usuarioService = new UsuarioService(0);
+            UsuarioService usuarioService = new UsuarioService(0, alteracaoRepositorio);
             GrupoService grupoService = new GrupoService();
             InscricaoService inscricaoService = new InscricaoService();
+            DiscenteService discenteService = new DiscenteService(discenteRepo, usuarioService);
 
             java.util.List<Inscricao> inscricoesSim = new java.util.ArrayList<>();
 
             while (true) {
                 System.out.println("\n=== SIMULAÇÃO MANUAL ===");
-                System.out.println("1) Listar Discentes");
-                System.out.println("2) Listar Docentes");
-                System.out.println("3) Listar Cursos");
-                System.out.println("4) Listar Oportunidades");
-                System.out.println("5) Criar/ Publicar Oportunidade");
-                System.out.println("6) Inscrever Discente em Oportunidade");
-                System.out.println("7) Listar Inscrições (simulação)");
-                System.out.println("8) Fechar Inscrições de uma Oportunidade");
-                System.out.println("9) Alterar senha de um usuário (simulação)");
+                System.out.println("1) Autocadastro discente");
+                System.out.println("2) Listar Discentes");
+                System.out.println("3) Listar Docentes");
+                System.out.println("4) Listar Cursos");
+                System.out.println("5) Listar Oportunidades");
+                System.out.println("6) Criar / Publicar Oportunidade");
+                System.out.println("7) Inscrever Discente em Oportunidade");
+                System.out.println("8) Listar Inscrições (simulação)");
+                System.out.println("9) Fechar Inscrições de uma Oportunidade");
+                System.out.println("10) Alterar senha de um usuário (simulação)");
+                System.out.println("11) Listar log de alterações");
                 System.out.println("0) Sair da simulação\n");
                 System.out.print("Escolha: ");
 
@@ -70,34 +73,43 @@ public class Main {
 
                 switch (opt) {
                     case "1":
+                        String nome = lerStringValida(scanner, "insira o seu nome: ");
+                        String email = lerStringValida(scanner, "insira o seu email: ");
+                        String senha = lerStringValida(scanner, "insira a senha: ");
+                        String matricula = lerStringValida(scanner, "insira a sua matricula: ");
+
+                        Discente novoDiscente = discenteService.autocadastroDiscente(nome, email, senha, matricula);
+                        discenteRepo.listaDiscente.add(novoDiscente);
+                        break;
+                    case "2":
                         System.out.println("Discentes:");
                         for (int i = 0; i < discenteRepo.listaDiscente.size(); i++) {
                             Discente d = discenteRepo.listaDiscente.get(i);
                             System.out.println(i + ") " + d.getNome() + " - " + d.getMatricula());
                         }
                         break;
-                    case "2":
+                    case "3":
                         System.out.println("Docentes:");
                         for (int i = 0; i < docenteRepo.listaDocentes.size(); i++) {
                             Docente d = docenteRepo.listaDocentes.get(i);
                             System.out.println(i + ") " + d.getNome() + " - " + d.getSiape());
                         }
                         break;
-                    case "3":
+                    case "4":
                         System.out.println("Cursos:");
                         for (int i = 0; i < cursoRepo.listaCursos.size(); i++) {
                             Curso c = cursoRepo.listaCursos.get(i);
                             System.out.println(i + ") " + c.getNome() + " (" + c.getCodigo() + ")");
                         }
                         break;
-                    case "4":
+                    case "5":
                         System.out.println("Oportunidades:");
                         for (int i = 0; i < oportunidadesService.listarOportunidadesAtivas().size(); i++) {
                             Oportunidade o = oportunidadesService.listarOportunidadesAtivas().get(i);
                             System.out.println(i + ") " + o.getTitulo() + " - Vagas: " + o.getVagas() + " - Status: " + o.getStatusOportunidade());
                         }
                         break;
-                    case "5":
+                    case "6":
                         try {
                             System.out.print("Título: ");
                             String titulo = scanner.nextLine();
@@ -136,7 +148,7 @@ public class Main {
                             System.out.println("Erro ao criar oportunidade: " + e.getMessage());
                         }
                         break;
-                    case "6":
+                    case "7":
                         try {
                             System.out.println("Selecione Discente por índice:");
                             for (int i = 0; i < discenteRepo.listaDiscente.size(); i++) {
@@ -161,14 +173,14 @@ public class Main {
                             System.out.println("Erro ao inscrever: " + e.getMessage());
                         }
                         break;
-                    case "7":
+                    case "8":
                         System.out.println("Inscrições (simulação):");
                         for (int i = 0; i < inscricaoService.getInscricao().size(); i++) {
                             Inscricao ins = inscricaoService.getInscricao().get(i);
                             System.out.println(i + ") " + ins.getDiscente().getNome() + " -> " + ins.getOportunidade().getTitulo() + " | Motivo: " + ins.getMotivacao());
                         }
                         break;
-                    case "8":
+                    case "9":
                         try {
                             System.out.println("Selecione Oportunidade para fechar inscrições:");
                             for (int i = 0; i < oportunidadeRepo.listaOportunidades.size(); i++) {
@@ -182,7 +194,7 @@ public class Main {
                             System.out.println("Erro: " + e.getMessage());
                         }
                         break;
-                    case "9":
+                    case "10":
                         try {
                             System.out.println("Selecione Discente por índice para alterar senha:");
                             for (int i = 0; i < discenteRepo.listaDiscente.size(); i++) {
@@ -198,6 +210,12 @@ public class Main {
                             System.out.println("Erro: " + e.getMessage());
                         }
                         break;
+                    case "11":
+                        System.out.println("Log de Alterações de Permissão:");
+                        for (AlteracaoPermissao ap : alteracaoRepositorio.getListaAlteracaoPermissao())
+                            System.out.println(ap.getTipoOperacao() + " - Usuário: " + ap.getUsuario().getNome() + " - Data: " + ap.getData());
+                        break;
+
                     case "0":
                         System.out.println("Saindo da simulação manual.");
                         return;

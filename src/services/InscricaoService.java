@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class InscricaoService {
-    private List<Inscricao> listIncricoes;
+    private final List<Inscricao> listIncricoes;
 
     public InscricaoService(){
         listIncricoes = new ArrayList<Inscricao>();

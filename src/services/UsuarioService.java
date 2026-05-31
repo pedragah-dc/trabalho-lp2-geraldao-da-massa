@@ -17,10 +17,11 @@ import static utils.ConsoleUtils.lerStringValida;
 
 public class UsuarioService {
     private Integer numUsuarios;
-    private AlteracaoPermissaoRepository alteracaoRepositorio;
+    private final AlteracaoPermissaoRepository alteracaoRepositorio;
 
-    public UsuarioService(Integer numUser){
+    public UsuarioService(Integer numUser, AlteracaoPermissaoRepository alteracaoRepositorio){
         this.numUsuarios = numUser;
+        this.alteracaoRepositorio = alteracaoRepositorio;
     }
 
     public Integer getNumUsuarios(){
@@ -41,17 +42,22 @@ public class UsuarioService {
         return listaOportunidades.listaOportunidades;
     }
 
-    public void mudarPermissao(Usuario usuario, RolesUsuario role){
-        AlteracaoPermissao alteracao = new AlteracaoPermissao();
+    public void atribuirPermissao(Usuario usuario, RolesUsuario role){
         usuario.setRole(role);
-
-        alteracao.setUsuario(usuario);
-        alteracao.setDataAlteracao(LocalDateTime.now());
-        alteracao.setTipoOperacao(TipoOperacao.ALTERAR);
-
-
+        AlteracaoPermissao alteracao = new AlteracaoPermissao(usuario, LocalDateTime.now(), TipoOperacao.ATRIBUIR, null);
         alteracaoRepositorio.getListaAlteracaoPermissao().add(alteracao);
+    }
 
+    public void mudarPermissao(Usuario usuario, RolesUsuario role){
+        usuario.setRole(role);
+        AlteracaoPermissao alteracao = new AlteracaoPermissao(usuario, LocalDateTime.now(), TipoOperacao.ALTERAR, null);
+        alteracaoRepositorio.getListaAlteracaoPermissao().add(alteracao);
+    }
+
+    public void removerPermissao(Usuario usuario){
+        usuario.setRole(null);
+        AlteracaoPermissao alteracao = new AlteracaoPermissao(usuario, LocalDateTime.now(), TipoOperacao.REMOVER, null);
+        alteracaoRepositorio.getListaAlteracaoPermissao().add(alteracao);
     }
 
     public Usuario autocadastroUsuario(UsuarioService servicoUsuario, String nome, String email, String senha){
