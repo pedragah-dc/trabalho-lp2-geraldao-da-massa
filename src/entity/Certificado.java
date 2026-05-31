@@ -2,43 +2,95 @@ package entity;
 
 import java.time.LocalDateTime;
 
+/**
+ * Classe que representa um Certificado emitido para um discente
+ * em uma oportunidade (RF019)
+ */
 public class Certificado {
-    String uuidHash;
-    Discente discente;
-    Oportunidade oportunidade;
-    LocalDateTime dataEmissao;
-    Integer horas;
-    String certificadoPath;
-    Boolean statusAssinatura;
+    private String hash;
+    private Discente discente;
+    private Oportunidade oportunidade;
+    private LocalDateTime dataEmissao;
+    private Integer cargaHoraria;
+    private String caminhoArquivo;
+    private Boolean assinado;
 
-    public Certificado(String uuidHash, Discente discente, Oportunidade oportunidade, LocalDateTime dataEmissao, Integer horas, String certificadoPath, Boolean statusAssinatura) {
-        this.uuidHash = uuidHash;
+    public Certificado(String hash, Discente discente, Oportunidade oportunidade,
+                       LocalDateTime dataEmissao, Integer cargaHoraria,
+                       String caminhoArquivo, Boolean assinado) {
+        this.hash = hash;
         this.discente = discente;
         this.oportunidade = oportunidade;
         this.dataEmissao = dataEmissao;
-        this.horas = horas;
-        this.certificadoPath = certificadoPath;
-        this.statusAssinatura = statusAssinatura;
+        this.cargaHoraria = cargaHoraria;
+        this.caminhoArquivo = caminhoArquivo;
+        this.assinado = assinado;
     }
 
-    public String getUuidHash() { return uuidHash; }
-    public void setUuidHash(String uuidHash) { this.uuidHash = uuidHash; }
+    public String getHash() {
+        return hash;
+    }
 
-    public Discente getDiscente() { return discente; }
-    public void setDiscente(Discente discente) { this.discente = discente; }
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
 
-    public Oportunidade getOportunidade() { return oportunidade; }
-    public void setOportunidade(Oportunidade oportunidade) { this.oportunidade = oportunidade; }
+    public Discente getDiscente() {
+        return discente;
+    }
 
-    public LocalDateTime getDataEmissao() { return dataEmissao; }
-    public void setDataEmissao(LocalDateTime dataEmissao) { this.dataEmissao = dataEmissao; }
+    public void setDiscente(Discente discente) {
+        this.discente = discente;
+    }
 
-    public Integer getHoras() { return horas; }
-    public void setHoras(Integer horas) { this.horas = horas; }
+    public Oportunidade getOportunidade() {
+        return oportunidade;
+    }
 
-    public String getCertificadoPath() { return certificadoPath; }
-    public void setCertificadoPath(String certificadoPath) { this.certificadoPath = certificadoPath; }
+    public void setOportunidade(Oportunidade oportunidade) {
+        this.oportunidade = oportunidade;
+    }
 
-    public Boolean getStatusAssinatura() { return statusAssinatura; }
-    public void setStatusAssinatura(Boolean statusAssinatura) { this.statusAssinatura = statusAssinatura; }
+    public LocalDateTime getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public void setDataEmissao(LocalDateTime dataEmissao) {
+        this.dataEmissao = dataEmissao;
+    }
+
+    public Integer getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public void setCargaHoraria(Integer cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    public String getCaminhoArquivo() {
+        return caminhoArquivo;
+    }
+
+    public void setCaminhoArquivo(String caminhoArquivo) {
+        this.caminhoArquivo = caminhoArquivo;
+    }
+
+    public Boolean getAssinado() {
+        return assinado;
+    }
+
+    public void setAssinado(Boolean assinado) {
+        this.assinado = assinado;
+    }
+
+    @Override
+    public String toString() {
+        return "Certificados{" +
+                "hash='" + hash + '\'' +
+                ", discente=" + (discente != null ? discente.getNome() : "null") +
+                ", oportunidade=" + (oportunidade != null ? oportunidade.getTitulo() : "null") +
+                ", dataEmissao=" + dataEmissao +
+                ", cargaHoraria=" + cargaHoraria +
+                '}';
+    }
 }

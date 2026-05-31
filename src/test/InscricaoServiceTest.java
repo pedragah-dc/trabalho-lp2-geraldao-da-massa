@@ -15,15 +15,15 @@ public class InscricaoServiceTest {
         Papel papelDocente  = new Papel("DOCENTE");
         Papel papelDiscente = new Papel("DISCENTE");
 
-        Docente docente = new Docente(1, "Prof. Ana", "ana@ufma.br", "123", papelDocente, true, "9999", "TI");
+        Docente docente = new Docente(1, "Prof. Ana", "ana@ufma.br", "123", papelDocente, true, RolesUsuario.DOCENTE, "9999", "TI");
 
         CursoRepository cursoRepo = new CursoRepository();
         Curso curso = cursoRepo.listaCursos.get(0);
 
-        Discente joao  = new Discente(10, "João",  "joao@disc.ufma.br",  "123", papelDiscente, true, "2021001", 3, curso);
-        Discente maria = new Discente(11, "Maria", "maria@disc.ufma.br", "123", papelDiscente, true, "2021002", 3, curso);
-        Discente pedro = new Discente(12, "Pedro", "pedro@disc.ufma.br", "123", papelDiscente, true, "2021003", 4, curso);
-        Discente carla = new Discente(13, "Carla", "carla@disc.ufma.br", "123", papelDiscente, true, "2021004", 3, curso);
+        Discente joao  = new Discente(10, "João",  "joao@disc.ufma.br",  "123", papelDiscente, true, null, "2021001", 3, curso, RolesUsuario.DISCENTE);
+        Discente maria = new Discente(11, "Maria", "maria@disc.ufma.br", "123", papelDiscente, true, null, "2021002", 3, curso, RolesUsuario.DISCENTE);
+        Discente pedro = new Discente(12, "Pedro", "pedro@disc.ufma.br", "123", papelDiscente, true, null, "2021003", 4, curso, RolesUsuario.DISCENTE);
+        Discente carla = new Discente(13, "Carla", "carla@disc.ufma.br", "123", papelDiscente, true, null, "2021004", 3, curso, RolesUsuario.DISCENTE);
 
         OportunidadeRepository opRepo   = new OportunidadeRepository();
         InscricaoRepository    inscRepo = new InscricaoRepository();
@@ -71,9 +71,10 @@ public class InscricaoServiceTest {
                 TiposModalidade.PRESENCIAL,
                 40,
                 5,
-                StatusOportunidade.PENDENTE,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(30),
+                LocalDateTime.now(),
+                LocalDateTime.now().plusDays(40),
                 autor,
                 docente
             );

@@ -1,5 +1,8 @@
 package services;
 
+import entity.AlteracaoPermissao;
+import entity.Curso;
+import entity.Docente;
 import entity.SolicitacaoOportunidade;
 import repository.SolicitacaoOportunidadeRepository;
 import entity.enums.StatusSolicitacaoOportunidade;
@@ -14,6 +17,15 @@ public class CoordenadorService {
 	public CoordenadorService(SolicitacaoOportunidadeRepository solicitacaoRepo) {
 		this.solicitacaoRepo = solicitacaoRepo;
 	}
+
+    public void cadastrarPPC(Curso curso, String versaoPPC, Integer cargaHoraria, Docente coordenador){
+        
+        AlteracaoPermissao alteracaoPermissao = new AlteracaoPermissao(coordenador, LocalDateTime.now(), null, curso.getVersaoPPC());
+        curso.setVersaoPPC(versaoPPC);
+        curso.setCargaHoraria(cargaHoraria);
+        curso.getListaAlteracaoPPC().add(alteracaoPermissao);
+
+    }
 
 	public List<SolicitacaoOportunidade> listarSolicitacoesPendentesAtrasadas() {
 		return solicitacaoRepo.listarSolicitacoesPendentesAtrasadas();

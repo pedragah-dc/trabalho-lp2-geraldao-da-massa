@@ -156,6 +156,11 @@ public class OportunidadesService {
         return repository.listarTodas();
     }
 
+    public boolean fecharInscricoes(Oportunidade oportunidade){
+        oportunidade.setStatus(StatusOportunidade.ARQUIVADA);
+        return true;
+    }
+
     public List<Oportunidade> retornaOportunidadeDiscente(List<Oportunidade> lista, Discente discente ){
         List<Oportunidade> retorno = new ArrayList<>();
         for(Oportunidade i : lista){

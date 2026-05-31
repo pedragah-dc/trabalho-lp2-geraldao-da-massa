@@ -16,12 +16,11 @@ import java.util.Scanner;
 import static utils.ConsoleUtils.lerStringValida;
 
 public class UsuarioService {
-    private Integer numUsuarios;
+    private static Integer numUsuarios;
     private AlteracaoPermissaoRepository alteracaoRepositorio;
-    private OportunidadeRepository oportunidadeRepository;
 
-    public UsuarioService(Integer numUser, AlteracaoPermissaoRepository alteracaoRepositorio){
-        this.numUsuarios = numUser;
+    public UsuarioService(AlteracaoPermissaoRepository alteracaoRepositorio){
+        this.numUsuarios = 0;
         this.alteracaoRepositorio = alteracaoRepositorio;
     }
 
@@ -30,16 +29,6 @@ public class UsuarioService {
     }
     public void setNumUsuarios(Integer numUsuarios){
         this.numUsuarios = numUsuarios;
-    }
-
-
-    public UsuarioService(OportunidadeRepository oportunidadeRepository) {
-        this.oportunidadeRepository = oportunidadeRepository;
-    }
-    
-    public List<Oportunidade> obterOportunidades(){
-        return oportunidadeRepository.getListaOportunidades();
-
     }
 
     public boolean mudarSenha(Usuario usuario, String novaSenha) {

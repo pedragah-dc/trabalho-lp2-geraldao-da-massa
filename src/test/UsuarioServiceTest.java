@@ -15,7 +15,6 @@ public class UsuarioServiceTest {
         // Executa os testes
         testMudarSenha();
         testMudarSenhaMultiplasVezes();
-        testObterOportunidades();
     }
 
     public static void testMudarSenha() {
@@ -25,7 +24,7 @@ public class UsuarioServiceTest {
             Usuario usuario = new Usuario(1, "João Silva", "joao@email.com", "senhaAntiga123", papel, true, null);
 
             System.out.println("=== Mudar senha ===");
-            UsuarioService service = new UsuarioService(0);
+            UsuarioService service = new UsuarioService(new AlteracaoPermissaoRepository());
             service.mudarSenha(usuario, "novaSenha123");
             System.out.println("Senha atualizada: " + usuario.getSenha());
             System.out.println("  Usuário: " + usuario.getNome());
@@ -48,7 +47,7 @@ public class UsuarioServiceTest {
             Papel papel = new Papel("Docente");
             Usuario usuario = new Usuario(2, "Prof. Maria", "maria@email.com", "senhaInicial", papel, true, null);
 
-            UsuarioService service = new UsuarioService(0, new AlteracaoPermissaoRepository());
+            UsuarioService service = new UsuarioService(new AlteracaoPermissaoRepository());
 
             System.out.println("  Usuário: " + usuario.getNome());
             System.out.println("  Senha inicial: " + usuario.getSenha());
@@ -62,33 +61,6 @@ public class UsuarioServiceTest {
 
             System.out.println("✓ Múltiplas alterações de senha realizadas!");
             System.out.println("  Senha final: " + usuario.getSenha());
-            System.out.println();
-        } catch (Exception e) {
-            System.out.println("✗ FALHA: " + e.getMessage());
-            System.out.println();
-        }
-    }
-
-    public static void testObterOportunidades() {
-        System.out.println("TEST 3: Obter Oportunidades Disponíveis");
-        try {
-            UsuarioService service = new UsuarioService(0);
-            List<Oportunidade> oportunidades = service.obterOportunidades();
-
-            System.out.println("✓ Oportunidades carregadas!");
-            System.out.println("  Total de oportunidades: " + oportunidades.size());
-            
-            if (oportunidades.size() > 0) {
-                System.out.println("\n  Primeiras oportunidades:");
-                for (int i = 0; i < Math.min(3, oportunidades.size()); i++) {
-                    Oportunidade op = oportunidades.get(i);
-                    System.out.println("  " + (i + 1) + ". " + op.getTitulo() + 
-                                    " - Vagas: " + op.getVagas() +
-                                    " - Status: " + op.getStatusOportunidade());
-                }
-            } else {
-                System.out.println("  Nenhuma oportunidade disponível no momento");
-            }
             System.out.println();
         } catch (Exception e) {
             System.out.println("✗ FALHA: " + e.getMessage());

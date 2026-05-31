@@ -1,6 +1,5 @@
 package repository;
 
-import entity.Discente;
 import entity.Docente;
 import entity.Oportunidade;
 import entity.enums.TiposModalidade;
@@ -12,10 +11,10 @@ import java.util.List;
 
 public class OportunidadeRepository {
 
-    private List<Oportunidade> oportunidades;
+    private List<Oportunidade> listOportunidades;
 
     public OportunidadeRepository() {
-        oportunidades = new ArrayList<>();
+        listOportunidades = new ArrayList<>();
 
         // Dados de exemplo para testes
         // Agora o construtor de Oportunidade não recebe mais StatusOportunidade
@@ -24,7 +23,7 @@ public class OportunidadeRepository {
         if (!docentes.isEmpty()) {
             Docente docente = docentes.get(0);
             for (int i = 0; i < 3; i++) {
-                oportunidades.add(new Oportunidade(
+                listOportunidades.add(new Oportunidade(
                         "Oportunidade Exemplo " + i,
                         "Descrição de teste " + i,
                         TiposOportunidade.PROJETO,
@@ -43,15 +42,15 @@ public class OportunidadeRepository {
     }
 
     public void salvar(Oportunidade oportunidade) {
-        oportunidades.add(oportunidade);
+        listOportunidades.add(oportunidade);
     }
 
     public List<Oportunidade> listarTodas() {
-        return new ArrayList<>(oportunidades);
+        return new ArrayList<>(listOportunidades);
     }
 
     public Oportunidade buscarPorTitulo(String titulo) {
-        for (Oportunidade op : oportunidades) {
+        for (Oportunidade op : listOportunidades) {
             if (op.getTitulo().equalsIgnoreCase(titulo)) {
                 return op;
             }

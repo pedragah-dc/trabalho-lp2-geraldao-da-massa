@@ -13,8 +13,8 @@ public class DocenteServiceTest {
     public static void main(String[] args) {
 
         Papel papelDocente = new Papel("DOCENTE");
-        Docente docente1 = new Docente(1, "Prof. Silva", "silva@ufma.br", "123", papelDocente, true, "1111", "CC");
-        Docente docente2 = new Docente(2, "Prof. Lima",  "lima@ufma.br",  "123", papelDocente, true, "2222", "SI");
+        Docente docente1 = new Docente(1, "Prof. Silva", "silva@ufma.br", "123", papelDocente, true, RolesUsuario.DOCENTE, "1111", "CC");
+        Docente docente2 = new Docente(2, "Prof. Lima",  "lima@ufma.br",  "123", papelDocente, true, RolesUsuario.DOCENTE, "2222", "SI");
 
     }
 
@@ -26,7 +26,7 @@ public class DocenteServiceTest {
             Usuario autor = new Usuario(2, "Admin", "admin@email.com", "admin123", new Papel("Admin"), true, null);
             OportunidadesService oportunidadeService = new OportunidadesService(new OportunidadeRepository());
             DocenteService service = new DocenteService(oportunidadeService);
-            
+
             Oportunidade oportunidade = service.criarOportunidade(
                 "Curso Algoritmos",
                 "Aprenda estrutura de dados e algoritmos",
@@ -34,15 +34,16 @@ public class DocenteServiceTest {
                 TiposModalidade.PRESENCIAL,
                 60,
                 30,
-                StatusOportunidade.PUBLICADA,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusMonths(4),
+                LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusMonths(3),
                 autor,
                 docente
             );
 
         System.out.println("=== Docente cria oportunidade ===");
-        Oportunidade op = docSrv.criarOportunidade(
+        Oportunidade op = service.criarOportunidade(
                 "Seminário de IA", "Palestras sobre IA",
                 TiposOportunidade.EVENTO, TiposModalidade.PRESENCIAL,
                 8, 50,
@@ -87,9 +88,10 @@ public class DocenteServiceTest {
                 TiposModalidade.PRESENCIAL,
                 16,
                 20,
-                StatusOportunidade.PENDENTE,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(5),
+                LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusDays(4),
                 autor,
                 docente
             );
@@ -102,9 +104,10 @@ public class DocenteServiceTest {
                 TiposModalidade.REMOTO,
                 4,
                 100,
-                StatusOportunidade.PUBLICADA,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusDays(2),
                 autor,
                 docente
             );
@@ -117,9 +120,10 @@ public class DocenteServiceTest {
                 TiposModalidade.HIBRIDO,
                 40,
                 15,
-                StatusOportunidade.EM_PROGRESSO,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(60),
+                LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusDays(59),
                 autor,
                 docente
             );
@@ -153,9 +157,10 @@ public class DocenteServiceTest {
                 TiposModalidade.REMOTO,
                 8,
                 50,
-                StatusOportunidade.PUBLICADA,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(3),
+                LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusDays(2),
                 autor,
                 docente
             );
@@ -167,9 +172,10 @@ public class DocenteServiceTest {
                 TiposModalidade.PRESENCIAL,
                 120,
                 3,
-                StatusOportunidade.PENDENTE,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(90),
+                LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusDays(89),
                 autor,
                 docente
             );

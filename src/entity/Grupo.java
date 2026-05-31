@@ -32,8 +32,6 @@ public class Grupo {
 
     public String getEmail() { return email; }
 
-    public void setStatus(StatusGrupo status) { this.status = status; }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -46,11 +44,11 @@ public class Grupo {
         this.descricao = descricao;
     }
 
-    public Enum<StatusGrupo> getStatus() {
+    public StatusGrupo getStatus() {
         return status;
     }
 
-    public void setStatus(Enum<StatusGrupo> status) {
+    public void setStatus(StatusGrupo status) {
         this.status = status;
     }
 

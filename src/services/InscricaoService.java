@@ -10,8 +10,6 @@ import repository.InscricaoRepository;
 import java.util.List;
 
 public class InscricaoService {
-    private final List<Inscricao> listIncricoes;
-
     private InscricaoRepository repository;
 
     public InscricaoService(InscricaoRepository repository) {

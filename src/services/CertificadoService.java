@@ -1,10 +1,9 @@
 package services;
 
-import entity.Certificados;
+import entity.Certificado;
 import entity.Discente;
 import entity.Inscricao;
 import entity.Oportunidade;
-import entity.enums.StatusInscricao;
 import entity.enums.StatusOportunidade;
 import repository.InscricaoRepository;
 
@@ -16,14 +15,14 @@ import java.util.UUID;
 public class CertificadoService {
 
     private InscricaoRepository inscricaoRepository;
-    private List<Certificados> certificadosEmitidos = new ArrayList<>();
+    private List<Certificado> certificadoEmitidos = new ArrayList<>();
 
     public CertificadoService(InscricaoRepository inscricaoRepository) {
         this.inscricaoRepository = inscricaoRepository;
     }
 
     // RF019 - Encerrar oportunidade e gerar lista de participantes para certificação
-    public List<Certificados> encerrarEGerarCertificados(Oportunidade oportunidade) {
+    public List<Certificado> encerrarEGerarCertificados(Oportunidade oportunidade) {
         if (oportunidade.getStatus() != StatusOportunidade.EM_EXECUCAO
                 && oportunidade.getStatus() != StatusOportunidade.APROVADA
                 && oportunidade.getStatus() != StatusOportunidade.EM_INSCRICOES) {
@@ -41,12 +40,12 @@ public class CertificadoService {
         System.out.println("[RF019] Oportunidade '" + oportunidade.getTitulo() + "' ENCERRADA.");
         System.out.println("[RF019] Gerando certificados para " + aprovados.size() + " participante(s)...");
 
-        List<Certificados> novos = new ArrayList<>();
+        List<Certificado> novos = new ArrayList<>();
         for (Inscricao inscricao : aprovados) {
             Discente discente = inscricao.getDiscente();
             String hash = UUID.randomUUID().toString().replace("-", "").substring(0, 16).toUpperCase();
 
-            Certificados cert = new Certificados(
+            Certificado cert = new Certificado(
                     hash,
                     discente,
                     oportunidade,
@@ -56,7 +55,7 @@ public class CertificadoService {
                     false // ainda não assinado
             );
 
-            certificadosEmitidos.add(cert);
+            certificadoEmitidos.add(cert);
             novos.add(cert);
             System.out.println("[RF019]  Certificado gerado: " + discente.getNome()
                     + " | Hash: " + hash
@@ -68,14 +67,14 @@ public class CertificadoService {
     }
 
     // Retorna todos os certificados emitidos
-    public List<Certificados> listarCertificados() {
-        return new ArrayList<>(certificadosEmitidos);
+    public List<Certificado> listarCertificados() {
+        return new ArrayList<>(certificadoEmitidos);
     }
 
     // Retorna os certificados de um discente específico
-    public List<Certificados> listarCertificadosPorDiscente(Discente discente) {
-        List<Certificados> resultado = new ArrayList<>();
-        for (Certificados c : certificadosEmitidos) {
+    public List<Certificado> listarCertificadosPorDiscente(Discente discente) {
+        List<Certificado> resultado = new ArrayList<>();
+        for (Certificado c : certificadoEmitidos) {
             if (c.getDiscente().equals(discente)) {
                 resultado.add(c);
             }
