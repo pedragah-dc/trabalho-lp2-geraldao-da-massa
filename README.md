@@ -2,7 +2,6 @@
 
 DISCLAIMER: Gerei os testes automatizados e a documentação com ajuda do GitHub Copilot mas verifiquei tudo(Pedro H). Os testes eram só pra ajudar a rodar os Services já que a implementação de interface ainda não faz parte desta etapa. Como não sabia se o senhor aceitaria só os testes automatizados coloquei a opção de fazer eles manualmente também inserindo os inputs. Por achar que não fazia parte diretamente do que foi pedido pra primeira etapa(apesar de necessário para ver se os Services estavam funcionando) utilizei o Copilot pra agilizar o processo. Todas as Entidades e Serviços foram implementados manualmente pela equipe.
 
-
 Resumo rápido
 - Projeto para compor a nota da disciplina de Linguagem de Programação II: Sistema para gerenciar oportunidades (eventos, cursos, projetos, oficinas), inscrições, usuários e grupos para auxiliar os discentes da UFMA a cumprir as horas necessárias de acordo com o PPC do seu curso.
 - Estrutura simples: entidades em `src/entity`, repositórios(somente dados de teste por enquanto) em `src/repository`, serviços em `src/services` e casos de teste em `test/`.

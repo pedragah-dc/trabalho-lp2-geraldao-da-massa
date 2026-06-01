@@ -73,7 +73,6 @@ public class Main {
             System.out.println("1 - Cadastrar/Atualizar PPC ");
             System.out.println("2 - Alterar Permissão de usuário");
             System.out.println("3 - Cadastrar Docente (sem passar por coordenador) ");
-            System.out.println("4 - Cadastrar Administrador");
             System.out.println("0 - Voltar\n");
             System.out.print("Escolha: ");
 
@@ -320,10 +319,10 @@ public class Main {
         System.out.println("║          MENU PRINCIPAL - SIMULAÇÃO INTERATIVA          ║");
         System.out.println("╚════════════════════════════════════════════════════════╝");
         System.out.println("1 - Gerenciar Perfis (Discentes, Docentes, Admin)");
-        System.out.println("2 - Criar e Submeter Oportunidades (RF011)");
-        System.out.println("3 - Aprovar/Reprovar Oportunidades (RF012)");
-        System.out.println("4 - Inscrições e Participantes (RF015, RF016, RF017)");
-        System.out.println("5 - Encerramento e Certificados (RF019)");
+        System.out.println("2 - Criar Oportunidade");
+        System.out.println("3 - Aprovar/Reprovar Oportunidades");
+        System.out.println("4 - Inscrições e Participantes");
+        System.out.println("5 - Encerramento e Certificados");
         System.out.println("6 - Relatórios e Consultas");
         System.out.println("7 - Menu Administrador (ações restritas)");
         System.out.println("0 - Sair da Simulação\n");
@@ -463,7 +462,7 @@ public class Main {
     
     private static void menuCriacaoOportunidade(Scanner scanner) {
         System.out.println("\n╔════════════════════════════════════════════════════════╗");
-        System.out.println("║    CRIAR E SUBMETER OPORTUNIDADE (RF011)               ║");
+        System.out.println("║    CRIAR E SUBMETER OPORTUNIDADE                       ║");
         System.out.println("╚════════════════════════════════════════════════════════╝");
         
         if (docenteRepo.listaDocentes.isEmpty()) {
@@ -486,14 +485,45 @@ public class Main {
             String titulo = scanner.nextLine();
             System.out.print("Descrição: ");
             String descricao = scanner.nextLine();
-            System.out.print("Tipo (EVENTO, CURSO, WORKSHOP, PROGRAMA, PRESTACAO_SERVICO): ");
-            String tipoStr = scanner.nextLine().toUpperCase();
-            TiposOportunidade tipo = TiposOportunidade.valueOf(tipoStr);
-            
-            System.out.print("Modalidade (PRESENCIAL, HIBRIDO, ONLINE): ");
-            String modalidadeStr = scanner.nextLine().toUpperCase();
-            TiposModalidade modalidade = TiposModalidade.valueOf(modalidadeStr);
-            
+           TiposOportunidade tipo = null;
+            while (tipo == null) {
+                System.out.println("\nSelecione o Tipo de Oportunidade:");
+                TiposOportunidade[] tipos = TiposOportunidade.values();
+                for (int i = 0; i < tipos.length; i++) {
+                    System.out.printf("[%d] %s\n", i + 1, tipos[i]);
+                }
+                System.out.print("Opção: ");
+                try {
+                    int opcao = Integer.parseInt(scanner.nextLine());
+                    if (opcao >= 1 && opcao <= tipos.length) {
+                        tipo = tipos[opcao - 1];
+                    } else {
+                        System.out.println("Opção inválida! Escolha um número da lista.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Por favor, digite um número válido.");
+                }
+            }
+
+            TiposModalidade modalidade = null;
+            while (modalidade == null) {
+                System.out.println("\nSelecione a Modalidade:");
+                TiposModalidade[] modalidades = TiposModalidade.values();
+                for (int i = 0; i < modalidades.length; i++) {
+                    System.out.printf("[%d] %s\n", i + 1, modalidades[i]);
+                }
+                System.out.print("Opção: ");
+                try {
+                    int opcao = Integer.parseInt(scanner.nextLine());
+                    if (opcao >= 1 && opcao <= modalidades.length) {
+                        modalidade = modalidades[opcao - 1];
+                    } else {
+                        System.out.println("Opção inválida! Escolha um número da lista.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Por favor, digite um número válido.");
+                }
+            } 
             System.out.print("Carga Horária: ");
             int cargaHoraria = Integer.parseInt(scanner.nextLine());
             System.out.print("Número de Vagas: ");
@@ -527,7 +557,7 @@ public class Main {
     
     private static void menuAprovacaoOportunidade(Scanner scanner) {
         System.out.println("\n╔════════════════════════════════════════════════════════╗");
-        System.out.println("║    APROVAR/REPROVAR OPORTUNIDADES (RF012)              ║");
+        System.out.println("║    APROVAR/REPROVAR OPORTUNIDADES                      ║");
         System.out.println("╚════════════════════════════════════════════════════════╝");
         
         List<Oportunidade> todasOps = oportunidadesService.listarTodas();
@@ -594,12 +624,12 @@ public class Main {
         boolean voltar = false;
         while (!voltar) {
             System.out.println("\n╔════════════════════════════════════════════════════════╗");
-            System.out.println("║      INSCRIÇÕES E PARTICIPANTES (RF015-RF017)         ║");
+            System.out.println("║      INSCRIÇÕES E PARTICIPANTES                       ║");
             System.out.println("╚════════════════════════════════════════════════════════╝");
-            System.out.println("1 - Inscrever Discente em Oportunidade (RF015)");
-            System.out.println("2 - Aprovar Inscrição (RF015)");
-            System.out.println("3 - Rejeitar Inscrição (RF015)");
-            System.out.println("4 - Cancelar Inscrição (RF016)");
+            System.out.println("1 - Inscrever Discente em Oportunidade");
+            System.out.println("2 - Aprovar Inscrição");
+            System.out.println("3 - Rejeitar Inscrição");
+            System.out.println("4 - Cancelar Inscrição");
             System.out.println("5 - Listar Inscrições");
             System.out.println("0 - Voltar\n");
             System.out.print("Escolha: ");
@@ -732,7 +762,7 @@ public class Main {
     }
     
     private static void cancelarInscricao(Scanner scanner) {
-        System.out.println("\n--- Cancelar Inscrição (RF016) ---");
+        System.out.println("\n--- Cancelar Inscrição ---");
         List<Inscricao> todas = inscricaoRepo.listarTodas();
         List<Inscricao> cancelaveis = new java.util.ArrayList<>();
         
@@ -814,10 +844,10 @@ public class Main {
     
     private static void menuGestaoAlternativas(Scanner scanner) {
         System.out.println("\n╔════════════════════════════════════════════════════════╗");
-        System.out.println("║        GESTÃO DE ALTERNATIVAS (RF017, RF019)           ║");
+        System.out.println("║        GESTÃO DE ALTERNATIVAS                          ║");
         System.out.println("╚════════════════════════════════════════════════════════╝");
-        System.out.println("1 - Substitua Participante (RF017)");
-        System.out.println("2 - Encerrar Oportunidade e Gerar Certificados (RF019)");
+        System.out.println("1 - Substitua Participante");
+        System.out.println("2 - Encerrar Oportunidade e Gerar Certificados");
         System.out.print("Escolha: ");
         
         String opcao = scanner.nextLine().trim();
@@ -834,12 +864,12 @@ public class Main {
     }
     
     private static void substituirParticipante(Scanner scanner) {
-        System.out.println("\n--- Substituir Participante (RF017) ---");
+        System.out.println("\n--- Substituir Participante ---");
         System.out.println("Funcionalidade disponível através da API InscricaoService.substituirParticipante()");
     }
     
     private static void encerrarOportunidadeGerarCertificados(Scanner scanner) {
-        System.out.println("\n--- Encerrar Oportunidade e Gerar Certificados (RF019) ---");
+        System.out.println("\n--- Encerrar Oportunidade e Gerar Certificados ---");
         
         List<Oportunidade> todasOps = oportunidadesService.listarTodas();
         List<Oportunidade> ativas = new java.util.ArrayList<>();
