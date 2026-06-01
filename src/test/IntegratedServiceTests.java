@@ -228,7 +228,7 @@ public class IntegratedServiceTests {
         try {
             List<Oportunidade> todas = oportunidadesService.listarTodas();
             Oportunidade oportunidade = todas.get(0);
-            Docente docente = docenteRepo.listaDocentes.get(0);
+            Docente docente = oportunidade.getDocenteResponsavel();
 
             oportunidadesService.aprovarOportunidade(oportunidade, docente);
 
@@ -527,8 +527,6 @@ public class IntegratedServiceTests {
             Discente discente = discenteService.autocadastroDiscente(
                 "Ana Silva", "ana@email.com", "senha123", "2021003"
             );
-
-            usuarioService.atribuirPermissao(discente, RolesUsuario.DISCENTE);
 
             assert discente.getRole() == RolesUsuario.DISCENTE : "Role deve ser DISCENTE";
             assert alteracaoRepo.getListaAlteracaoPermissao().size() > 0 : "Alteração não foi registrada";

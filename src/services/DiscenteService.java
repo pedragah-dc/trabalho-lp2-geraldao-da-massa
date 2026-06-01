@@ -57,11 +57,10 @@ public class DiscenteService {
 
 
     public Discente autocadastroDiscente(String nome, String email, String senha, String matricula) {
-        Usuario usuario = usuarioService.autocadastroUsuario(usuarioService, nome, email, senha);
-
-        Curso curso = verificaCurso(discenteRepository.listaDiscente, matricula);
-
-        if (verificaMatriculaDiscente(matricula, discenteRepository.listaDiscente)) {
+        try{
+            Usuario usuario = usuarioService.autocadastroUsuario(usuarioService, nome, email, senha);
+    
+            Curso curso = verificaCurso(discenteRepository.listaDiscente, matricula);
             Discente discente = new Discente(
                     usuario.getId(),
                     usuario.getNome(),
@@ -77,11 +76,8 @@ public class DiscenteService {
             );
             discenteRepository.listaDiscente.add(discente);
             return discente;
-
-        }
-        else{
-            usuarioService.excluirUsuario(usuario, usuarioService);
-            return null;
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao criar discente", e);
         }
     }
 
