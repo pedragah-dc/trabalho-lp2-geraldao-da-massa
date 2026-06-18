@@ -1,0 +1,88 @@
+package geraldao_da_massa.demo.services;
+
+import geraldao_da_massa.demo.entity.*;
+import geraldao_da_massa.demo.entity.enums.RolesUsuario;
+import geraldao_da_massa.demo.entity.enums.StatusSolicitacaoOportunidade;
+import geraldao_da_massa.demo.repository.DiscenteRepository;
+import geraldao_da_massa.demo.repository.SolicitacaoOportunidadeRepository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class DiscenteService {
+    private static DiscenteRepository discenteRepository;
+    private static UsuarioService usuarioService;
+    public SolicitacaoOportunidade criarSolicitacaoOportunidade(Discente discente, Oportunidade oportunidade){
+        try{
+            SolicitacaoOportunidade solicitacao = new SolicitacaoOportunidade(discente, oportunidade);
+            return solicitacao;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean reenviarSolicitacaoOportunidade(SolicitacaoOportunidade solicitacao) throws Exception {
+        if (solicitacao.getStatus() != StatusSolicitacaoOportunidade.ESPERANDO_REENVIO)
+            throw new Exception("Não é possível realizar reenvio desta solicitação no momento.");
+        
+        // ficou grande demais entao vou explicar kkkkk
+        // pega a data de agora e verifica se é depois do dia do indeferimento + 5 dias
+        // o requisito fala que após o indeferimento tem 5 dias pra reenvio então ta fazendo exatamente isso
+        if(LocalDateTime.now().isAfter(solicitacao.getDataIndeferimento().plusDays(5)))
+            throw new Exception("Prazo para reenvio esgotado!");
+
+        solicitacao.setStatus(StatusSolicitacaoOportunidade.PENDENTE);
+        return true;
+    }
+    public List<SolicitacaoOportunidade> listarSolicitacoesDoDiscente(Discente discente, SolicitacaoOportunidadeRepository repo){
+        return repo.listarPorDiscente(discente);
+    }
+    public DiscenteService(DiscenteRepository discenteRepository, UsuarioService usuarioService) {
+        this.discenteRepository = discenteRepository;
+        this.usuarioService = usuarioService;
+    }
+
+
+    public Discente autocadastroDiscente(String nome, String email, String senha, String matricula) {
+        try{
+            Usuario usuario = usuarioService.autocadastroUsuario(usuarioService, nome, email, senha);
+    
+            Curso curso = verificaCurso(discenteRepository.listaDiscente, matricula);
+            Discente discente = new Discente(
+                    usuario.getId(),
+                    usuario.getNome(),
+                    usuario.getEmail(),
+                    usuario.getSenha(),
+                    usuario.getPapel(),
+                    usuario.getAtivo(),
+                    null,
+                    matricula,
+                    0,
+                    curso,
+                    RolesUsuario.DISCENTE
+            );
+            discenteRepository.listaDiscente.add(discente);
+            return discente;
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao criar discente", e);
+        }
+    }
+
+    public Boolean verificaMatriculaDiscente (String matricula, List < Discente > repositorio){
+        for (Discente d : repositorio) {
+            if (d.getMatricula().equals(matricula)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Curso verificaCurso (List <Discente> repositorio, String matricula){
+        for (Discente d: repositorio){
+            if (d.getMatricula().equals(matricula)) {
+                return d.getCurso();
+            }
+        }
+        return null;
+    }
+}
