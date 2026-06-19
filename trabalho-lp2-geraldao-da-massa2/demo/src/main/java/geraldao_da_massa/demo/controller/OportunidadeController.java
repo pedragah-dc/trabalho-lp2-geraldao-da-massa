@@ -20,8 +20,8 @@ public class OportunidadeController {
     private OportunidadesService oportunidadesService;
 
     @PostMapping("/oportunidades")
-    public void addOportunidade(@Valid @RequestBody OportunidadeRequestDTO oportunidade){
-        oportunidadesService.criarOportunidade(oportunidade);
+    public boolean addOportunidade(@Valid @RequestBody OportunidadeRequestDTO oportunidade){
+        return oportunidadesService.criarOportunidade(oportunidade);
     }
     @GetMapping("/oportunidades")
     public List<Oportunidade> listarOportunidades(){

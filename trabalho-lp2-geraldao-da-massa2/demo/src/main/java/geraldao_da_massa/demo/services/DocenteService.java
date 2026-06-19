@@ -32,7 +32,8 @@ public class DocenteService {
 //                autor, docenteResponsavel);
 //    }
     public Oportunidade criarOportunidade(OportunidadeRequestDTO opDTO){
-        return oportunidadeService.criarOportunidade(opDTO);
+        return null;
+        //return oportunidadeService.criarOportunidade(opDTO);
     }
 
 

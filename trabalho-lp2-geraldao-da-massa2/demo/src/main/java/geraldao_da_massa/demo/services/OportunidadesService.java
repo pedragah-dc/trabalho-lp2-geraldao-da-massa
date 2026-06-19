@@ -35,8 +35,8 @@ public class OportunidadesService {
     // -------------------------------------------------------
     // Qualquer usuário (discente diretor ou docente) pode criar.
     // A oportunidade começa como RASCUNHO e não aparece para ninguém ainda.
-    //Ave maria doido;--;
-    public Oportunidade criarOportunidade(OportunidadeRequestDTO oportunidade) {
+
+    public boolean criarOportunidade(OportunidadeRequestDTO oportunidade) {
 
         if (oportunidade.titulo == null || oportunidade.titulo.isBlank()) {
             throw new IllegalArgumentException("Título da oportunidade é obrigatório.");
@@ -47,6 +47,7 @@ public class OportunidadesService {
         if (oportunidade.vagas == null || oportunidade.vagas <= 0) {
             throw new IllegalArgumentException("Número de vagas deve ser maior que zero.");
         }
+        // POderia setar o horario no service... diminuiria o tamanho do DTO
         if (oportunidade.inicio == null || oportunidade.fim == null || oportunidade.fim.isBefore(oportunidade.inicio)) {
             //throw new IllegalArgumentException("Datas de início e fim são inválidas.");
         }
@@ -61,7 +62,7 @@ public class OportunidadesService {
 
         repository.save(nova);
         System.out.println("[RF011] Oportunidade criada como RASCUNHO: " + oportunidade.titulo);
-        return nova;
+        return true;
     }
 
     // -------------------------------------------------------
