@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "Oportunidade")
 public class Oportunidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

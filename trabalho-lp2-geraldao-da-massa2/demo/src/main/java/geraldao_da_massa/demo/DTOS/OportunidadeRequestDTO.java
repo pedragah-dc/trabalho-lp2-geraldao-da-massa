@@ -4,9 +4,11 @@ import geraldao_da_massa.demo.entity.Docente;
 import geraldao_da_massa.demo.entity.Usuario;
 import geraldao_da_massa.demo.entity.enums.TiposModalidade;
 import geraldao_da_massa.demo.entity.enums.TiposOportunidade;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
+@NotNull
 //deixa a responsabilidade de procurar classes na camada service?
 public class OportunidadeRequestDTO {
     public String titulo;

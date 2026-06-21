@@ -1,12 +1,16 @@
 package geraldao_da_massa.demo.services;
 
+import geraldao_da_massa.demo.DTOS.UsuarioRequestDTO;
 import geraldao_da_massa.demo.entity.AlteracaoPermissao;
+import geraldao_da_massa.demo.entity.DiscenteDiretor;
 import geraldao_da_massa.demo.entity.Usuario;
 import geraldao_da_massa.demo.entity.enums.RolesUsuario;
 import geraldao_da_massa.demo.entity.enums.TipoOperacao;
 import geraldao_da_massa.demo.repository.AlteracaoPermissaoRepository;
 
 import java.time.LocalDateTime;
+
+import geraldao_da_massa.demo.repository.UsuarioRepository;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +20,11 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
     private static Integer numUsuarios;
 
-
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
     private AlteracaoPermissaoRepository alteracaoRepositorio;
+
 
 
 
@@ -44,29 +51,29 @@ public class UsuarioService {
     public void atribuirPermissao(Usuario usuario, RolesUsuario role){
         usuario.setRole(role);
         AlteracaoPermissao alteracao = new AlteracaoPermissao(usuario, LocalDateTime.now(), TipoOperacao.ATRIBUIR, null);
-        alteracaoRepositorio.getListaAlteracaoPermissao().add(alteracao);
+        alteracaoRepositorio.save(alteracao);
     }
 
     public void mudarPermissao(Usuario usuario, RolesUsuario role){
         usuario.setRole(role);
         AlteracaoPermissao alteracao = new AlteracaoPermissao(usuario, LocalDateTime.now(), TipoOperacao.ALTERAR, null);
-        alteracaoRepositorio.getListaAlteracaoPermissao().add(alteracao);
+        alteracaoRepositorio.save(alteracao);
     }
 
     public void removerPermissao(Usuario usuario){
         usuario.setRole(null);
         AlteracaoPermissao alteracao = new AlteracaoPermissao(usuario, LocalDateTime.now(), TipoOperacao.REMOVER, null);
-        alteracaoRepositorio.getListaAlteracaoPermissao().add(alteracao);
+        alteracaoRepositorio.save(alteracao);
     }
 
-    public Usuario autocadastroUsuario(UsuarioService servicoUsuario, String nome, String email, String senha){
-        Integer id = servicoUsuario.getNumUsuarios();
-
-        id += 1;
-
-        servicoUsuario.setNumUsuarios(id);
-
-        return new Usuario(id, nome, email, senha, null,  true, null);
+    public Usuario autocadastroUsuario(UsuarioRequestDTO userDTO){
+        //TODO FAZER VERIFICACAO
+        Usuario user = new Usuario();
+        user.setNome(userDTO.getNome());
+        user.setSenha(userDTO.getSenha());
+        user.setEmail(userDTO.getEmail());
+        usuarioRepository.save(user);
+        return user;
     }
 
     public void excluirUsuario(Usuario usuario, UsuarioService servicoUsuario){
@@ -77,5 +84,9 @@ public class UsuarioService {
 
         Integer novoId = servicoUsuario.getNumUsuarios() - 1;
         servicoUsuario.setNumUsuarios(novoId);
+    }
+    //metodo pra encontrar um usuario
+    public Usuario findUsuario(String name){
+        return null;
     }
 }

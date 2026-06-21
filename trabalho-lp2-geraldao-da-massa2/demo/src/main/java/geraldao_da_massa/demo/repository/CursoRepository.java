@@ -1,23 +1,10 @@
 package geraldao_da_massa.demo.repository;
 
 import geraldao_da_massa.demo.entity.Curso;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CursoRepository {
-    public List<Curso> listaCursos;
-
-    public CursoRepository() {
-        listaCursos = new ArrayList<Curso>();
-        listaCursos.add(new Curso("Ciência da Computação",
-                6767,
-                500,
-                "PCC_Atual"));
-    }
-
-
-    public List<Curso> getListaCursos(){
-        return listaCursos;
-    }
+public interface CursoRepository extends JpaRepository<Curso, Integer> {
 }

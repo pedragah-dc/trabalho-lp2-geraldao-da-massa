@@ -1,8 +1,17 @@
 package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.StatusAproveitamento;
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "aproveitamento")
+@NoArgsConstructor
 
 public class Aproveitamento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @OneToOne
     private Discente discente;
     private String descricao;
     private String instituicao;

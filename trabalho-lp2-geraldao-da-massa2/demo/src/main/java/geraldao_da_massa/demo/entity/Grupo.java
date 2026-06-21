@@ -1,16 +1,24 @@
 package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.StatusGrupo;
+import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "grupo")
 public class Grupo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String nome;
     private String tipo;
     private String email;
     private String descricao;
     private StatusGrupo status; // corrigido: era Enum<StatusGrupo>
+    @OneToOne
     private Docente responsavel;
+    @OneToMany
     private ArrayList<MembroGrupo> membros;
 
     public Grupo(String nome, String tipo, String email, String descricao,

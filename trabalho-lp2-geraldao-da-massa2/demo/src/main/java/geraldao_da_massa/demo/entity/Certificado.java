@@ -1,14 +1,25 @@
 package geraldao_da_massa.demo.entity;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 /**
  * Classe que representa um Certificado emitido para um discente
  * em uma oportunidade (RF019)
  */
+@Entity
+@Table(name = "certificado")
+@NoArgsConstructor
 public class Certificado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String hash;
+    @OneToOne
     private Discente discente;
+    @OneToOne
     private Oportunidade oportunidade;
     private LocalDateTime dataEmissao;
     private Integer cargaHoraria;

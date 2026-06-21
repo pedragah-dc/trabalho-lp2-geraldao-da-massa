@@ -1,10 +1,23 @@
 package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.TipoOperacao;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "AlterarPermissao")
 public class AlteracaoPermissao {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idPermissao;
+    @OneToOne
     private Usuario usuario;
     private LocalDateTime dataAlteracao;
     private TipoOperacao tipoOperacao;
