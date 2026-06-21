@@ -1,15 +1,22 @@
 package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.StatusGrupo;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
+@Entity
+@Getter
+@Setter
 public class Grupo {
     private String nome;
     private String tipo;
     private String email;
     private String descricao;
-    private StatusGrupo status; // corrigido: era Enum<StatusGrupo>
+    private @Enumerated StatusGrupo status; // corrigido: era Enum<StatusGrupo>
     private Docente responsavel;
     private ArrayList<MembroGrupo> membros;
 
@@ -21,43 +28,7 @@ public class Grupo {
         this.descricao = descricao;
         this.status = status;
         this.responsavel = responsavel;
-        membros = new ArrayList<MembroGrupo>();
-    }
-
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
-
-    public String getTipo() { return tipo; }
-    public void setTipo(String tipo) { this.tipo = tipo; }
-
-    public String getEmail() { return email; }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public StatusGrupo getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusGrupo status) {
-        this.status = status;
-    }
-
-    public Docente getResponsavel() {
-        return responsavel;
-    }
-
-    public void setResponsavel(Docente responsavel) {
-        this.responsavel = responsavel;
+        membros = new ArrayList<>();
     }
 
     public void adicionarMembro(MembroGrupo membro){

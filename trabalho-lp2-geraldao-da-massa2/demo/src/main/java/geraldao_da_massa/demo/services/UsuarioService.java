@@ -8,14 +8,17 @@ import geraldao_da_massa.demo.repository.AlteracaoPermissaoRepository;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class UsuarioService {
-    private static Integer numUsuarios;
+@Getter
+@Setter
 
+public class UsuarioService {
+    private Integer numUsuarios;
 
     private AlteracaoPermissaoRepository alteracaoRepositorio;
 
@@ -23,15 +26,9 @@ public class UsuarioService {
 
     public UsuarioService(){
         this.numUsuarios = 0;
+        this.alteracaoRepositorio = new AlteracaoPermissaoRepository();
     }
 
-
-    public Integer getNumUsuarios(){
-        return numUsuarios;
-    }
-    public void setNumUsuarios(Integer numUsuarios){
-        this.numUsuarios = numUsuarios;
-    }
 
     public boolean mudarSenha(Usuario usuario, String novaSenha) {
         if (novaSenha == null || novaSenha.isBlank()) {

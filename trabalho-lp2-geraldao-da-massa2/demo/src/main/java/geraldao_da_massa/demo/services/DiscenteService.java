@@ -5,13 +5,20 @@ import geraldao_da_massa.demo.entity.enums.RolesUsuario;
 import geraldao_da_massa.demo.entity.enums.StatusSolicitacaoOportunidade;
 import geraldao_da_massa.demo.repository.DiscenteRepository;
 import geraldao_da_massa.demo.repository.SolicitacaoOportunidadeRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class DiscenteService {
-    private static DiscenteRepository discenteRepository;
-    private static UsuarioService usuarioService;
+    @Autowired
+    private DiscenteRepository discenteRepository;
+    @Autowired
+    private UsuarioService usuarioService;
+
+
     public SolicitacaoOportunidade criarSolicitacaoOportunidade(Discente discente, Oportunidade oportunidade){
         try{
             SolicitacaoOportunidade solicitacao = new SolicitacaoOportunidade(discente, oportunidade);
@@ -47,7 +54,7 @@ public class DiscenteService {
         try{
             Usuario usuario = usuarioService.autocadastroUsuario(usuarioService, nome, email, senha);
     
-            Curso curso = verificaCurso(discenteRepository.listaDiscente, matricula);
+            Curso curso = verificaCurso(discenteRepository.findAll(), matricula);
             Discente discente = new Discente(
                     usuario.getId(),
                     usuario.getNome(),
@@ -61,7 +68,7 @@ public class DiscenteService {
                     curso,
                     RolesUsuario.DISCENTE
             );
-            discenteRepository.listaDiscente.add(discente);
+            discenteRepository.save(discente);
             return discente;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao criar discente", e);

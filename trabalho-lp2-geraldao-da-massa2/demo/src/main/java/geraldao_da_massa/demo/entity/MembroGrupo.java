@@ -1,10 +1,16 @@
 package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.CargoNoGrupo;
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+@Entity
+@Getter
+@Setter
 public class MembroGrupo {
     private Usuario membro;
     private CargoNoGrupo cargo;
@@ -18,30 +24,11 @@ public class MembroGrupo {
         historico.atualize(LocalDateTime.now(), cargo);
 
     }
-
-    //USADO SOMENTE PARA COPIA
-    public MembroGrupo(MembroGrupo copy) {
-        this.membro = copy.getMembro();
-        this.cargo = copy.getCargo();
-    }
-
-    public Usuario getMembro() {
-        return membro;
-    }
-
-
-    public CargoNoGrupo getCargo() {
-        return cargo;
-    }
-
     public void setCargo(CargoNoGrupo cargo) {
         historico.atualize(LocalDateTime.now(), cargo);
         this.cargo = cargo;
     }
 
-    public String getNome() {
-        return membro.getNome();
-    }
 
     //classe aninhadas
     class Historico {
