@@ -2,12 +2,16 @@ package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.StatusAproveitamento;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "aproveitamento")
 @NoArgsConstructor
 
+@Getter
+@Setter
 public class Aproveitamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,19 +30,4 @@ public class Aproveitamento {
         this.horas = horas;
         this.status = status;
     }
-
-    public Discente getDiscente() { return discente; }
-    public void setDiscente(Discente discente) { this.discente = discente; }
-
-    public String getDescricao() { return descricao; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
-
-    public String getInstituicao() { return instituicao; }
-    public void setInstituicao(String instituicao) { this.instituicao = instituicao; }
-
-    public Integer getHoras() { return horas; }
-    public void setHoras(Integer horas) { this.horas = horas; }
-
-    public StatusAproveitamento getStatus() { return status; }
-    public void setStatus(StatusAproveitamento status) { this.status = status; }
 }

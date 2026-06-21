@@ -2,12 +2,16 @@ package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.StatusGrupo;
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
 @Entity
 @Table(name = "grupo")
+
+@Getter
+@Setter
 public class Grupo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,43 +33,7 @@ public class Grupo {
         this.descricao = descricao;
         this.status = status;
         this.responsavel = responsavel;
-        membros = new ArrayList<MembroGrupo>();
-    }
-
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
-
-    public String getTipo() { return tipo; }
-    public void setTipo(String tipo) { this.tipo = tipo; }
-
-    public String getEmail() { return email; }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public StatusGrupo getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusGrupo status) {
-        this.status = status;
-    }
-
-    public Docente getResponsavel() {
-        return responsavel;
-    }
-
-    public void setResponsavel(Docente responsavel) {
-        this.responsavel = responsavel;
+        membros = new ArrayList<>();
     }
 
     public void adicionarMembro(MembroGrupo membro){

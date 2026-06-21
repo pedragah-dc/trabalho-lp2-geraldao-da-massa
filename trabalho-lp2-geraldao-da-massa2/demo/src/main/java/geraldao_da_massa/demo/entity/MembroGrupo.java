@@ -2,12 +2,16 @@ package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.CargoNoGrupo;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Entity
 @Table(name = "membrogrupo")
+@Getter
+@Setter
 public class MembroGrupo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,15 +36,6 @@ public class MembroGrupo {
     public MembroGrupo(MembroGrupo copy) {
         this.membro = copy.getMembro();
         this.cargo = copy.getCargo();
-    }
-
-    public Usuario getMembro() {
-        return membro;
-    }
-
-
-    public CargoNoGrupo getCargo() {
-        return cargo;
     }
 
     public void setCargo(CargoNoGrupo cargo) {

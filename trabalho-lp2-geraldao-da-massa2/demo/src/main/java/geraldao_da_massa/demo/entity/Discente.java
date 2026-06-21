@@ -3,7 +3,9 @@ package geraldao_da_massa.demo.entity;
 import geraldao_da_massa.demo.entity.enums.RolesUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -15,8 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "chavefk")
 
+@Getter
+@Setter
 public class Discente extends Usuario {
-
     private String matricula;
     private Integer semestreAtual;
     @OneToOne
@@ -31,32 +34,4 @@ public class Discente extends Usuario {
 //        this.curso = curso;
 //        this.listaDeOp = listaOp;
 //    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public Integer getSemestreAtual() {
-        return semestreAtual;
-    }
-
-    public void setSemestreAtual(Integer semestreAtual) {
-        this.semestreAtual = semestreAtual;
-    }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
-    public List<Oportunidade> getListaDeOp(){
-        return listaDeOp;
-    }
 }

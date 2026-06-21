@@ -1,21 +1,24 @@
 package geraldao_da_massa.demo.entity;
 
-import geraldao_da_massa.demo.entity.enums.RolesUsuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "discentediretor")
 @SuperBuilder
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "chavefk")
+
+@Getter
+@Setter
 public class DiscenteDiretor extends Discente {
 
     @OneToOne
@@ -31,36 +34,4 @@ public class DiscenteDiretor extends Discente {
 //        this.dataInicio = dataInicio;
 //        this.dataFim = dataFim;
 //    }
-
-    public Grupo getGrupo() {
-        return grupo;
-    }
-
-    public void setGrupo(Grupo grupo) {
-        this.grupo = grupo;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public Date getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public Date getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
-    }
 }

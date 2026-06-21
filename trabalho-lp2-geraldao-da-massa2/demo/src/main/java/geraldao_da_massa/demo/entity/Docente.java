@@ -22,6 +22,4 @@ public class Docente extends Usuario {
     @OneToOne(optional = false)
     private Oportunidade oportunidade;
 
-
-
 }
