@@ -5,11 +5,12 @@ import geraldao_da_massa.demo.entity.Oportunidade;
 import geraldao_da_massa.demo.entity.enums.TiposModalidade;
 import geraldao_da_massa.demo.entity.enums.TiposOportunidade;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public interface OportunidadeRepository extends JpaRepository<Oportunidade, Integer> {
-
 }

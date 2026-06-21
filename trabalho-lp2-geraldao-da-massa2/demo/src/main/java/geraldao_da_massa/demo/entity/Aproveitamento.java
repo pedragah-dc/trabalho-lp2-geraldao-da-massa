@@ -1,22 +1,22 @@
 package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.StatusAproveitamento;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import lombok.Getter;
-import lombok.Setter;
-
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "aproveitamento")
+@NoArgsConstructor
 
 public class Aproveitamento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @OneToOne
     private Discente discente;
     private String descricao;
     private String instituicao;
     private Integer horas;
-    private @Enumerated StatusAproveitamento status; // corrigido: era Enum<StatusAproveitamento>
+    private StatusAproveitamento status; // corrigido: era Enum<StatusAproveitamento>
 
     public Aproveitamento(Discente discente, String descricao, String instituicao,
                           Integer horas, StatusAproveitamento status) {
@@ -26,4 +26,19 @@ public class Aproveitamento {
         this.horas = horas;
         this.status = status;
     }
+
+    public Discente getDiscente() { return discente; }
+    public void setDiscente(Discente discente) { this.discente = discente; }
+
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getInstituicao() { return instituicao; }
+    public void setInstituicao(String instituicao) { this.instituicao = instituicao; }
+
+    public Integer getHoras() { return horas; }
+    public void setHoras(Integer horas) { this.horas = horas; }
+
+    public StatusAproveitamento getStatus() { return status; }
+    public void setStatus(StatusAproveitamento status) { this.status = status; }
 }

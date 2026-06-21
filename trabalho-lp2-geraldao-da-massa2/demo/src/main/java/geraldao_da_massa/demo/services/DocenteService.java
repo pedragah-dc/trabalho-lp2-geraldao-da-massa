@@ -6,17 +6,21 @@ import geraldao_da_massa.demo.entity.Oportunidade;
 import geraldao_da_massa.demo.entity.enums.TiposModalidade;
 import geraldao_da_massa.demo.entity.enums.TiposOportunidade;
 import geraldao_da_massa.demo.repository.DocenteRepository;
+import geraldao_da_massa.demo.repository.OportunidadeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
+@Service
 public class DocenteService {
 
-    private final OportunidadesService oportunidadeService;
+    @Autowired
+    private DocenteRepository docenteRepository;
+    @Autowired
+    private OportunidadesService oportunidadeService;
 
-
-    public DocenteService(OportunidadesService oportunidadeService) {
-        this.oportunidadeService = oportunidadeService;
-    }
 
     // Docente também pode criar oportunidades
 //    public Oportunidade criarOportunidade(String titulo, String descricao,
@@ -48,12 +52,16 @@ public class DocenteService {
     }
 
 
-    public Boolean verificaSiapeDocente(String siape, DocenteRepository repositorio){
-        for (Docente docente : repositorio.listaDocentes) {
-            if (docente.getSiape().equals(siape)) {
-                return true;
+    public Boolean verificaSiapeDocente(String siape){
+        try {
+            for(Docente doc: docenteRepository.findAll()){
+
+                if(siape.equals(doc.getSiape())) return true;
             }
+        } catch (Exception err){
+            System.out.println(err.getMessage());
         }
         return false;
     }
+
 }

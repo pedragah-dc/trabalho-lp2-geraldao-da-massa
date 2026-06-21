@@ -11,7 +11,4 @@ import java.util.List;
 
 public interface DiscenteRepository extends JpaRepository<Discente, Integer> {
 
-
-
-    boolean existsByMatricula(String matricula);
 }

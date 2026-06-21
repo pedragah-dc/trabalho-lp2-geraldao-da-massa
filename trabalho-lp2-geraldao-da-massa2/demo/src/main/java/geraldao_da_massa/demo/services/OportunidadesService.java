@@ -10,6 +10,7 @@ import geraldao_da_massa.demo.entity.enums.TiposModalidade;
 import geraldao_da_massa.demo.entity.enums.TiposOportunidade;
 import geraldao_da_massa.demo.repository.OportunidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -47,13 +48,13 @@ public class OportunidadesService {
         if (oportunidade.vagas == null || oportunidade.vagas <= 0) {
             throw new IllegalArgumentException("Número de vagas deve ser maior que zero.");
         }
+
         // POderia setar o horario no service... diminuiria o tamanho do DTO
         if (oportunidade.inicio == null || oportunidade.fim == null || oportunidade.fim.isBefore(oportunidade.inicio)) {
             //throw new IllegalArgumentException("Datas de início e fim são inválidas.");
         }
 
         //TODO ocorre uma pesquisa pelo nome de alguem que está no banco
-
 
         Oportunidade nova = new Oportunidade(oportunidade.titulo, oportunidade.descricao, oportunidade.tipo, oportunidade.modalidade,
                 oportunidade.cargaHoraria, oportunidade.vagas, oportunidade.inicio, oportunidade.fim,

@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e92da34-34b9-41dc-9a78-305725aa64ce" name="Changes" comment="Teste de repo, servico, controller, dto&#10;Funcionando marromeno">
+      <change afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOS/DocenteRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOS/UsuarioRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/HistoricoMembro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/UsuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOS/OportunidadeRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOS/OportunidadeRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controller/OportunidadeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controller/OportunidadeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controller/UsuarioController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Administrador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/AlteracaoPermissao.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/AlteracaoPermissao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Aproveitamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Aproveitamento.java" afterDir="false" />
@@ -15,48 +23,32 @@
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/DiscenteDiretor.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/DiscenteDiretor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Docente.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Docente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Grupo.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Grupo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Inscricao.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Inscricao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/MembroGrupo.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/MembroGrupo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Notificacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Notificacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/MembroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/MembroService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Oportunidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Oportunidade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Papel.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Papel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/SolicitacaoOportunidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/SolicitacaoOportunidade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/AlteracaoPermissaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/AlteracaoPermissaoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/CursoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/CursoRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/DiscenteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/DiscenteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/DocenteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/DocenteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/OportunidadeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/OportunidadeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/AdministradorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/AdministradorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/DiscenteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/DiscenteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/DocenteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/DocenteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/OportunidadesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/OportunidadesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CopilotChats">
-    <option name="panelChat">
-      <chat>
-        <option name="activeSessionId" value="dda02994-abcb-403d-b06c-496227851bd2" />
-        <option name="sessions">
-          <session>
-            <option name="chatType" value="PANEL" />
-            <option name="id" value="dda02994-abcb-403d-b06c-496227851bd2" />
-            <option name="modeId" value="Ask" />
-            <option name="modelType" value="builtin_family" />
-            <option name="modelValue" value="auto" />
-            <option name="targetType" value="LOCAL" />
-          </session>
-        </option>
-        <option name="type" value="PANEL" />
-      </chat>
-    </option>
-  </component>
-  <component name="CopilotPersistence">
-    <persistenceIdMap>
-      <entry key="_C:/Users/super/OneDrive/Desktop/Documentos/GitHub/trabalho-lp2-geraldao-da-massa" value="3FRjntBqsjv7QcEeOPcZduJr43a" />
-    </persistenceIdMap>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -81,6 +73,19 @@
     &quot;accountId&quot;: &quot;bb87e8b8-f492-45b8-80e3-108cf006404e&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/4.1.0/spring-boot-4.1.0-sources.jar!/org/springframework/boot/ApplicationProperties.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/4.1.0/spring-boot-4.1.0-sources.jar!/org/springframework/boot/SpringApplication.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/4.1.0/spring-boot-4.1.0-sources.jar!/org/springframework/boot/SpringApplicationShutdownHook.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/4.1.0/spring-boot-4.1.0-sources.jar!/org/springframework/boot/bootstrap/DefaultBootstrapContext.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/7.0.8/spring-context-7.0.8-sources.jar!/org/springframework/context/event/AbstractApplicationEventMulticaster.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/7.0.8/spring-context-7.0.8-sources.jar!/org/springframework/context/event/SimpleApplicationEventMulticaster.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/7.0.8/spring-core-7.0.8-sources.jar!/org/springframework/util/Assert.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/7.0.8/spring-core-7.0.8-sources.jar!/org/springframework/util/ClassUtils.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5,
   &quot;fromUser&quot;: false
@@ -103,10 +108,10 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Spring Boot.DemoApplication.executor&quot;: &quot;Run&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;spring-boot&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;spring-boot-jerry-branch&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.liquibase.common.gui.settings.db.LiquibaseConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -130,13 +135,6 @@
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-python-sdk-890ed5b35930-d9c5bdb153f4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.23774.444" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6e92da34-34b9-41dc-9a78-305725aa64ce" name="Changes" comment="" />
@@ -148,6 +146,11 @@
       <workItem from="1781746209375" duration="1402000" />
       <workItem from="1781834761262" duration="652000" />
       <workItem from="1781835539940" duration="1038000" />
+      <workItem from="1781875356580" duration="14242000" />
+      <workItem from="1781976813834" duration="6663000" />
+      <workItem from="1781983999232" duration="251000" />
+      <workItem from="1782003023999" duration="4354000" />
+      <workItem from="1782047129416" duration="355000" />
     </task>
     <task id="LOCAL-00001" summary="Teste de repo, servico, controller, dto&#10;Funcionando marromeno">
       <option name="closed" value="true" />
@@ -175,12 +178,14 @@
     <MESSAGE value="Teste de repo, servico, controller, dto&#10;Funcionando marromeno" />
     <option name="LAST_COMMIT_MESSAGE" value="Teste de repo, servico, controller, dto&#10;Funcionando marromeno" />
   </component>
-  <component name="github-copilot-workspace">
-    <instructionFileLocations>
-      <option value=".github/instructions" />
-    </instructionFileLocations>
-    <promptFileLocations>
-      <option value=".github/prompts" />
-    </promptFileLocations>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,18 +1,25 @@
 package geraldao_da_massa.demo.entity;
 
-import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
-
-
+/**
+ * Classe que representa um Certificado emitido para um discente
+ * em uma oportunidade (RF019)
+ */
 @Entity
-@Getter
-@Setter
+@Table(name = "certificado")
+@NoArgsConstructor
 public class Certificado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String hash;
+    @OneToOne
     private Discente discente;
+    @OneToOne
     private Oportunidade oportunidade;
     private LocalDateTime dataEmissao;
     private Integer cargaHoraria;
@@ -31,6 +38,61 @@ public class Certificado {
         this.assinado = assinado;
     }
 
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public Discente getDiscente() {
+        return discente;
+    }
+
+    public void setDiscente(Discente discente) {
+        this.discente = discente;
+    }
+
+    public Oportunidade getOportunidade() {
+        return oportunidade;
+    }
+
+    public void setOportunidade(Oportunidade oportunidade) {
+        this.oportunidade = oportunidade;
+    }
+
+    public LocalDateTime getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public void setDataEmissao(LocalDateTime dataEmissao) {
+        this.dataEmissao = dataEmissao;
+    }
+
+    public Integer getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public void setCargaHoraria(Integer cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    public String getCaminhoArquivo() {
+        return caminhoArquivo;
+    }
+
+    public void setCaminhoArquivo(String caminhoArquivo) {
+        this.caminhoArquivo = caminhoArquivo;
+    }
+
+    public Boolean getAssinado() {
+        return assinado;
+    }
+
+    public void setAssinado(Boolean assinado) {
+        this.assinado = assinado;
+    }
 
     @Override
     public String toString() {

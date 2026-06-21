@@ -1,13 +1,20 @@
 package geraldao_da_massa.demo.services;
 
+import geraldao_da_massa.demo.DTOS.DocenteRequestDTO;
+import geraldao_da_massa.demo.DTOS.UsuarioRequestDTO;
 import geraldao_da_massa.demo.entity.*;
 import geraldao_da_massa.demo.entity.enums.RolesUsuario;
 import geraldao_da_massa.demo.repository.DocenteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Service
 public class AdministradorService {
-    private final UsuarioService usuarioService;
+    @Autowired
+    private UsuarioService usuarioService;
+    @Autowired
     private final DocenteRepository docenterepository;
 
     public AdministradorService(UsuarioService usuarioService, DocenteRepository docenteRepository){
@@ -16,14 +23,19 @@ public class AdministradorService {
     }
 
 
-    public Docente cadastroDocente(String nome, String email, String senha, String siape, String departamento, RolesUsuario role){
+    public Docente cadastroDocente(DocenteRequestDTO docDTO){
+        //TODO FAZER SISTEMA DE VERIFICACAO
+        Usuario usuario = usuarioService.autocadastroUsuario(docDTO);
 
-        Usuario usuario = usuarioService.autocadastroUsuario(usuarioService, nome, email, senha);
+        Docente docente = new Docente();
+        docente.setId(usuario.getId());
+        docente.setNome(usuario.getNome());
+        docente.setEmail(usuario.getEmail());
+        docente.setSenha(usuario.getSenha());docente.setPapel(new Papel(docDTO.getPapel()));
+        docente.setAtivo(usuario.getAtivo()); docente.setRole(docDTO.getRole());
+        docente.setSiape(docDTO.getSiape());
 
-        Docente docente = new Docente(usuario.getId(), usuario.getNome(), usuario.getEmail(),
-                usuario.getSenha(), usuario.getPapel(), usuario.getAtivo(), role, siape, departamento);
-
-        docenterepository.listaDocentes.add(docente);
+        docenterepository.save(docente);
 
         return docente;
     }
