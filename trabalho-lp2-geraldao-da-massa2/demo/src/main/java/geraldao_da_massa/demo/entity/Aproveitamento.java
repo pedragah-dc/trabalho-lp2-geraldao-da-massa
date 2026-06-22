@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class Aproveitamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idAproveitamento;
     @OneToOne
     private Discente discente;
     private String descricao;
