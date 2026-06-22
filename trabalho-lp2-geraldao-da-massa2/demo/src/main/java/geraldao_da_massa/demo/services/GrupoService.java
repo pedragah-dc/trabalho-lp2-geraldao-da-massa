@@ -1,9 +1,9 @@
 package geraldao_da_massa.demo.services;
 
 
-import geraldao_da_massa.demo.entity.*;
-import geraldao_da_massa.demo.entity.enums.CargoNoGrupo;
-import geraldao_da_massa.demo.entity.enums.StatusGrupo;
+import geraldao_da_massa.demo.entities.*;
+import geraldao_da_massa.demo.entities.enums.CargoNoGrupo;
+import geraldao_da_massa.demo.entities.enums.StatusGrupo;
 
 public class GrupoService {
 

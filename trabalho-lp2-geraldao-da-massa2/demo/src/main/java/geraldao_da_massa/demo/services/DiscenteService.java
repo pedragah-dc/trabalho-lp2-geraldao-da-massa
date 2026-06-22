@@ -1,12 +1,12 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOS.UsuarioRequestDTO;
-import geraldao_da_massa.demo.entity.*;
-import geraldao_da_massa.demo.entity.enums.RolesUsuario;
-import geraldao_da_massa.demo.entity.enums.StatusSolicitacaoOportunidade;
-import geraldao_da_massa.demo.repository.CursoRepository;
-import geraldao_da_massa.demo.repository.DiscenteRepository;
-import geraldao_da_massa.demo.repository.SolicitacaoOportunidadeRepository;
+import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.entities.*;
+import geraldao_da_massa.demo.entities.enums.RolesUsuario;
+import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;
+import geraldao_da_massa.demo.repositories.CursoRepository;
+import geraldao_da_massa.demo.repositories.DiscenteRepository;
+import geraldao_da_massa.demo.repositories.SolicitacaoOportunidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

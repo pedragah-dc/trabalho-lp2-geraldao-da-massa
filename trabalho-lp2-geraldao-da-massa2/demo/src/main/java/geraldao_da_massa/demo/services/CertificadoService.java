@@ -1,11 +1,11 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.entity.Certificado;
-import geraldao_da_massa.demo.entity.Discente;
-import geraldao_da_massa.demo.entity.Inscricao;
-import geraldao_da_massa.demo.entity.Oportunidade;
-import geraldao_da_massa.demo.entity.enums.StatusOportunidade;
-import geraldao_da_massa.demo.repository.InscricaoRepository;
+import geraldao_da_massa.demo.entities.Certificado;
+import geraldao_da_massa.demo.entities.Discente;
+import geraldao_da_massa.demo.entities.Inscricao;
+import geraldao_da_massa.demo.entities.Oportunidade;
+import geraldao_da_massa.demo.entities.enums.StatusOportunidade;
+import geraldao_da_massa.demo.repositories.InscricaoRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

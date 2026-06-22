@@ -1,10 +1,10 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.entity.Aproveitamento;
-import geraldao_da_massa.demo.entity.Discente;
-import geraldao_da_massa.demo.entity.Docente;
-import geraldao_da_massa.demo.entity.enums.StatusAproveitamento;
-import geraldao_da_massa.demo.repository.AproveitamentoRepository;
+import geraldao_da_massa.demo.entities.Aproveitamento;
+import geraldao_da_massa.demo.entities.Discente;
+import geraldao_da_massa.demo.entities.Docente;
+import geraldao_da_massa.demo.entities.enums.StatusAproveitamento;
+import geraldao_da_massa.demo.repositories.AproveitamentoRepository;
 
 import java.util.List;
 
