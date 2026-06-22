@@ -3,11 +3,13 @@ package geraldao_da_massa.demo.entity;
 import geraldao_da_massa.demo.entity.enums.StatusGrupo;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "grupo")
+@Table(name = "grupos")
+@NoArgsConstructor
 public class Grupo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

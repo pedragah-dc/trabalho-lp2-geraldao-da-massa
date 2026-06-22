@@ -1,12 +1,29 @@
 package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.StatusInscricao;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@Entity
+@Table(name = "inscricoes")
+@Getter
+@Setter
 public class Inscricao {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idInscricao;
+    //pergunta: inscricao só pode se inscrever numa oportunidade, e oportunidades podem ter varias inscricoes?
+    @OneToOne
     private Oportunidade oportunidade;
+    //TODO pergunta dps
+    @OneToOne
     private Discente discente;
     private StatusInscricao status;
     private String motivacao;
+    @OneToOne
     private Inscricao sustituidoPor; // RF017: aponta para a inscrição do substituto
 
     public Inscricao(Oportunidade oportunidade, Discente discente, String motivacao) {
@@ -15,21 +32,6 @@ public class Inscricao {
         this.motivacao = motivacao;
         this.status = StatusInscricao.PENDENTE;
     }
-
-    public Oportunidade getOportunidade() { return oportunidade; }
-    public void setOportunidade(Oportunidade oportunidade) { this.oportunidade = oportunidade; }
-
-    public Discente getDiscente() { return discente; }
-    public void setDiscente(Discente discente) { this.discente = discente; }
-
-    public StatusInscricao getStatus() { return status; }
-    public void setStatus(StatusInscricao status) { this.status = status; }
-
-    public String getMotivacao() { return motivacao; }
-    public void setMotivacao(String motivacao) { this.motivacao = motivacao; }
-
-    public Inscricao getSustituidoPor() { return sustituidoPor; }
-    public void setSustituidoPor(Inscricao sustituidoPor) { this.sustituidoPor = sustituidoPor; }
 
     @Override
     public String toString() {

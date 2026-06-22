@@ -1,19 +1,21 @@
 package geraldao_da_massa.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.io.Serializable;
+
+//
+//@Entity
+//@NoArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor
+@Embeddable
 public class Papel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Integer id;
     private String descricao;
 
     public Papel(String descricao) {

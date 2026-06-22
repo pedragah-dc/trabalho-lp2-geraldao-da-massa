@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * em uma oportunidade (RF019)
  */
 @Entity
-@Table(name = "certificado")
+@Table(name = "certificados")
 @NoArgsConstructor
 public class Certificado {
     @Id

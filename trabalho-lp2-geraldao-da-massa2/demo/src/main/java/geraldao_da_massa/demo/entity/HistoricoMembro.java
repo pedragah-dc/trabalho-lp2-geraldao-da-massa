@@ -7,12 +7,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "historico")
+@Table(name = "historico_do_membro")
 public class HistoricoMembro {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        @OneToOne(mappedBy = "membroid")
+        private Integer idHistoricoMembro;
+        @OneToOne(mappedBy = "historico")
         private MembroGrupo membro;
+        @ElementCollection
         private ArrayList<RegistroCargo> registros;
 
         public HistoricoMembro () {
@@ -31,7 +33,8 @@ public class HistoricoMembro {
             }
 
         }
-
 }
+//Jesus, quem programou isso
+//ah foi eu
 
 

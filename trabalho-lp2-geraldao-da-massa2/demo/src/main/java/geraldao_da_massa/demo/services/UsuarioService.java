@@ -87,6 +87,6 @@ public class UsuarioService {
     }
     //metodo pra encontrar um usuario
     public Usuario findUsuario(String name){
-        return null;
+        return usuarioRepository.findByNome(name);
     }
 }

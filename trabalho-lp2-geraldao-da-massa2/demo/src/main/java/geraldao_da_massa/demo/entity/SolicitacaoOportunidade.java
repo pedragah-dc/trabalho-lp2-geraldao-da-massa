@@ -3,7 +3,7 @@ package geraldao_da_massa.demo.entity;
 import geraldao_da_massa.demo.entity.enums.StatusSolicitacaoOportunidade;
 
 import java.time.LocalDateTime;
-
+//nao sei como funciona isso
 public class SolicitacaoOportunidade {
     private Discente discenteSolicitante;
     private Oportunidade oportunidadeRequerida;

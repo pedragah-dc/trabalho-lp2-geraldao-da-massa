@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name= "discente")
 @SuperBuilder
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "chavefk")
+@PrimaryKeyJoinColumn(name = "usuario")
 
 public class Discente extends Usuario {
 

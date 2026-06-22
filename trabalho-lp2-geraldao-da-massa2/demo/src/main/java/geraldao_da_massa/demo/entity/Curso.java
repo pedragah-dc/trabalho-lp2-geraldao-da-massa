@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name  ="curso")
+@Table(name  ="cursos")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -25,8 +25,8 @@ public class Curso {
     private String versaoPPC;
 
 
-    //por que precisa disso? nao poderia ser um repo, ou melhor delegar isso pra um serviço?
-    @OneToMany(mappedBy = "listappc")
+    //nao sei se essa classe deveria apontar de volta pro curso
+    @OneToMany
     private List<AlteracaoPermissao> listaAlteracaoPPC;
 
     public Curso(String nome, Integer codigo, Integer cargaHoraria, String versaoPPC) {

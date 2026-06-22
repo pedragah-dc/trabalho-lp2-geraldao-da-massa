@@ -21,13 +21,14 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Long id1;
+    //private Long id1;
 
     private String nome;
     private String email;
     private String senha;
-    @OneToOne
-    @JoinColumn(name = "id")
+    //@OneToOne
+    //@JoinColumn(name = "papel")
+    @Embedded
     private Papel papel;
     private Boolean ativo;
     private Enum<RolesUsuario> role;

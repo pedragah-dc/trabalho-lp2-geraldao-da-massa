@@ -63,21 +63,14 @@ public class DiscenteService {
             Usuario usuario = usuarioService.autocadastroUsuario(dto);
     
             Curso curso = verificaCurso(matricula);
-            Discente discente = new Discente(
-                    usuario.getId(),
-                    usuario.getNome(),
-                    usuario.getEmail(),
-                    usuario.getSenha(),
-                    usuario.getPapel(),
-                    usuario.getAtivo(),
-                    null,
-                    matricula,
-                    0,
-                    curso,
-                    RolesUsuario.DISCENTE
-            );
-
+            Discente discente = new Discente();
+            discente.setCurso(curso);
+            discente.setMatricula(matricula);
+            discente.setSenha(senha);
+            discente.setEmail(email);
+            discente.setRole(RolesUsuario.DISCENTE);
             discenteRepository.save(discente);
+
             return discente;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao criar discente", e);

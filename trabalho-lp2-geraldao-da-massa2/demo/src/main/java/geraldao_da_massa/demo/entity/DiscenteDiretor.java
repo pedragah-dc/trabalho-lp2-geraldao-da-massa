@@ -12,10 +12,10 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "discentediretor")
+@Table(name = "discentes_diretores")
 @SuperBuilder
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "chavefk")
+@PrimaryKeyJoinColumn(name = "usuario")
 public class DiscenteDiretor extends Discente {
 
     @OneToOne

@@ -9,9 +9,9 @@ import java.util.HashSet;
 
 @SuperBuilder
 @Entity
-@Table(name = "Docente")
+@Table(name = "docente")
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "chavefk")
+@PrimaryKeyJoinColumn(name = "usuario")
 @Getter
 @Setter
 public class Docente extends Usuario {
@@ -21,7 +21,5 @@ public class Docente extends Usuario {
     private HashSet<Grupo> grupos;
     @OneToOne(optional = false)
     private Oportunidade oportunidade;
-
-
 
 }

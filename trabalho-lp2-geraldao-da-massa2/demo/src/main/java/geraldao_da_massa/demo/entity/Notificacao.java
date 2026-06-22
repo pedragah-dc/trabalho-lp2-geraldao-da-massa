@@ -1,6 +1,8 @@
 package geraldao_da_massa.demo.entity;
 
 
+
+//nao faço ideia do que isso faz ou como deveria se comportar
 public class Notificacao {
     private Integer id;
     private String mensagem;
