@@ -6,6 +6,7 @@ import geraldao_da_massa.demo.entity.enums.RolesUsuario;
 import geraldao_da_massa.demo.entity.enums.StatusSolicitacaoOportunidade;
 import geraldao_da_massa.demo.repository.CursoRepository;
 import geraldao_da_massa.demo.repository.DiscenteRepository;
+import geraldao_da_massa.demo.repository.InscricaoRepository;
 import geraldao_da_massa.demo.repository.SolicitacaoOportunidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class DiscenteService {
     private CursoRepository cursoRepository;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private InscricaoRepository inscricaoRepository;
 
     public SolicitacaoOportunidade criarSolicitacaoOportunidade(Discente discente, Oportunidade oportunidade){
         try{
@@ -46,7 +49,7 @@ public class DiscenteService {
         return true;
     }
     public List<SolicitacaoOportunidade> listarSolicitacoesDoDiscente(Discente discente, SolicitacaoOportunidadeRepository repo){
-        return repo.listarPorDiscente(discente);
+        return inscricaoRepository.findAllByDiscente(discente);
     }
     public DiscenteService(DiscenteRepository discenteRepository, UsuarioService usuarioService) {
         this.discenteRepository = discenteRepository;

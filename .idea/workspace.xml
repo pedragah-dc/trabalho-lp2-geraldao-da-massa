@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="6e92da34-34b9-41dc-9a78-305725aa64ce" name="Changes" comment="Teste de repo, servico, controller, dto&#10;Funcionando marromeno">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Aproveitamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/Aproveitamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/AproveitamentoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/AproveitamentoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/AproveitamentoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/AproveitamentoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/SolicitacaoOportunidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entity/SolicitacaoOportunidade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/InscricaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/InscricaoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/SolicitacaoOportunidadeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repository/SolicitacaoOportunidadeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/CertificadoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/CertificadoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/CoordenadorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/CoordenadorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/DiscenteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/DiscenteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/InscricaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/InscricaoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +48,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/InscricaoService.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/4.1.0/spring-boot-4.1.0-sources.jar!/org/springframework/boot/ApplicationProperties.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/4.1.0/spring-boot-4.1.0-sources.jar!/org/springframework/boot/SpringApplication.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/4.1.0/spring-boot-4.1.0-sources.jar!/org/springframework/boot/SpringApplicationShutdownHook.java" root0="FORCE_HIGHLIGHTING" />
@@ -121,7 +126,8 @@
       <workItem from="1781983999232" duration="251000" />
       <workItem from="1782003023999" duration="4354000" />
       <workItem from="1782047129416" duration="4286000" />
-      <workItem from="1782091511595" duration="9578000" />
+      <workItem from="1782091511595" duration="9676000" />
+      <workItem from="1782216310894" duration="2319000" />
     </task>
     <task id="LOCAL-00001" summary="Teste de repo, servico, controller, dto&#10;Funcionando marromeno">
       <option name="closed" value="true" />

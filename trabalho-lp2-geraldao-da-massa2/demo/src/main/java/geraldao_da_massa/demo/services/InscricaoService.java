@@ -6,28 +6,31 @@ import geraldao_da_massa.demo.entity.Oportunidade;
 import geraldao_da_massa.demo.entity.enums.StatusInscricao;
 import geraldao_da_massa.demo.entity.enums.StatusOportunidade;
 import geraldao_da_massa.demo.repository.InscricaoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class InscricaoService {
-    private InscricaoRepository repository;
+    @Autowired
+    private InscricaoRepository inscricaoRepository;
 
-    public InscricaoService(InscricaoRepository repository) {
-        this.repository = repository;
-    }
 
     // Discente solicita inscrição em oportunidade aberta
     public Inscricao criarInscricao(Oportunidade oportunidade, Discente discente, String motivacao) {
+
         if (oportunidade.getStatus() != StatusOportunidade.EM_INSCRICOES) {
             throw new IllegalStateException("Inscrições não estão abertas para esta oportunidade. Status: "
                     + oportunidade.getStatus());
         }
-        if (repository.buscarPorDiscenteEOportunidade(discente, oportunidade) != null) {
+
+        //a ideia é procurar se o discente nao possui uma inscricao nessa oportunidade
+        if (inscricaoRepository.findByDiscente(discente) && inscricaoRepository.findByOportunidade(oportunidade)) {
             throw new IllegalStateException("Discente já possui inscrição nesta oportunidade.");
         }
 
         Inscricao inscricao = new Inscricao(oportunidade, discente, motivacao);
-        repository.salvar(inscricao);
+        inscricaoRepository.save(inscricao);
         System.out.println("[INSCRICAO] " + discente.getNome() + " inscrito em '" + oportunidade.getTitulo() + "'");
         return inscricao;
     }
@@ -39,7 +42,10 @@ public class InscricaoService {
                     + inscricao.getStatus());
         }
 
-        long vagasOcupadas = repository.listarAprovadosPorOportunidade(oportunidade).size();
+        //TODO AJEITAR DPS, verificar;-;
+        //procurar todas as incricoes com tal oportunidade pegar o total?
+        long vagasOcupadas = inscricaoRepository.findAllByOportunidade(oportunidade).size();
+
         if (vagasOcupadas >= oportunidade.getVagas()) {
             throw new IllegalStateException("Não há vagas disponíveis. Vagas: " + oportunidade.getVagas()
                     + ", Aprovados: " + vagasOcupadas);
@@ -94,7 +100,10 @@ public class InscricaoService {
         }
 
         // O substituto precisa ter inscrição na oportunidade (é da "lista de interessados")
-        Inscricao inscricaoSubstituto = repository.buscarPorDiscenteEOportunidade(novoDiscente, oportunidade);
+        //nao entendi:/
+//        Inscricao inscricaoSubstituto = inscricaoRepository.buscarPorDiscenteEOportunidade(novoDiscente, oportunidade);
+
+        Inscricao inscricaoSubstituto = inscricaoRepository.findByOportunidadeAndDiscente(novoDiscente, oportunidade);
         if (inscricaoSubstituto == null) {
             throw new IllegalStateException("O discente '" + novoDiscente.getNome()
                     + "' não possui inscrição nesta oportunidade. "
@@ -122,11 +131,13 @@ public class InscricaoService {
         return inscricaoSubstituto;
     }
 
-    public List<Inscricao> listarPorOportunidade(Oportunidade oportunidade) {
-        return repository.listarPorOportunidade(oportunidade);
-    }
+    //?? tava dando erro entao tirei
 
-    public List<Inscricao> listarAprovados(Oportunidade oportunidade) {
-        return repository.listarAprovadosPorOportunidade(oportunidade);
-    }
+//    public List<Inscricao> listarPorOportunidade(Oportunidade oportunidade) {
+//        return inscricaoRepository.findAllByOportunidade(oportunidade);
+//    }
+//
+//    public List<Inscricao> listarAprovados(Oportunidade oportunidade) {
+//        return inscricaoRepository.findAllByOportunidade(oportunidade);
+//    }
 }

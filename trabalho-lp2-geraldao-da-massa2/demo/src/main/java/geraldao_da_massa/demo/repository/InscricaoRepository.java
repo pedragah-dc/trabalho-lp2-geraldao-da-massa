@@ -3,50 +3,22 @@ package geraldao_da_massa.demo.repository;
 import geraldao_da_massa.demo.entity.Discente;
 import geraldao_da_massa.demo.entity.Inscricao;
 import geraldao_da_massa.demo.entity.Oportunidade;
+import geraldao_da_massa.demo.entity.SolicitacaoOportunidade;
 import geraldao_da_massa.demo.entity.enums.StatusInscricao;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class InscricaoRepository {
+public interface InscricaoRepository extends JpaRepository<Inscricao, Integer> {
 
-    private List<Inscricao> inscricoes = new ArrayList<>();
 
-    public void salvar(Inscricao inscricao) {
-        inscricoes.add(inscricao);
-    }
-
-    public List<Inscricao> listarTodas() {
-        return new ArrayList<>(inscricoes);
-    }
-
-    public List<Inscricao> listarPorOportunidade(Oportunidade oportunidade) {
-        List<Inscricao> resultado = new ArrayList<>();
-        for (Inscricao i : inscricoes) {
-            if (i.getOportunidade().equals(oportunidade)) {
-                resultado.add(i);
-            }
-        }
-        return resultado;
-    }
-
-    public List<Inscricao> listarAprovadosPorOportunidade(Oportunidade oportunidade) {
-        List<Inscricao> resultado = new ArrayList<>();
-        for (Inscricao i : inscricoes) {
-            if (i.getOportunidade().equals(oportunidade)
-                    && i.getStatus() == StatusInscricao.APROVADO) {
-                resultado.add(i);
-            }
-        }
-        return resultado;
-    }
-
-    public Inscricao buscarPorDiscenteEOportunidade(Discente discente, Oportunidade oportunidade) {
-        for (Inscricao i : inscricoes) {
-            if (i.getDiscente().equals(discente) && i.getOportunidade().equals(oportunidade)) {
-                return i;
-            }
-        }
-        return null;
-    }
+    boolean findByDiscente(Discente discente);
+    boolean findByOportunidade(Oportunidade oportunidade);
+    int findAllByStatus(StatusInscricao status);
+    Collection<Object> findAllByOportunidade(Oportunidade oportunidade);
+    Inscricao findByOportunidadeAndDiscente(Discente novoDiscente, Oportunidade oportunidade);
+    List<SolicitacaoOportunidade> findAllByDiscente(Discente discente);
 }
+//foda

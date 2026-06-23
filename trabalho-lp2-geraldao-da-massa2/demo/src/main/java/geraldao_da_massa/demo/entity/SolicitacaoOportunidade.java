@@ -1,11 +1,25 @@
 package geraldao_da_massa.demo.entity;
 
 import geraldao_da_massa.demo.entity.enums.StatusSolicitacaoOportunidade;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 //nao sei como funciona isso
+@NoArgsConstructor
+@Entity
+@Table(name = "solicitacao_oportunidade")
+@Getter
+@Setter
 public class SolicitacaoOportunidade {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idSolicitacaoOportunidade;
+    @OneToOne
     private Discente discenteSolicitante;
+    @OneToOne
     private Oportunidade oportunidadeRequerida;
     private LocalDateTime dataSolicitacao;
     private LocalDateTime dataAprovacao;

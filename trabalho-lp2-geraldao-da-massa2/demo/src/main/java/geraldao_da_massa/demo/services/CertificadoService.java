@@ -6,20 +6,21 @@ import geraldao_da_massa.demo.entity.Inscricao;
 import geraldao_da_massa.demo.entity.Oportunidade;
 import geraldao_da_massa.demo.entity.enums.StatusOportunidade;
 import geraldao_da_massa.demo.repository.InscricaoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+@Service
 public class CertificadoService {
-
+    @Autowired
     private InscricaoRepository inscricaoRepository;
+    //?
     private List<Certificado> certificadoEmitidos = new ArrayList<>();
 
-    public CertificadoService(InscricaoRepository inscricaoRepository) {
-        this.inscricaoRepository = inscricaoRepository;
-    }
+
 
     // RF019 - Encerrar oportunidade e gerar lista de participantes para certificação
     public List<Certificado> encerrarEGerarCertificados(Oportunidade oportunidade) {
@@ -30,7 +31,7 @@ public class CertificadoService {
                     + oportunidade.getStatus());
         }
 
-        List<Inscricao> aprovados = inscricaoRepository.listarAprovadosPorOportunidade(oportunidade);
+        List<Inscricao> aprovados = inscricaoRepository.findAll();
 
         if (aprovados.isEmpty()) {
             throw new IllegalStateException("Não há participantes aprovados para certificar.");
