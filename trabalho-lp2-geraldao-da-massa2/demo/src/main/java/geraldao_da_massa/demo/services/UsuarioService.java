@@ -1,17 +1,15 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOS.UsuarioRequestDTO;
-import geraldao_da_massa.demo.entity.AlteracaoPermissao;
-import geraldao_da_massa.demo.entity.DiscenteDiretor;
-import geraldao_da_massa.demo.entity.Usuario;
-import geraldao_da_massa.demo.entity.enums.RolesUsuario;
-import geraldao_da_massa.demo.entity.enums.TipoOperacao;
-import geraldao_da_massa.demo.repository.AlteracaoPermissaoRepository;
+import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.entities.AlteracaoPermissao;
+import geraldao_da_massa.demo.entities.Usuario;
+import geraldao_da_massa.demo.entities.enums.RolesUsuario;
+import geraldao_da_massa.demo.entities.enums.TipoOperacao;
+import geraldao_da_massa.demo.repositories.AlteracaoPermissaoRepository;
 
 import java.time.LocalDateTime;
 
-import geraldao_da_massa.demo.repository.UsuarioRepository;
-import jakarta.persistence.*;
+import geraldao_da_massa.demo.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

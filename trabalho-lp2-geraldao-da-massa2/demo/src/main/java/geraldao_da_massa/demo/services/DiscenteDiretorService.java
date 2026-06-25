@@ -1,13 +1,5 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.entity.DiscenteDiretor;
-import geraldao_da_massa.demo.entity.Docente;
-import geraldao_da_massa.demo.entity.Oportunidade;
-import geraldao_da_massa.demo.entity.enums.TiposModalidade;
-import geraldao_da_massa.demo.entity.enums.TiposOportunidade;
-
-import java.time.LocalDateTime;
-
 public class DiscenteDiretorService {
 
     private final OportunidadesService oportunidadeService;

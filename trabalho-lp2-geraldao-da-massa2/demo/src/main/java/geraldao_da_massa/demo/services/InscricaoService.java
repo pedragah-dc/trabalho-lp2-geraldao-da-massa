@@ -1,15 +1,14 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.entity.Discente;
-import geraldao_da_massa.demo.entity.Inscricao;
-import geraldao_da_massa.demo.entity.Oportunidade;
-import geraldao_da_massa.demo.entity.enums.StatusInscricao;
-import geraldao_da_massa.demo.entity.enums.StatusOportunidade;
-import geraldao_da_massa.demo.repository.InscricaoRepository;
+import geraldao_da_massa.demo.entities.Discente;
+import geraldao_da_massa.demo.entities.Inscricao;
+import geraldao_da_massa.demo.entities.Oportunidade;
+import geraldao_da_massa.demo.entities.enums.StatusInscricao;
+import geraldao_da_massa.demo.entities.enums.StatusOportunidade;
+import geraldao_da_massa.demo.repositories.InscricaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 public class InscricaoService {
     @Autowired
