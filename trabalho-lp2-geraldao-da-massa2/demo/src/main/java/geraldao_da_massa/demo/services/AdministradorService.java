@@ -1,6 +1,7 @@
 package geraldao_da_massa.demo.services;
 
 import geraldao_da_massa.demo.DTOs.DocenteRequestDTO;
+import geraldao_da_massa.demo.DTOs.RequestPPCDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.repositories.AdministradorRepository;
 import geraldao_da_massa.demo.repositories.CursoRepository;
@@ -55,17 +56,19 @@ public class AdministradorService {
     }
 
 
-    public void cadastrarPPC(String cursoNome, String versaoPPC, Integer cargaHoraria, Administrador admin){
+    public void cadastrarPPC(Integer id, RequestPPCDTO ppcDTO){
+        Administrador admin = admRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("ADMINISTRADOR NAO ENCONTRADO: "+id));
         Curso curso = null;
-        if(cursoNome != null){
-            if(!cursoNome.isBlank()){
-                curso = cursoRepository.findByNome(cursoNome);
+        if(ppcDTO.cursoNome != null){
+            if(!ppcDTO.cursoNome.isBlank()){
+                curso = cursoRepository.findByNome(ppcDTO.cursoNome);
             }
         }
         if(curso != null){
             AlteracaoPermissao alteracaoPermissao = new AlteracaoPermissao(admin, LocalDateTime.now(), null, curso.getVersaoPPC());
-            curso.setVersaoPPC(versaoPPC);
-            curso.setCargaHoraria(cargaHoraria);
+            curso.setVersaoPPC(ppcDTO.versaoPPC);
+            curso.setCargaHoraria(ppcDTO.cargaHoraria);
             curso.getListaAlteracaoPPC().add(alteracaoPermissao);
             cursoRepository.save(curso);
         }
