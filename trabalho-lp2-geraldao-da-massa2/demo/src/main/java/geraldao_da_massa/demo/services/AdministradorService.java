@@ -2,6 +2,7 @@ package geraldao_da_massa.demo.services;
 
 import geraldao_da_massa.demo.DTOs.DocenteRequestDTO;
 import geraldao_da_massa.demo.entities.*;
+import geraldao_da_massa.demo.repositories.CursoRepository;
 import geraldao_da_massa.demo.repositories.DocenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public class AdministradorService {
     private UsuarioService usuarioService;
     @Autowired
     private DocenteRepository docenterepository;
+    @Autowired
+    private CursoRepository cursoRepository;
 
 
 
@@ -45,11 +48,24 @@ public class AdministradorService {
         return null;
     }
 
-    public void cadastrarPPC(Curso curso, String versaoPPC, Integer cargaHoraria, Administrador admin){
-        AlteracaoPermissao alteracaoPermissao = new AlteracaoPermissao(admin, LocalDateTime.now(), null, curso.getVersaoPPC());
-        curso.setVersaoPPC(versaoPPC);
-        curso.setCargaHoraria(cargaHoraria);
-        curso.getListaAlteracaoPPC().add(alteracaoPermissao);
+
+    public void cadastrarPPC(String cursoNome, String versaoPPC, Integer cargaHoraria, Administrador admin){
+        Curso curso = null;
+        if(cursoNome != null){
+            if(!cursoNome.isBlank()){
+                curso = cursoRepository.findByNome(cursoNome);
+            }
+        }
+        if(curso != null){
+            AlteracaoPermissao alteracaoPermissao = new AlteracaoPermissao(admin, LocalDateTime.now(), null, curso.getVersaoPPC());
+            curso.setVersaoPPC(versaoPPC);
+            curso.setCargaHoraria(cargaHoraria);
+            curso.getListaAlteracaoPPC().add(alteracaoPermissao);
+            cursoRepository.save(curso);
+        }
+        if(curso == null){
+            throw new RuntimeException("CURSO NAO ENCONTRADO");
+        }
 
     }
 
