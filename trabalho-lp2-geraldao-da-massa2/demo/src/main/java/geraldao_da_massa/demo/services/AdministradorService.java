@@ -2,6 +2,7 @@ package geraldao_da_massa.demo.services;
 
 import geraldao_da_massa.demo.DTOs.DocenteRequestDTO;
 import geraldao_da_massa.demo.entities.*;
+import geraldao_da_massa.demo.repositories.AdministradorRepository;
 import geraldao_da_massa.demo.repositories.CursoRepository;
 import geraldao_da_massa.demo.repositories.DocenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import java.time.LocalDateTime;
 @Service
 public class AdministradorService {
     @Autowired
+    private AdministradorRepository admRepository;
+    @Autowired
     private UsuarioService usuarioService;
     @Autowired
     private DocenteRepository docenterepository;
@@ -20,8 +23,11 @@ public class AdministradorService {
 
 
 
-    public Docente cadastroDocente(DocenteRequestDTO docDTO){
+    public Docente cadastroDocente(Integer idAdm, DocenteRequestDTO docDTO){
         //TODO FAZER SISTEMA DE VERIFICACAO
+        Administrador adm = admRepository.findById(idAdm).
+                orElseThrow(() -> new RuntimeException("ADMINISTRADOR NAO ENCONTRADO: "+idAdm));
+
         if(docDTO.getSiape().isBlank() || docDTO.getDepartamento().isBlank()){
             throw new RuntimeException("INFORMAÇÕES DO DOCENTE FALTANDO");
         }
