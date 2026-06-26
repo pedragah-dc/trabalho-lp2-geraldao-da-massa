@@ -13,29 +13,36 @@ public class AdministradorService {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
-    private final DocenteRepository docenterepository;
+    private DocenteRepository docenterepository;
 
-    public AdministradorService(UsuarioService usuarioService, DocenteRepository docenteRepository){
-        this.usuarioService = usuarioService;
-        this.docenterepository = docenteRepository;
-    }
 
 
     public Docente cadastroDocente(DocenteRequestDTO docDTO){
         //TODO FAZER SISTEMA DE VERIFICACAO
+        if(docDTO.getSiape().isBlank() || docDTO.getDepartamento().isBlank()){
+            throw new RuntimeException("INFORMAÇÕES DO DOCENTE FALTANDO");
+        }
         Usuario usuario = usuarioService.autocadastroUsuario(docDTO);
+        //se o cadastro for com êxito, entao usuario foi salvo no banco
+        Docente docente = null;
+        if(usuario != null){
+            docente = new Docente();
+            docente.setId(usuario.getId());
+            docente.setNome(usuario.getNome());
+            docente.setEmail(usuario.getEmail());
+            docente.setSenha(usuario.getSenha());
+            docente.setPapel(new Papel(docDTO.getPapel()));
+            docente.setAtivo(usuario.getAtivo());
+            docente.setRole(docDTO.getRole());
+            docente.setSiape(docDTO.getSiape());
+        }
 
-        Docente docente = new Docente();
-        docente.setId(usuario.getId());
-        docente.setNome(usuario.getNome());
-        docente.setEmail(usuario.getEmail());
-        docente.setSenha(usuario.getSenha());docente.setPapel(new Papel(docDTO.getPapel()));
-        docente.setAtivo(usuario.getAtivo()); docente.setRole(docDTO.getRole());
-        docente.setSiape(docDTO.getSiape());
+        if(docente != null){
+            docenterepository.save(docente);
+            return docente;
+        }
 
-        docenterepository.save(docente);
-
-        return docente;
+        return null;
     }
 
     public void cadastrarPPC(Curso curso, String versaoPPC, Integer cargaHoraria, Administrador admin){
