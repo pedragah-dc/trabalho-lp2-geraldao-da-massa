@@ -6,11 +6,11 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 public class UsuarioRequestDTO {
-    public String nome;
-    public String email;
-    public String senha;
-    public String papel;
-    public Boolean ativo;
-    public Enum<RolesUsuario> role;
+    private String nome;
+    private String email;
+    private String senha;
+    private String papel;
+    private Boolean ativo;
+    private RolesUsuario role;
 
 }

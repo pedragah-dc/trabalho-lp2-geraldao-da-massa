@@ -15,12 +15,12 @@ public class OportunidadeController {
     @Autowired
     private OportunidadesService oportunidadesService;
 
-    @PostMapping("/oportunidades")
-    public boolean addOportunidade(@Valid @RequestBody OportunidadeRequestDTO oportunidade){
-        return oportunidadesService.criarOportunidade(oportunidade);
+
+    @PostMapping("/oportunidades/{id}")
+    public boolean addOportunidade(@Valid @RequestBody OportunidadeRequestDTO oportunidade, @PathVariable int id){
+        return oportunidadesService.criarOportunidade(oportunidade, id);
     }
     @GetMapping("/oportunidades")
-
     public List<Oportunidade> listarOportunidades(){
         return oportunidadesService.listarTodas();
     }

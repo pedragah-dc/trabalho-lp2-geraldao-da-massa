@@ -1,7 +1,9 @@
 package geraldao_da_massa.demo.services;
 
 import geraldao_da_massa.demo.DTOs.DocenteRequestDTO;
-import geraldao_da_massa.demo.DTOs.RequestPPCDTO;
+import geraldao_da_massa.demo.DTOs.PPCrequestDTO;
+import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.UsuarioResponseDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.repositories.AdministradorRepository;
 import geraldao_da_massa.demo.repositories.CursoRepository;
@@ -22,6 +24,18 @@ public class AdministradorService {
     @Autowired
     private CursoRepository cursoRepository;
 
+    public UsuarioResponseDTO cadastrarAdmin(UsuarioRequestDTO dto){
+        Administrador adm = new Administrador();
+        adm.setNome(dto.getNome());
+        adm.setAtivo(true);
+        adm.setRole(dto.getRole());
+        adm.setEmail(dto.getEmail());
+        adm.setSenha(dto.getSenha());
+        admRepository.save(adm);
+        UsuarioResponseDTO userResponse = new UsuarioResponseDTO(adm);
+
+        return userResponse;
+    }
 
 
     public Docente cadastroDocente(Integer idAdm, DocenteRequestDTO docDTO){
@@ -32,20 +46,17 @@ public class AdministradorService {
         if(docDTO.getSiape().isBlank() || docDTO.getDepartamento().isBlank()){
             throw new RuntimeException("INFORMAÇÕES DO DOCENTE FALTANDO");
         }
-        Usuario usuario = usuarioService.autocadastroUsuario(docDTO);
-        //se o cadastro for com êxito, entao usuario foi salvo no banco
-        Docente docente = null;
-        if(usuario != null){
-            docente = new Docente();
-            docente.setId(usuario.getId());
-            docente.setNome(usuario.getNome());
-            docente.setEmail(usuario.getEmail());
-            docente.setSenha(usuario.getSenha());
-            docente.setPapel(new Papel(docDTO.getPapel()));
-            docente.setAtivo(usuario.getAtivo());
-            docente.setRole(docDTO.getRole());
-            docente.setSiape(docDTO.getSiape());
-        }
+
+        Docente docente;
+        docente = new Docente();
+        //docente.setId(usuario.getId());
+        docente.setNome(docDTO.getNome());
+        docente.setEmail(docDTO.getEmail());
+        docente.setSenha(docDTO.getSenha());
+        docente.setPapel(new Papel(docDTO.getPapel()));
+        docente.setAtivo(true);
+        docente.setRole(docDTO.getRole());
+        docente.setSiape(docDTO.getSiape());
 
         if(docente != null){
             docenterepository.save(docente);
@@ -56,19 +67,19 @@ public class AdministradorService {
     }
 
 
-    public void cadastrarPPC(Integer id, RequestPPCDTO ppcDTO){
+    public void cadastrarPPC(Integer id, PPCrequestDTO ppcDTO){
         Administrador admin = admRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("ADMINISTRADOR NAO ENCONTRADO: "+id));
         Curso curso = null;
-        if(ppcDTO.cursoNome != null){
-            if(!ppcDTO.cursoNome.isBlank()){
-                curso = cursoRepository.findByNome(ppcDTO.cursoNome);
+        if(ppcDTO.getCursoNome() != null){
+            if(!ppcDTO.getCursoNome().isBlank()){
+                curso = cursoRepository.findByNome(ppcDTO.getCursoNome());
             }
         }
         if(curso != null){
             AlteracaoPermissao alteracaoPermissao = new AlteracaoPermissao(admin, LocalDateTime.now(), null, curso.getVersaoPPC());
-            curso.setVersaoPPC(ppcDTO.versaoPPC);
-            curso.setCargaHoraria(ppcDTO.cargaHoraria);
+            curso.setVersaoPPC(ppcDTO.getVersaoPPC());
+            curso.setCargaHoraria(ppcDTO.getCargaHoraria());
             curso.getListaAlteracaoPPC().add(alteracaoPermissao);
             cursoRepository.save(curso);
         }

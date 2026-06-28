@@ -5,24 +5,26 @@ import geraldao_da_massa.demo.entities.Usuario;
 import geraldao_da_massa.demo.entities.enums.TiposModalidade;
 import geraldao_da_massa.demo.entities.enums.TiposOportunidade;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 @NotNull
 //deixa a responsabilidade de procurar classes na camada service?
 public class OportunidadeRequestDTO {
-    public String titulo;
-    public String descricao;
-    public TiposOportunidade tipo;
-    public TiposModalidade modalidade;
-    public Integer cargaHoraria;
-    public Integer vagas;
-    public LocalDateTime inicio;
-    public LocalDateTime fim;
-    public LocalDateTime dataInicioInscricoes;
-    public LocalDateTime dataFimInscricoes;
-    public Usuario autor;
-    public Docente docenteResponsavel;
+    private String titulo;
+    private String descricao;
+    private TiposOportunidade tipo;
+    private TiposModalidade modalidade;
+    private Integer cargaHoraria;
+    private Integer vagas;
+    private LocalDateTime inicio;
+    private LocalDateTime fim;
+    private LocalDateTime dataInicioInscricoes;
+    private LocalDateTime dataFimInscricoes;
+    private Usuario autor;
+    private Docente docenteResponsavel;
 
 
 }

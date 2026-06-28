@@ -5,10 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e92da34-34b9-41dc-9a78-305725aa64ce" name="Changes" comment="Teste de repo, servico, controller, dto&#10;Funcionando marromeno">
-      <change afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/RequestPPCDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/UsuarioResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/DocenteRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/DocenteRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/OportunidadeRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/OportunidadeRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/RequestPPCDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/PPCrequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/UsuarioRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/UsuarioRequestDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controllers/AdministradorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controllers/AdministradorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controllers/OportunidadeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controllers/OportunidadeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Docente.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Docente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repositories/DocenteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repositories/DocenteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repositories/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repositories/UsuarioRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/AdministradorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/AdministradorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/OportunidadesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/OportunidadesService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +135,9 @@
       <workItem from="1782091511595" duration="9676000" />
       <workItem from="1782216310894" duration="2573000" />
       <workItem from="1782349224184" duration="3515000" />
-      <workItem from="1782510749621" duration="5036000" />
+      <workItem from="1782510749621" duration="5837000" />
+      <workItem from="1782526920979" duration="611000" />
+      <workItem from="1782662342538" duration="10052000" />
     </task>
     <task id="LOCAL-00001" summary="Teste de repo, servico, controller, dto&#10;Funcionando marromeno">
       <option name="closed" value="true" />

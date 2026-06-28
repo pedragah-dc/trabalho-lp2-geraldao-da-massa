@@ -9,7 +9,7 @@ public class DocenteRequestDTO extends UsuarioRequestDTO {
     private String departamento;
 
     public DocenteRequestDTO(String nome, String email, String senha, String papel, Boolean ativo, Enum<RolesUsuario> role, String siape, String departamento) {
-        super(nome, email, senha, papel, ativo, role);
+        super(nome, email, senha, papel, ativo, (RolesUsuario) role);
         this.siape = siape;
         this.departamento = departamento;
     }

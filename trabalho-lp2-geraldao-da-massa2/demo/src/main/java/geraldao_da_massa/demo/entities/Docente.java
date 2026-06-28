@@ -18,7 +18,7 @@ public class Docente extends Usuario {
     private String siape;
     private String departamento;
     private HashSet<Grupo> grupos;
-    @OneToOne(optional = false)
+    @OneToOne
     private Oportunidade oportunidade;
 
 }

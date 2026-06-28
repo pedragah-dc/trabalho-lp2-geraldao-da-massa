@@ -4,14 +4,21 @@ import geraldao_da_massa.demo.DTOs.OportunidadeRequestDTO;
 import geraldao_da_massa.demo.entities.Discente;
 import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.Oportunidade;
+import geraldao_da_massa.demo.entities.Usuario;
 import geraldao_da_massa.demo.entities.enums.StatusOportunidade;
+import geraldao_da_massa.demo.repositories.DocenteRepository;
 import geraldao_da_massa.demo.repositories.OportunidadeRepository;
+import geraldao_da_massa.demo.repositories.UsuarioRepository;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 //Vou imaginar assim: Um serviço só tem acesso ao seu repositorio e se ele quiser consultar outro, terá que utilizar um serviço pra isso
@@ -22,6 +29,10 @@ public class OportunidadesService {
     private OportunidadeRepository repository;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private UsuarioRepository userRepository;
+    @Autowired
+    private DocenteRepository docenteRepository;
 
     public OportunidadesService(OportunidadeRepository repository) {
         this.repository = repository;
@@ -32,33 +43,37 @@ public class OportunidadesService {
     // -------------------------------------------------------
     // Qualquer usuário (discente diretor ou docente) pode criar.
     // A oportunidade começa como RASCUNHO e não aparece para ninguém ainda.
+    public boolean criarOportunidade(OportunidadeRequestDTO oportunidade, int id) {
 
-    public boolean criarOportunidade(OportunidadeRequestDTO oportunidade) {
-
-        if (oportunidade.titulo == null || oportunidade.titulo.isBlank()) {
+        if (oportunidade.getTitulo() == null || oportunidade.getTitulo().isBlank()) {
             throw new IllegalArgumentException("Título da oportunidade é obrigatório.");
         }
-        if (oportunidade.cargaHoraria == null || oportunidade.cargaHoraria <= 0) {
+        if (oportunidade.getCargaHoraria() == null || oportunidade.getCargaHoraria() <= 0) {
             throw new IllegalArgumentException("Carga horária deve ser maior que zero.");
         }
-        if (oportunidade.vagas == null || oportunidade.vagas <= 0) {
+        if (oportunidade.getVagas() == null || oportunidade.getVagas() <= 0) {
             throw new IllegalArgumentException("Número de vagas deve ser maior que zero.");
         }
 
         // POderia setar o horario no service... diminuiria o tamanho do DTO
-        if (oportunidade.inicio == null || oportunidade.fim == null || oportunidade.fim.isBefore(oportunidade.inicio)) {
+        if (oportunidade.getInicio() == null || oportunidade.getFim() == null || oportunidade.getFim().isBefore(oportunidade.getInicio())) {
             //throw new IllegalArgumentException("Datas de início e fim são inválidas.");
         }
 
         //TODO ocorre uma pesquisa pelo nome de alguem que está no banco
-
-        Oportunidade nova = new Oportunidade(oportunidade.titulo, oportunidade.descricao, oportunidade.tipo, oportunidade.modalidade,
-                oportunidade.cargaHoraria, oportunidade.vagas, oportunidade.inicio, oportunidade.fim,
-                oportunidade.dataInicioInscricoes, oportunidade.dataFimInscricoes,
-                oportunidade.autor, oportunidade.docenteResponsavel);
-
+        //buscando o responsavel pelo id do endpoint
+        Usuario responsavel = userRepository.findById(id);
+        Oportunidade nova = new Oportunidade(oportunidade.getTitulo(), oportunidade.getDescricao(), oportunidade.getTipo(), oportunidade.getModalidade(),
+                oportunidade.getCargaHoraria(), oportunidade.getVagas(), oportunidade.getInicio(), oportunidade.getFim(),
+                oportunidade.getDataInicioInscricoes(), oportunidade.getDataFimInscricoes(),
+                responsavel, null);
         repository.save(nova);
-        System.out.println("[RF011] Oportunidade criada como RASCUNHO: " + oportunidade.titulo);
+
+        //fazendo a ligacao bidirecional talvez
+
+        userRepository.save(responsavel);
+        //ah entao nao salva no banco imediatamente?
+        System.out.println("[RF011] Oportunidade criada como RASCUNHO: " + oportunidade.getTitulo());
         return true;
     }
 

@@ -1,7 +1,9 @@
 package geraldao_da_massa.demo.controllers;
 
 import geraldao_da_massa.demo.DTOs.DocenteRequestDTO;
-import geraldao_da_massa.demo.DTOs.RequestPPCDTO;
+import geraldao_da_massa.demo.DTOs.PPCrequestDTO;
+import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.UsuarioResponseDTO;
 import geraldao_da_massa.demo.services.AdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,11 @@ public class AdministradorController {
         administradorService.cadastroDocente(idAdm, docDTO);
     }
     @PostMapping("/{idAdm}/cursoppc")
-    public void cadastrarPPC(@PathVariable int idAdm, @RequestBody RequestPPCDTO ppcDTO){
+    public void cadastrarPPC(@PathVariable int idAdm, @RequestBody PPCrequestDTO ppcDTO){
         administradorService.cadastrarPPC(idAdm, ppcDTO);
+    }
+    @PostMapping
+    public UsuarioResponseDTO cadastrarAdministrador(@RequestBody UsuarioRequestDTO dto){
+        return administradorService.cadastrarAdmin(dto);
     }
 }
