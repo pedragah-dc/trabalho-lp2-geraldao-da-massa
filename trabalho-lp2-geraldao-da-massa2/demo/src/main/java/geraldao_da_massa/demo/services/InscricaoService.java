@@ -9,6 +9,8 @@ import geraldao_da_massa.demo.repositories.InscricaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InscricaoService {
     @Autowired
@@ -23,8 +25,9 @@ public class InscricaoService {
                     + oportunidade.getStatus());
         }
 
-        //a ideia é procurar se o discente nao possui uma inscricao nessa oportunidade
-        if (inscricaoRepository.findByDiscente(discente) && inscricaoRepository.findByOportunidade(oportunidade)) {
+        // Corrigido: agora verifica se ESSE discente já tem inscrição NESSA oportunidade
+        // (antes verificava discente OU oportunidade isoladamente, no banco inteiro)
+        if (inscricaoRepository.existsByOportunidadeAndDiscente(oportunidade, discente)) {
             throw new IllegalStateException("Discente já possui inscrição nesta oportunidade.");
         }
 
@@ -41,9 +44,10 @@ public class InscricaoService {
                     + inscricao.getStatus());
         }
 
-        //TODO AJEITAR DPS, verificar;-;
-        //procurar todas as incricoes com tal oportunidade pegar o total?
-        long vagasOcupadas = inscricaoRepository.findAllByOportunidade(oportunidade).size();
+        // Conta quantos já estão APROVADOS nessa oportunidade para checar vaga
+        long vagasOcupadas = inscricaoRepository
+                .findByOportunidadeAndStatus(oportunidade, StatusInscricao.APROVADO)
+                .size();
 
         if (vagasOcupadas >= oportunidade.getVagas()) {
             throw new IllegalStateException("Não há vagas disponíveis. Vagas: " + oportunidade.getVagas()
@@ -51,6 +55,7 @@ public class InscricaoService {
         }
 
         inscricao.setStatus(StatusInscricao.APROVADO);
+        inscricaoRepository.save(inscricao);
         System.out.println("[RF015] Inscrição de '" + inscricao.getDiscente().getNome() + "' APROVADA.");
     }
 
@@ -61,6 +66,7 @@ public class InscricaoService {
                     + inscricao.getStatus());
         }
         inscricao.setStatus(StatusInscricao.REJEITADO);
+        inscricaoRepository.save(inscricao);
         System.out.println("[RF015] Inscrição de '" + inscricao.getDiscente().getNome() + "' REJEITADA.");
     }
 
@@ -77,6 +83,7 @@ public class InscricaoService {
         }
 
         inscricao.setStatus(StatusInscricao.CANCELADO);
+        inscricaoRepository.save(inscricao);
         System.out.println("[RF016] Inscrição de '" + inscricao.getDiscente().getNome()
                 + "' em '" + inscricao.getOportunidade().getTitulo() + "' CANCELADA.");
     }
@@ -99,9 +106,6 @@ public class InscricaoService {
         }
 
         // O substituto precisa ter inscrição na oportunidade (é da "lista de interessados")
-        //nao entendi:/
-//        Inscricao inscricaoSubstituto = inscricaoRepository.buscarPorDiscenteEOportunidade(novoDiscente, oportunidade);
-
         Inscricao inscricaoSubstituto = inscricaoRepository.findByOportunidadeAndDiscente(novoDiscente, oportunidade);
         if (inscricaoSubstituto == null) {
             throw new IllegalStateException("O discente '" + novoDiscente.getNome()
@@ -124,19 +128,27 @@ public class InscricaoService {
         // Aprova o substituto
         inscricaoSubstituto.setStatus(StatusInscricao.APROVADO);
 
+        inscricaoRepository.save(inscricaoOriginal);
+        inscricaoRepository.save(inscricaoSubstituto);
+
         System.out.println("[RF017] '" + inscricaoOriginal.getDiscente().getNome()
                 + "' substituído por '" + novoDiscente.getNome()
                 + "' em '" + oportunidade.getTitulo() + "'");
         return inscricaoSubstituto;
     }
 
-    //?? tava dando erro entao tirei
+    // Reativados: agora funcionam porque o repositório retorna o tipo certo (List<Inscricao>)
+    public List<Inscricao> listarPorOportunidade(Oportunidade oportunidade) {
+        return inscricaoRepository.findAllByOportunidade(oportunidade);
+    }
 
-//    public List<Inscricao> listarPorOportunidade(Oportunidade oportunidade) {
-//        return inscricaoRepository.findAllByOportunidade(oportunidade);
-//    }
-//
-//    public List<Inscricao> listarAprovados(Oportunidade oportunidade) {
-//        return inscricaoRepository.findAllByOportunidade(oportunidade);
-//    }
+    public List<Inscricao> listarAprovados(Oportunidade oportunidade) {
+        return inscricaoRepository.findByOportunidadeAndStatus(oportunidade, StatusInscricao.APROVADO);
+    }
+
+    // Usado pelo controller para buscar a inscrição pelo id antes de aprovar/rejeitar/cancelar/substituir
+    public Inscricao buscarPorId(Integer id) {
+        return inscricaoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Inscrição não encontrada com id: " + id));
+    }
 }

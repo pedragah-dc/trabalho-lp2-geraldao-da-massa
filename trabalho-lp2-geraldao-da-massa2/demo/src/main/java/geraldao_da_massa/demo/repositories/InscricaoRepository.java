@@ -7,17 +7,21 @@ import geraldao_da_massa.demo.entities.SolicitacaoOportunidade;
 import geraldao_da_massa.demo.entities.enums.StatusInscricao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface InscricaoRepository extends JpaRepository<Inscricao, Integer> {
 
+    // Corrigido: "exists" retorna boolean de verdade (verifica se já existe
+    // uma inscrição desse discente NESSA oportunidade especifica)
+    boolean existsByOportunidadeAndDiscente(Oportunidade oportunidade, Discente discente);
 
-    boolean findByDiscente(Discente discente);
-    boolean findByOportunidade(Oportunidade oportunidade);
-    int findAllByStatus(StatusInscricao status);
-    Collection<Object> findAllByOportunidade(Oportunidade oportunidade);
+    // Corrigido: agora retorna List<Inscricao>, que é o tipo real do resultado
+    List<Inscricao> findAllByOportunidade(Oportunidade oportunidade);
+
+    // Novo: usado pelo RF019 para buscar só quem foi aprovado naquela oportunidade
+    List<Inscricao> findByOportunidadeAndStatus(Oportunidade oportunidade, StatusInscricao status);
+
     Inscricao findByOportunidadeAndDiscente(Discente novoDiscente, Oportunidade oportunidade);
+
     List<SolicitacaoOportunidade> findAllByDiscente(Discente discente);
 }
-//foda
