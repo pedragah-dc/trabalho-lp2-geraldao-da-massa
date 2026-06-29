@@ -5,6 +5,7 @@ import geraldao_da_massa.demo.entities.enums.TiposModalidade;
 import geraldao_da_massa.demo.entities.enums.TiposOportunidade;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Oportunidades")
+@Data
 public class Oportunidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

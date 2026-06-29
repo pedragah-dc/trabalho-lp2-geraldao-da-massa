@@ -1,4 +1,4 @@
-package geraldao_da_massa.demo.DTOs;
+package geraldao_da_massa.demo.DTOs.inputs;
 
 import lombok.Data;
 

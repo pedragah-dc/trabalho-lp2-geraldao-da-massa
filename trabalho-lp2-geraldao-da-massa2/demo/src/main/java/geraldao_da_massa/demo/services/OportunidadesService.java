@@ -4,8 +4,11 @@ import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
 import geraldao_da_massa.demo.entities.Discente;
 import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.Oportunidade;
+import geraldao_da_massa.demo.entities.Usuario;
 import geraldao_da_massa.demo.entities.enums.StatusOportunidade;
+import geraldao_da_massa.demo.repositories.DocenteRepository;
 import geraldao_da_massa.demo.repositories.OportunidadeRepository;
+import geraldao_da_massa.demo.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -165,15 +168,15 @@ public class OportunidadesService {
     }
 
     public List<Oportunidade> retornaOportunidadeDiscente(List<Oportunidade> lista, Discente discente ){
-        List<Oportunidade> retorno = new ArrayList<>();
-        for(Oportunidade i : lista){
-            for (Oportunidade j : discente.getListaDeOp()){
-                if (i.equals(j)){
-                    retorno.add(j);
-                }
-            }
-        }
-        return retorno;
+//        List<Oportunidade> retorno = new ArrayList<>();
+//        for(Oportunidade i : lista){
+//            for (Oportunidade j : discente.getListaDeOp()){
+//                if (i.equals(j)){
+//                    retorno.add(j);
+//                }
+//            }
+//        }
+        return null;
     }
 
 

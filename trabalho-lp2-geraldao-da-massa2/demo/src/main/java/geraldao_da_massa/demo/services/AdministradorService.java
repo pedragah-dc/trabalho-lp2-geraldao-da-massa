@@ -1,7 +1,13 @@
 package geraldao_da_massa.demo.services;
 
 import geraldao_da_massa.demo.DTOs.inputs.DocenteRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.PPCrequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.UsuarioResponseDTO;
 import geraldao_da_massa.demo.entities.*;
+import geraldao_da_massa.demo.entities.enums.RolesUsuario;
+import geraldao_da_massa.demo.repositories.AdministradorRepository;
+import geraldao_da_massa.demo.repositories.CursoRepository;
 import geraldao_da_massa.demo.repositories.DocenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +29,10 @@ public class AdministradorService {
         Administrador adm = new Administrador();
         adm.setNome(dto.getNome());
         adm.setAtivo(true);
-        adm.setRole(dto.getRole());
         adm.setEmail(dto.getEmail());
         adm.setSenha(dto.getSenha());
+        adm.setRole(RolesUsuario.ADMINISTRADOR);
+        adm.setPapel(new Papel("um administrador"));
         admRepository.save(adm);
         UsuarioResponseDTO userResponse = new UsuarioResponseDTO(adm);
 
@@ -48,9 +55,9 @@ public class AdministradorService {
         docente.setNome(docDTO.getNome());
         docente.setEmail(docDTO.getEmail());
         docente.setSenha(docDTO.getSenha());
-        docente.setPapel(new Papel(docDTO.getPapel()));
+        docente.setPapel(new Papel(""));
         docente.setAtivo(true);
-        docente.setRole(docDTO.getRole());
+        docente.setRole(RolesUsuario.ADMINISTRADOR);
         docente.setSiape(docDTO.getSiape());
 
         if(docente != null){

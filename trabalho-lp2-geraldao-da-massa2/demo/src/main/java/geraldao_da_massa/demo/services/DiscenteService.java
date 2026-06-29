@@ -6,6 +6,7 @@ import geraldao_da_massa.demo.entities.enums.RolesUsuario;
 import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;
 import geraldao_da_massa.demo.repositories.CursoRepository;
 import geraldao_da_massa.demo.repositories.DiscenteRepository;
+import geraldao_da_massa.demo.repositories.InscricaoRepository;
 import geraldao_da_massa.demo.repositories.SolicitacaoOportunidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,9 +61,9 @@ public class DiscenteService {
 
         try{
 
-            UsuarioRequestDTO dto = new UsuarioRequestDTO(nome, email, matricula, null, true, RolesUsuario.DISCENTE);
-
-            Usuario usuario = usuarioService.autocadastroUsuario(dto);
+//            UsuarioRequestDTO dto = new UsuarioRequestDTO(nome, email, senha);
+//
+//            Usuario usuario = usuarioService.autocadastroUsuario(dto);
     
             Curso curso = verificaCurso(matricula);
             Discente discente = new Discente();
@@ -80,11 +81,11 @@ public class DiscenteService {
     }
 
     public Boolean verificaMatriculaDiscente (String matricula, List < Discente > repositorio){
-        for (Discente d : repositorio) {
-            if (d.getMatricula().equals(matricula)) {
-                return true;
-            }
-        }
+//        for (Discente d : repositorio) {
+//            if (d.getMatricula().equals(matricula)) {
+//                return true;
+//            }
+//        }
         return false;
     }
 

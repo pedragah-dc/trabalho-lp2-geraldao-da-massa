@@ -1,9 +1,9 @@
 package geraldao_da_massa.demo.controllers;
 
-import geraldao_da_massa.demo.DTOs.DocenteRequestDTO;
-import geraldao_da_massa.demo.DTOs.PPCrequestDTO;
-import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
-import geraldao_da_massa.demo.DTOs.UsuarioResponseDTO;
+import geraldao_da_massa.demo.DTOs.inputs.DocenteRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.PPCrequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.UsuarioResponseDTO;
 import geraldao_da_massa.demo.services.AdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package geraldao_da_massa.demo.entities;
 
 import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

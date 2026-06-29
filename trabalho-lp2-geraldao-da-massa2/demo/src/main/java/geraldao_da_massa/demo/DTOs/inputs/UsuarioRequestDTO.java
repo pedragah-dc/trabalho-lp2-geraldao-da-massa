@@ -19,4 +19,5 @@ public class UsuarioRequestDTO {
 
     @NotBlank(message = "A senha é obrigatória.")
     private String senha;
+
 }

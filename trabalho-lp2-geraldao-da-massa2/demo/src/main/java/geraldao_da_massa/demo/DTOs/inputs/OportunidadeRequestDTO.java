@@ -1,5 +1,6 @@
 package geraldao_da_massa.demo.DTOs.inputs;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import geraldao_da_massa.demo.entities.enums.TiposModalidade;
 import geraldao_da_massa.demo.entities.enums.TiposOportunidade;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -38,16 +39,20 @@ public class OportunidadeRequestDTO {
     private Integer vagas;
 
     @NotNull(message = "A data de início é obrigatória.")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime inicio;
 
     @NotNull(message = "A data de fim é obrigatória.")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fim;
 
     @NotNull(message = "A data de início das inscrições é obrigatória.")
     @FutureOrPresent(message = "A data de início das inscrições não pode ser no passado.")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataInicioInscricoes;
 
     @NotNull(message = "A data de fim das inscrições é obrigatória.")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataFimInscricoes;
 
     @NotNull(message = "O ID do autor é obrigatório.")
