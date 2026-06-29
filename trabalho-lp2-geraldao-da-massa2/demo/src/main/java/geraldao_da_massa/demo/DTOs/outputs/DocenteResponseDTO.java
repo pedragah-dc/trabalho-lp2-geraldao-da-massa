@@ -18,7 +18,7 @@ public class DocenteResponseDTO {
     private String siape;
     private String departamento;
 
-    DocenteResponseDTO(Docente docente){
+    public DocenteResponseDTO(Docente docente){
         this.id = docente.getId();
         this.nome = docente.getNome();
         this.email = docente.getEmail();

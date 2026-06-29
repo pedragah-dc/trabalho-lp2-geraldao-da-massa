@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 @Service
 public class AdministradorService {
@@ -51,13 +52,15 @@ public class AdministradorService {
 
         Docente docente;
         docente = new Docente();
-        //docente.setId(usuario.getId());
+
         docente.setNome(docDTO.getNome());
         docente.setEmail(docDTO.getEmail());
         docente.setSenha(docDTO.getSenha());
         docente.setPapel(new Papel(""));
         docente.setAtivo(true);
-        docente.setRole(RolesUsuario.ADMINISTRADOR);
+        docente.setRole(RolesUsuario.DOCENTE);
+//        docente.setGrupos(new HashSet<Grupo>());
+        docente.setDepartamento(docDTO.getDepartamento());
         docente.setSiape(docDTO.getSiape());
 
         if(docente != null){

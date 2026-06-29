@@ -31,7 +31,7 @@ public class OportunidadeResponseDTO {
     private String feedback;
 
 
-    OportunidadeResponseDTO(Oportunidade oportunidade){
+    public OportunidadeResponseDTO(Oportunidade oportunidade){
      this.titulo = oportunidade.getTitulo();
      this.descricao = oportunidade.getDescricao();
 

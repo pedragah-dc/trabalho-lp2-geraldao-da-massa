@@ -29,6 +29,7 @@ public class Usuario {
     @Embedded
     private Papel papel;
     private Boolean ativo;
+    @Enumerated(EnumType.STRING)
     private RolesUsuario role;
 
 }
