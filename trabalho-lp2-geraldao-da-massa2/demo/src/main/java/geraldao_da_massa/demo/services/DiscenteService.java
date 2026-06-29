@@ -1,6 +1,6 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.entities.enums.RolesUsuario;
 import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;

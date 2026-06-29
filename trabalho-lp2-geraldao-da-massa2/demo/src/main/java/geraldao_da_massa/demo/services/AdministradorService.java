@@ -1,6 +1,6 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOs.DocenteRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.DocenteRequestDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.repositories.DocenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
