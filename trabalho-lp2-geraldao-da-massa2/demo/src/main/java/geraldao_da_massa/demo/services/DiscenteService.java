@@ -1,6 +1,7 @@
 package geraldao_da_massa.demo.services;
 
 import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.SolicitacaoOportunidadeResponseDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.entities.enums.RolesUsuario;
 import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;
@@ -26,13 +27,17 @@ public class DiscenteService {
     @Autowired
     private InscricaoRepository inscricaoRepository;
 
-    public SolicitacaoOportunidade criarSolicitacaoOportunidade(Discente discente, Oportunidade oportunidade){
+
+    //nao sei como isso funciona
+    public SolicitacaoOportunidadeResponseDTO criarSolicitacaoOportunidade(Discente discente, Oportunidade oportunidade){
         try{
-            SolicitacaoOportunidade solicitacao = new SolicitacaoOportunidade(discente, oportunidade);
+            SolicitacaoOportunidade solicitacaoOportunidadeOBJ = new SolicitacaoOportunidade(discente, oportunidade);
+            SolicitacaoOportunidadeResponseDTO solicitacao = new SolicitacaoOportunidadeResponseDTO(solicitacaoOportunidadeOBJ);
             return solicitacao;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public boolean reenviarSolicitacaoOportunidade(SolicitacaoOportunidade solicitacao) throws Exception {
@@ -57,7 +62,7 @@ public class DiscenteService {
     }
 
 
-    public Discente autocadastroDiscente(String nome, String email, String senha, String matricula) {
+    public DiscenteResponseDTO autocadastroDiscente(DiscenteRequestDTO discenteRequestDTO) {
 
         try{
 
