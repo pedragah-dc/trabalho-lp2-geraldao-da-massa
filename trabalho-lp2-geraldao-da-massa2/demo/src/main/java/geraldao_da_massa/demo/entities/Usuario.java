@@ -13,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Usuarios")
 @NoArgsConstructor
+
 @Getter
 @Setter
 public class Usuario {

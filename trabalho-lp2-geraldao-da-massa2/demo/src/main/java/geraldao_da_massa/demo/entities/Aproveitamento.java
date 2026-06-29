@@ -2,12 +2,16 @@ package geraldao_da_massa.demo.entities;
 
 import geraldao_da_massa.demo.entities.enums.StatusAproveitamento;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "aproveitamentos")
 @NoArgsConstructor
 
+@Getter
+@Setter
 public class Aproveitamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

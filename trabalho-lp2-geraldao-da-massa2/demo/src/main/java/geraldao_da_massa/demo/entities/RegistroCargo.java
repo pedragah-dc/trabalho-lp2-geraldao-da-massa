@@ -1,6 +1,7 @@
 package geraldao_da_massa.demo.entities;
 
 import geraldao_da_massa.demo.entities.enums.CargoNoGrupo;
+import geraldao_da_massa.demo.entities.enums.CargoNoGrupo;
 import jakarta.persistence.Embeddable;
 import lombok.NoArgsConstructor;
 

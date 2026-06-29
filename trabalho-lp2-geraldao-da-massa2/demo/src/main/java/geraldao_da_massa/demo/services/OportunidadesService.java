@@ -1,24 +1,17 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOs.OportunidadeRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
 import geraldao_da_massa.demo.entities.Discente;
 import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.Oportunidade;
-import geraldao_da_massa.demo.entities.Usuario;
 import geraldao_da_massa.demo.entities.enums.StatusOportunidade;
-import geraldao_da_massa.demo.repositories.DocenteRepository;
 import geraldao_da_massa.demo.repositories.OportunidadeRepository;
-import geraldao_da_massa.demo.repositories.UsuarioRepository;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 //Vou imaginar assim: Um serviço só tem acesso ao seu repositorio e se ele quiser consultar outro, terá que utilizar um serviço pra isso

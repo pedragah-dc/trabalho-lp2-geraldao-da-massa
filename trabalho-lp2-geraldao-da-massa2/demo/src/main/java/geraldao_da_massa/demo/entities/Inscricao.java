@@ -2,6 +2,7 @@ package geraldao_da_massa.demo.entities;
 
 import geraldao_da_massa.demo.entities.enums.StatusInscricao;
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class Inscricao {
         this.motivacao = motivacao;
         this.status = StatusInscricao.PENDENTE;
     }
+
 
     @Override
     public String toString() {

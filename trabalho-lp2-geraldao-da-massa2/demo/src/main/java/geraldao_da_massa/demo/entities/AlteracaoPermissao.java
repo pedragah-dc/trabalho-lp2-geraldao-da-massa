@@ -3,7 +3,9 @@ package geraldao_da_massa.demo.entities;
 import geraldao_da_massa.demo.entities.enums.TipoOperacao;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +14,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "AlterarPermissao")
+
+@Getter
+@Setter
 public class AlteracaoPermissao {
 
     @Id
@@ -27,34 +32,6 @@ public class AlteracaoPermissao {
         this.usuario = usuario;
         this.dataAlteracao = dataAlteracao;
         this.tipoOperacao = tipoOperacao;
-        this.nomePPC = nomePPC;
-    }
-
-    public Usuario getUsuario(){
-        return usuario;
-    }
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
-    }
-
-    public LocalDateTime getData(){
-        return dataAlteracao;
-    }
-    public void setData(LocalDateTime dataAlteracao){
-        this.dataAlteracao = dataAlteracao;
-    }
-
-    public TipoOperacao getTipoOperacao(){
-        return tipoOperacao;
-    }
-    public void setTipoOperacao(TipoOperacao tipoOperacao){
-        this.tipoOperacao = tipoOperacao;
-    }
-
-    public String getNomePPC(){
-        return nomePPC;
-    }
-    public void setNomePPC(String nomePPC){
         this.nomePPC = nomePPC;
     }
 }

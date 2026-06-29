@@ -1,6 +1,6 @@
 package geraldao_da_massa.demo.controllers;
 
-import geraldao_da_massa.demo.DTOs.OportunidadeRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
 import geraldao_da_massa.demo.entities.Oportunidade;
 import geraldao_da_massa.demo.services.OportunidadesService;
 import jakarta.validation.Valid;

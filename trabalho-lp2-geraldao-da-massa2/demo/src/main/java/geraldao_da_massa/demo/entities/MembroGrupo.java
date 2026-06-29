@@ -2,6 +2,8 @@ package geraldao_da_massa.demo.entities;
 
 import geraldao_da_massa.demo.entities.enums.CargoNoGrupo;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -14,7 +16,7 @@ public class MembroGrupo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idMembro;
-    @OneToOne(optional = false)
+    @OneToOne
     private Usuario membro;
     private CargoNoGrupo cargo;
     private LocalDateTime time;

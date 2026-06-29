@@ -1,6 +1,12 @@
 package geraldao_da_massa.demo.entities;
 
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
+@Entity
+@Getter
+@Setter
 
 //nao faço ideia do que isso faz ou como deveria se comportar
 public class Notificacao {
@@ -13,38 +19,6 @@ public class Notificacao {
         this.id = id;
         this.mensagem = mensagem;
         this.destinatario = destinatario;
-        this.lida = lida;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
-
-    public Usuario getDestinatario() {
-        return destinatario;
-    }
-
-    public void setDestinatario(Usuario destinatario) {
-        this.destinatario = destinatario;
-    }
-
-    public Boolean getLida() {
-        return lida;
-    }
-
-    public void setLida(Boolean lida) {
         this.lida = lida;
     }
 }

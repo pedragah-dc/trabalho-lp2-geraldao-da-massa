@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Embeddable
 public class Papel {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Integer id;
     private String descricao;
 
     public Papel(String descricao) {

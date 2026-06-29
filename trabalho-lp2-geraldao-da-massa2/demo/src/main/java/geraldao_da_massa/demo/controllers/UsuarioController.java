@@ -1,6 +1,6 @@
 package geraldao_da_massa.demo.controllers;
 
-import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
 import geraldao_da_massa.demo.entities.Usuario;
 import geraldao_da_massa.demo.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;

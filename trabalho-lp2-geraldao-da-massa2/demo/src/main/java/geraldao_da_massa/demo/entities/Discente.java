@@ -14,7 +14,6 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "usuario")
 
 public class Discente extends Usuario {
-
     private String matricula;
     private Integer semestreAtual;
     @OneToOne
@@ -29,32 +28,4 @@ public class Discente extends Usuario {
 //        this.curso = curso;
 //        this.listaDeOp = listaOp;
 //    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public Integer getSemestreAtual() {
-        return semestreAtual;
-    }
-
-    public void setSemestreAtual(Integer semestreAtual) {
-        this.semestreAtual = semestreAtual;
-    }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
-    public List<Oportunidade> getListaDeOp(){
-        return listaDeOp;
-    }
 }
