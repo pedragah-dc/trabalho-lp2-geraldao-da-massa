@@ -1,6 +1,8 @@
 package geraldao_da_massa.demo.services;
 
+import geraldao_da_massa.demo.DTOs.inputs.DiscenteRequestDTO;
 import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.DiscenteResponseDTO;
 import geraldao_da_massa.demo.DTOs.outputs.SolicitacaoOportunidadeResponseDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.entities.enums.RolesUsuario;
@@ -63,23 +65,17 @@ public class DiscenteService {
 
 
     public DiscenteResponseDTO autocadastroDiscente(DiscenteRequestDTO discenteRequestDTO) {
-
         try{
-
-//            UsuarioRequestDTO dto = new UsuarioRequestDTO(nome, email, senha);
-//
-//            Usuario usuario = usuarioService.autocadastroUsuario(dto);
-    
-            Curso curso = verificaCurso(matricula);
-            Discente discente = new Discente();
-            discente.setCurso(curso);
-            discente.setMatricula(matricula);
-            discente.setSenha(senha);
-            discente.setEmail(email);
-            discente.setRole(RolesUsuario.DISCENTE);
-            discenteRepository.save(discente);
-
-            return discente;
+            Discente discente;
+            Curso curso = verificaCurso(discenteRequestDTO.getMatricula());
+            if(curso != null){
+                discente = new Discente(discenteRequestDTO);
+                discente.setCurso(curso);
+                discenteRepository.save(discente);
+                return new DiscenteResponseDTO(discente);
+            } else {
+                throw new RuntimeException("CURSO NAO ENCONTRADO");
+            }
         } catch (Exception e) {
             throw new RuntimeException("Erro ao criar discente", e);
         }
