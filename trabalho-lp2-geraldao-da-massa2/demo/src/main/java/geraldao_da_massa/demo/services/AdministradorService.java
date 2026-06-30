@@ -3,6 +3,7 @@ package geraldao_da_massa.demo.services;
 import geraldao_da_massa.demo.DTOs.inputs.DocenteRequestDTO;
 import geraldao_da_massa.demo.DTOs.inputs.PPCrequestDTO;
 import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.DocenteResponseDTO;
 import geraldao_da_massa.demo.DTOs.outputs.UsuarioResponseDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.entities.enums.RolesUsuario;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 @Service
 public class AdministradorService {
@@ -27,6 +29,10 @@ public class AdministradorService {
 
     public UsuarioResponseDTO cadastrarAdmin(UsuarioRequestDTO dto){
         Administrador adm = new Administrador();
+        //se tiver um email ja cadastrado
+        if(admRepository.existsByEmail(dto.getEmail())){
+            throw new RuntimeException("JA TEM UM ADM COM ESTE EMAIL");
+        }
         adm.setNome(dto.getNome());
         adm.setAtivo(true);
         adm.setEmail(dto.getEmail());
@@ -40,7 +46,7 @@ public class AdministradorService {
     }
 
 
-    public Docente cadastroDocente(Integer idAdm, DocenteRequestDTO docDTO){
+    public DocenteResponseDTO cadastroDocente(Integer idAdm, DocenteRequestDTO docDTO){
         //TODO FAZER SISTEMA DE VERIFICACAO
         Administrador adm = admRepository.findById(idAdm).
                 orElseThrow(() -> new RuntimeException("ADMINISTRADOR NAO ENCONTRADO: "+idAdm));
@@ -48,24 +54,27 @@ public class AdministradorService {
         if(docDTO.getSiape().isBlank() || docDTO.getDepartamento().isBlank()){
             throw new RuntimeException("INFORMAÇÕES DO DOCENTE FALTANDO");
         }
+        //se email ja estiver cadastrado
+        if(docenterepository.existsByEmail(docDTO.getEmail())){
+            throw new RuntimeException("ja existe um docente com este email");
+        }
 
         Docente docente;
         docente = new Docente();
-        //docente.setId(usuario.getId());
+
         docente.setNome(docDTO.getNome());
         docente.setEmail(docDTO.getEmail());
         docente.setSenha(docDTO.getSenha());
-        docente.setPapel(new Papel(""));
+        docente.setPapel(new Papel("um docente"));
         docente.setAtivo(true);
-        docente.setRole(RolesUsuario.ADMINISTRADOR);
+        docente.setRole(RolesUsuario.DOCENTE);
+        docente.setDepartamento(docDTO.getDepartamento());
         docente.setSiape(docDTO.getSiape());
 
-        if(docente != null){
-            docenterepository.save(docente);
-            return docente;
-        }
 
-        return null;
+        docenterepository.save(docente);
+
+        return new DocenteResponseDTO(docente);
     }
 
 
@@ -76,6 +85,7 @@ public class AdministradorService {
         if(ppcDTO.getCursoNome() != null){
             if(!ppcDTO.getCursoNome().isBlank()){
                 curso = cursoRepository.findByNome(ppcDTO.getCursoNome());
+
             }
         }
         if(curso != null){
@@ -84,8 +94,7 @@ public class AdministradorService {
             curso.setCargaHoraria(ppcDTO.getCargaHoraria());
             curso.getListaAlteracaoPPC().add(alteracaoPermissao);
             cursoRepository.save(curso);
-        }
-        if(curso == null){
+        } else {
             throw new RuntimeException("CURSO NAO ENCONTRADO");
         }
 

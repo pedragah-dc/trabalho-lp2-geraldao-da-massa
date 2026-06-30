@@ -36,37 +36,6 @@ public class Curso {
         this.versaoPPC = versaoPPC;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public Integer getCargaHoraria() {
-        return cargaHoraria;
-    }
-
-    public void setCargaHoraria(Integer cargaHoraria) {
-        this.cargaHoraria = cargaHoraria;
-    }
-
-    public String getVersaoPPC() {
-        return versaoPPC;
-    }
-
-    public void setVersaoPPC(String versaoPPC) {
-        this.versaoPPC = versaoPPC;
-    }
 
     //desativei pois nao entendi muito o que ele faria aq
 //    public List<AlteracaoPermissao> getListaAlteracaoPPC() {

@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e92da34-34b9-41dc-9a78-305725aa64ce" name="Changes" comment="Teste de repo, servico, controller, dto&#10;Funcionando marromeno">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/DocenteRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/OportunidadeRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/PPCrequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/inputs/PPCrequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/UsuarioRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/UsuarioResponseDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/inputs/OportunidadeRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/inputs/OportunidadeRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/inputs/UsuarioRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/inputs/UsuarioRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controllers/AdministradorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controllers/AdministradorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Discente.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Discente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Notificacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Notificacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Oportunidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/Oportunidade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/SolicitacaoOportunidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/SolicitacaoOportunidade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/AdministradorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/AdministradorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/outputs/SolicitacaoOportunidadeResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/DTOs/outputs/SolicitacaoOportunidadeResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controllers/DiscenteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/controllers/DiscenteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/DiscenteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/DiscenteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/GrupoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/GrupoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/MembroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/MembroService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/NotificacaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/NotificacaoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/OportunidadesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/OportunidadesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +79,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Spring Boot.DemoApplication.executor&quot;: &quot;Run&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;spring-boot-jerry-branch-merge&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;spring-boot-jerry-branch&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
@@ -147,6 +129,8 @@
       <workItem from="1782526920979" duration="611000" />
       <workItem from="1782662342538" duration="10052000" />
       <workItem from="1782699692827" duration="2137000" />
+      <workItem from="1782825875167" duration="1054000" />
+      <workItem from="1782841374295" duration="7980000" />
     </task>
     <task id="LOCAL-00001" summary="Teste de repo, servico, controller, dto&#10;Funcionando marromeno">
       <option name="closed" value="true" />

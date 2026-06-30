@@ -1,5 +1,5 @@
 package geraldao_da_massa.demo.entities.enums;
 
 public enum CargoNoGrupo {
-    DIRETOR, VICE, TESOUREIRO, MEMBRO;
+    RESPONSAVEL, DIRETOR, VICE, TESOUREIRO, MEMBRO;
 }

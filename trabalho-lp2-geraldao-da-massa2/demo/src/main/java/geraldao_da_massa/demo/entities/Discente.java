@@ -1,5 +1,6 @@
 package geraldao_da_massa.demo.entities;
 
+import geraldao_da_massa.demo.DTOs.inputs.DiscenteRequestDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,11 +23,10 @@ public class Discente extends Usuario {
     @OneToMany
     private List<Oportunidade> listaDeOp;
 
-//    public Discente(Integer id, String nome, String email, String senha, Papel papel, Boolean ativo, List<Oportunidade> listaOp, String matricula, Integer semestreAtual, Curso curso, Enum<RolesUsuario> role) {
-//        super(id, nome, email, senha, papel, ativo, role);
-//        this.matricula = matricula;
-//        this.semestreAtual = semestreAtual;
-//        this.curso = curso;
-//        this.listaDeOp = listaOp;
-//    }
+    public Discente(DiscenteRequestDTO dto) {
+        super(dto);
+        matricula = dto.getMatricula();
+        semestreAtual = dto.getSemestreAtual();
+
+    }
 }

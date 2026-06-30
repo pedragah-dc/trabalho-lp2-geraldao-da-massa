@@ -11,6 +11,7 @@ public class MembroService {
 
 
     public void setCargo(CargoNoGrupo cargo){
-
+        //lembro disso nao
+        //vou descartar esse servico
     }
 }

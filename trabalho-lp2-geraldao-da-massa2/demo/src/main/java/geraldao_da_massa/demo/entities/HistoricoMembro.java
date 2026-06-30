@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "historico_do_membro")
@@ -15,7 +16,7 @@ public class HistoricoMembro {
         @OneToOne(mappedBy = "historico")
         private MembroGrupo membro;
         @ElementCollection
-        private ArrayList<RegistroCargo> registros;
+        private List<RegistroCargo> registros;
 
         public HistoricoMembro () {
             registros = new ArrayList<>();
