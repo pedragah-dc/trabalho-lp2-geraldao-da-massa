@@ -95,7 +95,7 @@ public class DiscenteService {
     //ah ta,  matricula diz qual curso o aluno está, muito foda, sabia disso nao
     public Curso verificaCurso (String matricula){
         //rapaz, eu acho que vamo ter que quebrar essa matricula pra descobrir o codigo do curso e apartir disso pesquisar no banco
-        Integer codigoMatricula = Integer.parseInt(matricula.substring(1, 4));
+        Integer codigoMatricula = Integer.parseInt(matricula.substring(0, 4));
         for(Curso curso: cursoRepository.findAll()){
             if(curso.getCodigo().equals(codigoMatricula)){
                 return curso;
