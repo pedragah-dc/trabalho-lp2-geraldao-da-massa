@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class DiscenteService {
@@ -55,8 +56,14 @@ public class DiscenteService {
         solicitacao.setStatus(StatusSolicitacaoOportunidade.PENDENTE);
         return true;
     }
-    public List<SolicitacaoOportunidade> listarSolicitacoesDoDiscente(Discente discente, SolicitacaoOportunidadeRepository repo){
-        return inscricaoRepository.findAllByDiscente(discente);
+    public List<SolicitacaoOportunidadeResponseDTO> listarSolicitacoesDoDiscente(int discenteId){
+        List<SolicitacaoOportunidadeResponseDTO> lista = new ArrayList<SolicitacaoOportunidadeResponseDTO>();
+        Discente discente = discenteRepository.findById(discenteId).
+                orElseThrow(() -> new RuntimeException("DISCENTE NAO ENCONTRADO COM ESTE ID"));
+        for(SolicitacaoOportunidade documento: inscricaoRepository.findAllByDiscente(discente)){
+            lista.add(new SolicitacaoOportunidadeResponseDTO(documento));
+        }
+        return lista;
     }
     public DiscenteService(DiscenteRepository discenteRepository, UsuarioService usuarioService) {
         this.discenteRepository = discenteRepository;
@@ -81,6 +88,8 @@ public class DiscenteService {
         }
     }
 
+
+    //isso tem que ir pro controller?
     public Boolean verificaMatriculaDiscente (String matricula, List < Discente > repositorio){
 //        for (Discente d : repositorio) {
 //            if (d.getMatricula().equals(matricula)) {
