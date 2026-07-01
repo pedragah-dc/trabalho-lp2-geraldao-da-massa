@@ -41,6 +41,7 @@ public class GrupoService {
       }
 
          grupo.setResponsavel(responsavel);
+         grupo.setStatus(StatusGrupo.ATIVO);
 //      responsavel.getGrupos().add(grupo);
 
       GrupoResponseDTO grupoResponseDTO = new GrupoResponseDTO(grupo);
@@ -48,6 +49,7 @@ public class GrupoService {
       //O responsavel pode fazer muitas coisas
       MembroGrupo membroResponsavel = new MembroGrupo(responsavel, grupo);
       membroResponsavel.setCargo(CargoNoGrupo.RESPONSAVEL);
+
    //salvando alteracoes
       docenteRepository.save(responsavel);
       grupoRepository.save(grupo);
