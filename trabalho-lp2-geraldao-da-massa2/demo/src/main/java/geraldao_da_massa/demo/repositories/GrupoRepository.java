@@ -6,7 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
-    Grupo findByIdGrupo(Integer idGrupo);
+
 
     boolean existsGrupoByEmail(@NotBlank @NotNull String email);
+
 }
