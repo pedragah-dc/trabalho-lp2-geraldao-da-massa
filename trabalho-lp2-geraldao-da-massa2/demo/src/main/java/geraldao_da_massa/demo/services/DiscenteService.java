@@ -72,10 +72,7 @@ public class DiscenteService {
         }
         return lista;
     }
-    public DiscenteService(DiscenteRepository discenteRepository, UsuarioService usuarioService) {
-        this.discenteRepository = discenteRepository;
-        this.usuarioService = usuarioService;
-    }
+
 
 
     public DiscenteResponseDTO autocadastroDiscente(DiscenteRequestDTO discenteRequestDTO) {

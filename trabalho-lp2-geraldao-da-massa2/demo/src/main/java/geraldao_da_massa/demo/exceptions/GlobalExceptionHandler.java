@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
+//eita kkkk
 // Captura exceções lançadas pelos services e devolve respostas HTTP legíveis
 // em vez do erro 500 genérico do Spring
 @RestControllerAdvice
