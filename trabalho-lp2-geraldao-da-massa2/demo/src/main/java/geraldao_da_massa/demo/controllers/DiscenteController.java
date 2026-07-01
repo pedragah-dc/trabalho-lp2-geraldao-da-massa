@@ -25,5 +25,9 @@ public class DiscenteController {
     public List<SolicitacaoOportunidadeResponseDTO> getListaDeOportunidadesDiscente(@PathVariable int idDiscente){
         return discenteService.listarSolicitacoesDoDiscente(idDiscente);
     }
+    @PostMapping("{idDiscente}/oportunidades/{idOportunidade}")
+    public SolicitacaoOportunidadeResponseDTO criarSolicitacaoOportunidade(@PathVariable int idDiscente, @PathVariable int idOportunidade){
+        return discenteService.criarSolicitacaoOportunidade(idDiscente, idOportunidade);
+    }
 
 }

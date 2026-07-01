@@ -22,20 +22,22 @@ public class OportunidadeController {
     private DocenteRepository docenteRepository;
 
 
-    // RF011 - Criação (já existente)
-    @PostMapping("/oportunidades/{id}")
+    // RF011 - Criação
+    // POST /oportunidades/{id}
+    @PostMapping("/{id}")
     public boolean addOportunidade(@Valid @RequestBody OportunidadeRequestDTO oportunidade, @PathVariable int id){
         return oportunidadesService.criarOportunidade(oportunidade, id);
     }
 
-    @GetMapping("/oportunidades")
+    // GET /oportunidades
+    @GetMapping
     public List<Oportunidade> listarOportunidades(){
         return oportunidadesService.listarTodas();
     }
 
     // RF011 - Submeter oportunidade (RASCUNHO -> AGUARDANDO_APROVACAO)
     // PATCH /oportunidades/5/submeter
-    @PatchMapping("/oportunidades/{idOportunidade}/submeter")
+    @PatchMapping("/{idOportunidade}/submeter")
     public Oportunidade submeter(@PathVariable Integer idOportunidade) {
         Oportunidade oportunidade = oportunidadesService.buscarPorId(idOportunidade);
         oportunidadesService.submeterParaAprovacao(oportunidade);
@@ -44,7 +46,7 @@ public class OportunidadeController {
 
     // RF012 - Docente aprova a oportunidade
     // PATCH /oportunidades/5/aprovar?idDocente=2
-    @PatchMapping("/oportunidades/{idOportunidade}/aprovar")
+    @PatchMapping("/{idOportunidade}/aprovar")
     public Oportunidade aprovar(@PathVariable Integer idOportunidade, @RequestParam Integer idDocente) {
         Oportunidade oportunidade = oportunidadesService.buscarPorId(idOportunidade);
         Docente docente = buscarDocente(idDocente);
@@ -55,7 +57,7 @@ public class OportunidadeController {
 
     // RF012 - Docente reprova a oportunidade com motivo obrigatório
     // PATCH /oportunidades/5/reprovar?idDocente=2
-    @PatchMapping("/oportunidades/{idOportunidade}/reprovar")
+    @PatchMapping("/{idOportunidade}/reprovar")
     public Oportunidade reprovar(@PathVariable Integer idOportunidade, @RequestParam Integer idDocente,
                                   @Valid @RequestBody ReprovacaoRequestDTO dto) {
         Oportunidade oportunidade = oportunidadesService.buscarPorId(idOportunidade);
@@ -65,29 +67,26 @@ public class OportunidadeController {
         return oportunidade;
     }
 
-    // Lista oportunidades com inscrições abertas (para o portal de oportunidades)
+    // Lista oportunidades com inscrições abertas
     // GET /oportunidades/abertas
-    @GetMapping("/oportunidades/abertas")
+    @GetMapping("/abertas")
     public List<Oportunidade> listarAbertas() {
         return oportunidadesService.listarOportunidadesAbertas();
     }
 
     // Lista oportunidades aguardando aprovação de um docente específico
     // GET /oportunidades/aguardando-aprovacao?idDocente=2
-    @GetMapping("/oportunidades/aguardando-aprovacao")
+    @GetMapping("/aguardando-aprovacao")
     public List<Oportunidade> listarAguardandoAprovacao(@RequestParam Integer idDocente) {
         Docente docente = buscarDocente(idDocente);
         return oportunidadesService.listarAguardandoAprovacao(docente);
     }
 
+
+    //hmmm
     private Docente buscarDocente(Integer id) {
-        if (id != null) {
-            Docente docente = docenteRepository.findById(id).orElse(null);
-            if (docente == null) {
-                throw new IllegalArgumentException("Docente não encontrado com id: " + id);
-            }
-            return docente;
-        }
-        throw new IllegalArgumentException("ID do docente é obrigatório.");
+        Docente docente = docenteRepository.findById(id.intValue()).
+                orElseThrow(() -> new RuntimeException("NAO EXISTE DOCENTE NESTE ID"));
+        return docente;
     }
 }
