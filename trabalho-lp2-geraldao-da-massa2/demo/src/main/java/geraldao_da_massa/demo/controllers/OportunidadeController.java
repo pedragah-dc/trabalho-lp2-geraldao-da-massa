@@ -2,6 +2,7 @@ package geraldao_da_massa.demo.controllers;
 
 import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
 import geraldao_da_massa.demo.DTOs.inputs.ReprovacaoRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.OportunidadeResponseDTO;
 import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.Oportunidade;
 import geraldao_da_massa.demo.repositories.DocenteRepository;
@@ -24,9 +25,9 @@ public class OportunidadeController {
 
     // RF011 - Criação
     // POST /oportunidades/{id}
-    @PostMapping("/{id}")
-    public boolean addOportunidade(@Valid @RequestBody OportunidadeRequestDTO oportunidade, @PathVariable int id){
-        return oportunidadesService.criarOportunidade(oportunidade, id);
+    @PostMapping("/criar")
+    public OportunidadeResponseDTO addOportunidade(@Valid @RequestBody OportunidadeRequestDTO oportunidade){
+        return oportunidadesService.criarOportunidade(oportunidade);
     }
 
     // GET /oportunidades

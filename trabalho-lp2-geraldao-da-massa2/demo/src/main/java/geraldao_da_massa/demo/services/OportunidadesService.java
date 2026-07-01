@@ -1,6 +1,7 @@
 package geraldao_da_massa.demo.services;
 
 import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.OportunidadeResponseDTO;
 import geraldao_da_massa.demo.entities.Discente;
 import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.Oportunidade;
@@ -38,7 +39,7 @@ public class OportunidadesService {
     // -------------------------------------------------------
     // Qualquer usuário (discente diretor ou docente) pode criar.
     // A oportunidade começa como RASCUNHO e não aparece para ninguém ainda.
-    public boolean criarOportunidade(OportunidadeRequestDTO oportunidade, int id) {
+    public OportunidadeResponseDTO criarOportunidade(OportunidadeRequestDTO oportunidade) {
 
         if (oportunidade.getTitulo() == null || oportunidade.getTitulo().isBlank()) {
             throw new IllegalArgumentException("Título da oportunidade é obrigatório.");
@@ -56,23 +57,21 @@ public class OportunidadesService {
             throw new IllegalArgumentException("Datas de início e fim são inválidas.");
         }
 
-        // Busca o autor (quem está criando) pelo id da rota
-        Usuario responsavel = userRepository.findById(id).orElseThrow(() -> new RuntimeException("NAO EXISTE USUARIO COM ESTE ID"));
+        // Busca o autor (quem está criando) pelo dto
+        Usuario responsavel = userRepository.findById(oportunidade.getAutorId()).orElseThrow(() -> new RuntimeException("NAO EXISTE USUARIO COM ESTE ID"));
 
         // Corrigido: antes o docente responsável era passado como null.
         // Agora busca o docente pelo docenteResponsavelId que já vem no DTO.
         Docente docenteResponsavel = docenteRepository.findById(oportunidade.getDocenteResponsavelId().intValue()).
                 orElseThrow(() -> new RuntimeException("NAO EXISTE DOCENTE NESTE ID"));
 
-
-        Oportunidade nova = new Oportunidade(oportunidade.getTitulo(), oportunidade.getDescricao(), oportunidade.getTipo(), oportunidade.getModalidade(),
-                oportunidade.getCargaHoraria(), oportunidade.getVagas(), oportunidade.getInicio(), oportunidade.getFim(),
-                oportunidade.getDataInicioInscricoes(), oportunidade.getDataFimInscricoes(),
-                responsavel, docenteResponsavel);
+        Oportunidade nova = new Oportunidade(oportunidade);
+        nova.setAutor(responsavel);
+        nova.setDocenteResponsavel(docenteResponsavel);
         repository.save(nova);
 
         System.out.println("[RF011] Oportunidade criada como RASCUNHO: " + oportunidade.getTitulo());
-        return true;
+        return new OportunidadeResponseDTO(nova);
     }
 
     // -------------------------------------------------------
@@ -98,7 +97,7 @@ public class OportunidadesService {
     // -------------------------------------------------------
     // Docente analisa e aprova → status vai para APROVADA.
     // Em seguida, se o período de inscrições for agora, vai para EM_INSCRICOES.
-    public void aprovarOportunidade(Oportunidade oportunidade, Docente docente) {
+    public OportunidadeResponseDTO aprovarOportunidade(Oportunidade oportunidade, Docente docente) {
         if (oportunidade.getStatus() != StatusOportunidade.AGUARDANDO_APROVACAO) {
             throw new IllegalStateException("Oportunidade não está aguardando aprovação. Status: "
                     + oportunidade.getStatus());
@@ -121,9 +120,11 @@ public class OportunidadesService {
                 && !agora.isBefore(oportunidade.getDataInicioInscricoes())) {
             oportunidade.setStatus(StatusOportunidade.EM_INSCRICOES);
             System.out.println("[RF012] Inscrições abertas automaticamente para: " + oportunidade.getTitulo());
+
         }
 
         repository.save(oportunidade);
+        return new OportunidadeResponseDTO(oportunidade);
     }
 
     // -------------------------------------------------------
@@ -131,7 +132,7 @@ public class OportunidadesService {
     // -------------------------------------------------------
     // Docente reprova e DEVE informar o motivo.
     // Criador pode corrigir e resubmeter.
-    public void reprovarOportunidade(Oportunidade oportunidade, Docente docente, String motivo) {
+    public OportunidadeResponseDTO reprovarOportunidade(Oportunidade oportunidade, Docente docente, String motivo) {
         if (oportunidade.getStatus() != StatusOportunidade.AGUARDANDO_APROVACAO) {
             throw new IllegalStateException("Oportunidade não está aguardando aprovação. Status: "
                     + oportunidade.getStatus());
@@ -149,6 +150,8 @@ public class OportunidadesService {
         System.out.println("[RF012] Oportunidade '" + oportunidade.getTitulo()
                 + "' REPROVADA. Motivo: " + motivo);
         System.out.println("[RF012] Notificação enviada ao criador: " + oportunidade.getAutor().getNome());
+
+        return new OportunidadeResponseDTO(oportunidade);
     }
 
     // -------------------------------------------------------

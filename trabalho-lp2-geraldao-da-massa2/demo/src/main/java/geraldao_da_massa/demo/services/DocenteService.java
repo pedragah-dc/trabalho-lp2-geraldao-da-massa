@@ -1,9 +1,12 @@
 package geraldao_da_massa.demo.services;
 
 import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.ReprovacaoRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.OportunidadeResponseDTO;
 import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.Oportunidade;
 import geraldao_da_massa.demo.repositories.DocenteRepository;
+import geraldao_da_massa.demo.repositories.OportunidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,35 +17,34 @@ public class DocenteService {
     private DocenteRepository docenteRepository;
     @Autowired
     private OportunidadesService oportunidadeService;
+    @Autowired
+    private OportunidadeRepository oportunidadeRepository;
 
 
-    // Docente também pode criar oportunidades
-//    public Oportunidade criarOportunidade(String titulo, String descricao,
-//                                          TiposOportunidade tipo, TiposModalidade modalidade,
-//                                          Integer cargaHoraria, Integer vagas,
-//                                          LocalDateTime inicio, LocalDateTime fim,
-//                                          LocalDateTime dataInicioInscricoes, LocalDateTime dataFimInscricoes,
-//                                          Docente autor, Docente docenteResponsavel) {
-//
-//        return oportunidadeService.criarOportunidade(titulo, descricao, tipo, modalidade,
-//                cargaHoraria, vagas, inicio, fim,
-//                dataInicioInscricoes, dataFimInscricoes,
-//                autor, docenteResponsavel);
-//    }
-    public Oportunidade criarOportunidade(OportunidadeRequestDTO opDTO){
-        return null;
-        //return oportunidadeService.criarOportunidade(opDTO);
+
+    public OportunidadeResponseDTO criarOportunidade(OportunidadeRequestDTO opDTO){
+        return oportunidadeService.criarOportunidade(opDTO);
     }
 
 
     // Docente aprova oportunidade de discente
-    public void aprovar(Oportunidade oportunidade, Docente docente) {
-        oportunidadeService.aprovarOportunidade(oportunidade, docente);
+    public OportunidadeResponseDTO aprovar(int idOportunidade, int idDocente) {
+        Docente docente = docenteRepository.findById(idDocente).
+                orElseThrow(() -> new RuntimeException("NAO EXISTE DOCENTE NESTE ID"));
+        Oportunidade oportunidade = oportunidadeRepository.findById(idOportunidade).
+                orElseThrow(() -> new RuntimeException("NAO EXISTE OPORTUNIDADE NESTE ID"));
+
+        return oportunidadeService.aprovarOportunidade(oportunidade, docente);
     }
 
     // Docente reprova com motivo
-    public void reprovar(Oportunidade oportunidade, Docente docente, String motivo) {
-        oportunidadeService.reprovarOportunidade(oportunidade, docente, motivo);
+    //obrigado, azambuja
+    public OportunidadeResponseDTO reprovar(int idOportunidade, int idDocente, ReprovacaoRequestDTO motivoDTO) {
+        Docente docente = docenteRepository.findById(idDocente).
+                orElseThrow(() -> new RuntimeException("NAO EXISTE DOCENTE NESTE ID"));
+        Oportunidade oportunidade = oportunidadeRepository.findById(idOportunidade).
+                orElseThrow(() -> new RuntimeException("NAO EXISTE OPORTUNIDADE NESTE ID"));
+        return oportunidadeService.reprovarOportunidade(oportunidade, docente, motivoDTO.getMotivo());
     }
 
 

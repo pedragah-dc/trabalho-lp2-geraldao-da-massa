@@ -1,5 +1,6 @@
 package geraldao_da_massa.demo.entities;
 
+import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
 import geraldao_da_massa.demo.entities.enums.StatusOportunidade;
 import geraldao_da_massa.demo.entities.enums.TiposModalidade;
 import geraldao_da_massa.demo.entities.enums.TiposOportunidade;
@@ -57,7 +58,22 @@ public class Oportunidade {
         this.docenteResponsavel = docenteResponsavel;
         this.status = StatusOportunidade.RASCUNHO; // sempre começa como rascunho
     }
+    public Oportunidade(OportunidadeRequestDTO dto){
+        this.titulo = dto.getTitulo();
+        this.descricao = dto.getDescricao();
+        this.tipo = dto.getTipo();
+        this.modalidade = dto.getModalidade();
+        this.cargaHoraria = dto.getCargaHoraria();
+        this.vagas = dto.getVagas();
+        this.inicio = dto.getInicio();
+        this.fim = dto.getFim();
+        this.dataInicioInscricoes = dto.getDataInicioInscricoes();
+        this.dataFimInscricoes = dto.getDataFimInscricoes();
+//        this.autor = setado posteiormente
+//        this.docenteResponsavel = setado posteriormente
+        this.status = StatusOportunidade.RASCUNHO;
 
+    }
     public boolean isInscricoesAbertas() {
         LocalDateTime agora = LocalDateTime.now();
         return status == StatusOportunidade.EM_INSCRICOES

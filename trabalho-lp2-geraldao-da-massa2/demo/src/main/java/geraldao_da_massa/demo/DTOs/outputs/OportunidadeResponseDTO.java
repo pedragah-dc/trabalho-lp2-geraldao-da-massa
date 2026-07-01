@@ -31,6 +31,7 @@ public class OportunidadeResponseDTO {
     private String feedback;
 
 
+    //obg azambuja
     public OportunidadeResponseDTO(Oportunidade oportunidade){
      this.titulo = oportunidade.getTitulo();
      this.descricao = oportunidade.getDescricao();
