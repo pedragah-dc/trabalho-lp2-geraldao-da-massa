@@ -2,6 +2,7 @@ package geraldao_da_massa.demo.DTOs.inputs;
 
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class GrupoRequestDTO {
     @NotBlank(message="A descrição do grupo é obrigatória.")
     private String descricao;
 
-    @NotBlank(message="O ID do responsável pelo grupo é obrigatório.")
+    @NotNull(message="O ID do responsável pelo grupo é obrigatório.")
     private Integer idResponsavel;
 
 }
