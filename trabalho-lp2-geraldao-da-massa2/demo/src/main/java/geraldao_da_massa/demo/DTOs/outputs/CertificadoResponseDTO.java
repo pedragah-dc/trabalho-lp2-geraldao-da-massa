@@ -11,20 +11,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CertificadoResponseDTO {
-
-    private String hash;
     private String discente;
     private String oportunidade;
     private LocalDateTime dataEmissao;
     private Integer cargaHoraria;
-    private String caminhoArquivo;
+    private Boolean assinado;
 
-    public CertificadoResponseDTO(Certificado certificado) {
-        this.hash = certificado.getHash();
+
+    CertificadoResponseDTO(Certificado certificado) {
         this.discente = certificado.getDiscente().getNome();
         this.oportunidade = certificado.getOportunidade().getTitulo();
         this.dataEmissao = certificado.getDataEmissao();
         this.cargaHoraria = certificado.getCargaHoraria();
-        this.caminhoArquivo = certificado.getCaminhoArquivo();
+        this.assinado = certificado.getAssinado();
     }
 }

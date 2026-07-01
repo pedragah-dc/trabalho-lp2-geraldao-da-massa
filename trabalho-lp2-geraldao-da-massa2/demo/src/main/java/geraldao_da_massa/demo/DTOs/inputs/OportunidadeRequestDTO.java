@@ -56,8 +56,8 @@ public class OportunidadeRequestDTO {
     private LocalDateTime dataFimInscricoes;
 
     @NotNull(message = "O ID do autor é obrigatório.")
-    private Long autorId;
+    private Integer autorId;
 
     @NotNull(message = "O ID do docente responsável é obrigatório.")
-    private Long docenteResponsavelId;
+    private Integer docenteResponsavelId;
 }

@@ -1,20 +1,25 @@
 package geraldao_da_massa.demo.DTOs.outputs;
 
+
 import geraldao_da_massa.demo.entities.Discente;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
-@Data
-public class DiscenteResponseDTO {
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class DiscenteResponseDTO extends UsuarioResponseDTO{
+    private String matricula;
+    private Integer semestreAtual;
+    private Integer idCurso;
+    private String nomeCurso;
 
-    private String nome;
-    private String email;
-    private String cursoNome;
 
-    public DiscenteResponseDTO(Discente discente){
-        nome = discente.getNome();
-        email = discente.getNome();
-        cursoNome = discente.getCurso().getNome();
+    DiscenteResponseDTO(Discente discente){
+        super(discente);
+        this.matricula = discente.getMatricula();
+        this.semestreAtual = discente.getSemestreAtual();
+        this.idCurso = discente.getCurso().getIdCurso();
+        this.nomeCurso = discente.getCurso().getNome();
     }
 }
