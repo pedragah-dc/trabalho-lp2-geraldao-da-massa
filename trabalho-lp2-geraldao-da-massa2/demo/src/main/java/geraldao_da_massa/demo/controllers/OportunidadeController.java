@@ -81,10 +81,13 @@ public class OportunidadeController {
     }
 
     private Docente buscarDocente(Integer id) {
-        Docente docente = docenteRepository.findById(id.intValue());
-        if (docente == null) {
-            throw new IllegalArgumentException("Docente não encontrado com id: " + id);
+        if (id != null) {
+            Docente docente = docenteRepository.findById(id).orElse(null);
+            if (docente == null) {
+                throw new IllegalArgumentException("Docente não encontrado com id: " + id);
+            }
+            return docente;
         }
-        return docente;
+        throw new IllegalArgumentException("ID do docente é obrigatório.");
     }
 }

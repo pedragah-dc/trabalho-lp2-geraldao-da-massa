@@ -1,6 +1,5 @@
 package geraldao_da_massa.demo.DTOs.inputs;
 
-import geraldao_da_massa.demo.entities.enums.RolesUsuario;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;

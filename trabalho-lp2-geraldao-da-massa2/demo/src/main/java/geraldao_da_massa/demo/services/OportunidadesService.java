@@ -61,7 +61,7 @@ public class OportunidadesService {
 
         // Corrigido: antes o docente responsável era passado como null.
         // Agora busca o docente pelo docenteResponsavelId que já vem no DTO.
-        Docente docenteResponsavel = docenteRepository.findById(oportunidade.getDocenteResponsavelId().intValue());
+        Docente docenteResponsavel = docenteRepository.findById(oportunidade.getDocenteResponsavelId()).orElse(null);
         if (docenteResponsavel == null) {
             throw new IllegalArgumentException("Docente responsável não encontrado para o id informado.");
         }
