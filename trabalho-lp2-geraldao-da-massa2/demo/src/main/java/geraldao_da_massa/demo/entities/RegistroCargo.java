@@ -1,3 +1,4 @@
+<<<<<<< HEAD:trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/RegistroCargo.java
 package geraldao_da_massa.demo.entities;
 
 import geraldao_da_massa.demo.entities.enums.CargoNoGrupo;
@@ -11,6 +12,14 @@ import java.time.LocalDateTime;
 
 @Embeddable
 @NoArgsConstructor
+=======
+package entity;
+
+import entity.enums.CargoNoGrupo;
+
+import java.time.LocalDateTime;
+
+>>>>>>> ad2863fb1d92ebc72fd1724ecc049d531ba9e063:src/entity/RegistroCargo.java
 public class RegistroCargo {
     private CargoNoGrupo cargo;
     private LocalDateTime inicio;

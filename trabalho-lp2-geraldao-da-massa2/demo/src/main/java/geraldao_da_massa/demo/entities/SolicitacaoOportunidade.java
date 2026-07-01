@@ -1,3 +1,4 @@
+<<<<<<< HEAD:trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/entities/SolicitacaoOportunidade.java
 package geraldao_da_massa.demo.entities;
 
 import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;
@@ -20,6 +21,16 @@ public class SolicitacaoOportunidade {
     @OneToOne
     private Discente discenteSolicitante;
     @OneToOne
+=======
+package entity;
+
+import entity.enums.StatusSolicitacaoOportunidade;
+
+import java.time.LocalDateTime;
+
+public class SolicitacaoOportunidade {
+    private Discente discenteSolicitante;
+>>>>>>> ad2863fb1d92ebc72fd1724ecc049d531ba9e063:src/entity/SolicitacaoOportunidade.java
     private Oportunidade oportunidadeRequerida;
     private LocalDateTime dataSolicitacao;
     private LocalDateTime dataAprovacao;
