@@ -61,6 +61,12 @@ public class GrupoService {
    public MembroGrupoResponseDTO adicionarMembro(int idGrupo, int idUser){
       Grupo grupo = grupoRepository.findById(idGrupo).orElseThrow(() -> new RuntimeException("NÃO EXISTE GRUPO COM ESTE ID"));
       Usuario usuario = usuarioRepository.findById(idUser).orElseThrow(()->new RuntimeException("NAO EXISTE USUARIO COM ESTE ID"));
+      //verificar se nao ta adicionando o mesmo cara
+      for(MembroGrupo membro: grupo.getMembros()){
+         if(membro.getMembro().equals(usuario)){
+            throw new RuntimeException("ESTE USUARIO JÁ ESTÁ NESTE GRUPPO");
+         }
+      }
       MembroGrupo membroNovo = new MembroGrupo(usuario, grupo);
       membroGrupoRepository.save(membroNovo);
       grupo.getMembros().add(membroNovo);

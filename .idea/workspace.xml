@@ -12,6 +12,7 @@
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repositories/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/repositories/UsuarioRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/GrupoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/GrupoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/MembroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/MembroService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/OportunidadesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trabalho-lp2-geraldao-da-massa2/demo/src/main/java/geraldao_da_massa/demo/services/OportunidadesService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
