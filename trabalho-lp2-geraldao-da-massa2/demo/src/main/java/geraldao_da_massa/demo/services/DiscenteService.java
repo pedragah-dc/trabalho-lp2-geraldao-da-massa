@@ -7,10 +7,7 @@ import geraldao_da_massa.demo.DTOs.outputs.SolicitacaoOportunidadeResponseDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.entities.enums.RolesUsuario;
 import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;
-import geraldao_da_massa.demo.repositories.CursoRepository;
-import geraldao_da_massa.demo.repositories.DiscenteRepository;
-import geraldao_da_massa.demo.repositories.InscricaoRepository;
-import geraldao_da_massa.demo.repositories.SolicitacaoOportunidadeRepository;
+import geraldao_da_massa.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +26,22 @@ public class DiscenteService {
     private UsuarioService usuarioService;
     @Autowired
     private InscricaoRepository inscricaoRepository;
+    @Autowired
+    private OportunidadeRepository oportunidadeRepository;
+    @Autowired
+    private SolicitacaoOportunidadeRepository solicitacaoOportunidadeRepository;
 
 
     //nao sei como isso funciona
-    public SolicitacaoOportunidadeResponseDTO criarSolicitacaoOportunidade(Discente discente, Oportunidade oportunidade){
+    public SolicitacaoOportunidadeResponseDTO criarSolicitacaoOportunidade(int idDiscente, int idOportunidade){
         try{
+            Discente discente = discenteRepository.findById(idDiscente).
+                    orElseThrow(() -> new RuntimeException("ESTE DISCENTE NAO EXISTE NESSE ID"));
+            Oportunidade oportunidade = oportunidadeRepository.findById(idOportunidade).
+                    orElseThrow(()-> new RuntimeException("OPORTUNIDADE NAO ENCONTRADA EM TAL ID"));
+
             SolicitacaoOportunidade solicitacaoOportunidadeOBJ = new SolicitacaoOportunidade(discente, oportunidade);
+            solicitacaoOportunidadeRepository.save(solicitacaoOportunidadeOBJ);
             SolicitacaoOportunidadeResponseDTO solicitacao = new SolicitacaoOportunidadeResponseDTO(solicitacaoOportunidadeOBJ);
             return solicitacao;
         } catch (Exception e) {
