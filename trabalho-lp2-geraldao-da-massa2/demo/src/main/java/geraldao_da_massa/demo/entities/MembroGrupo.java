@@ -18,7 +18,7 @@ public class MembroGrupo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idMembro;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "usuario")
     private Usuario membro;
 
@@ -35,11 +35,13 @@ public class MembroGrupo {
     @JoinColumn(name = "historico_membro")
     private HistoricoMembro historico;
 
-    public MembroGrupo(Usuario user) {
+    public MembroGrupo(Usuario user, Grupo grupo) {
         this.membro = user;
         this.cargo = CargoNoGrupo.MEMBRO;
         historico = new HistoricoMembro();
         historico.atualize(LocalDateTime.now(), cargo);
+        time = LocalDateTime.now();
+        this.grupo = grupo;
     }
 
     //USADO SOMENTE PARA COPIA

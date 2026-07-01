@@ -57,7 +57,7 @@ public class OportunidadesService {
         }
 
         // Busca o autor (quem está criando) pelo id da rota
-        Usuario responsavel = userRepository.findById(id);
+        Usuario responsavel = userRepository.findById(id).orElseThrow(() -> new RuntimeException("NAO EXISTE USUARIO COM ESTE ID"));
 
         // Corrigido: antes o docente responsável era passado como null.
         // Agora busca o docente pelo docenteResponsavelId que já vem no DTO.

@@ -15,6 +15,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 //fica responsavel por mexer com os membros tmb
 @Service
 public class GrupoService {
@@ -44,7 +46,7 @@ public class GrupoService {
       GrupoResponseDTO grupoResponseDTO = new GrupoResponseDTO(grupo);
       grupoResponseDTO.setResponsavel(responsavel.getNome());
       //O responsavel pode fazer muitas coisas
-      MembroGrupo membroResponsavel = new MembroGrupo(responsavel);
+      MembroGrupo membroResponsavel = new MembroGrupo(responsavel, grupo);
       membroResponsavel.setCargo(CargoNoGrupo.RESPONSAVEL);
    //salvando alteracoes
       docenteRepository.save(responsavel);
@@ -57,16 +59,21 @@ public class GrupoService {
    //no drawio, um membro é um usuario, entao tanto docente quanto discente podem ser membros
    //talvez sempre que um membro entrar ele já comece num determinado cargo(ou template de membro) e posteriormente possa mudar
    public MembroGrupoResponseDTO adicionarMembro(int idGrupo, int idUser){
-      Grupo grupo = grupoRepository.findByIdGrupo(idGrupo);
-      Usuario usuario = usuarioRepository.findById(idUser);
-      MembroGrupo membroNovo = new MembroGrupo(usuario);
+      Grupo grupo = grupoRepository.findById(idGrupo).orElseThrow(() -> new RuntimeException("NÃO EXISTE GRUPO COM ESTE ID"));
+      Usuario usuario = usuarioRepository.findById(idUser).orElseThrow(()->new RuntimeException("NAO EXISTE USUARIO COM ESTE ID"));
+      //verificar se nao ta adicionando o mesmo cara
+      for(MembroGrupo membro: grupo.getMembros()){
+         if(membro.getMembro().equals(usuario)){
+            throw new RuntimeException("ESTE USUARIO JÁ ESTÁ NESTE GRUPPO");
+         }
+      }
+      MembroGrupo membroNovo = new MembroGrupo(usuario, grupo);
       membroGrupoRepository.save(membroNovo);
       grupo.getMembros().add(membroNovo);
       grupoRepository.save(grupo);
       MembroGrupoResponseDTO dto = new MembroGrupoResponseDTO(membroNovo);
       return dto;
    }
-   //na teoria, só na tela do docente vai ter uma opção pra retirar e adiocionar cargos, entao nao acho que seja necessario uma verificacaao
    //errado kkkkkkkk, vai achando q é assim. tem que verificar se tem permissao. como?
    public MembroGrupoResponseDTO setCargo(int id, CargoNoGrupo cargo){
       MembroGrupo membro = membroGrupoRepository.findById(id).orElseThrow(() -> new RuntimeException("membro nao encontrado"));
@@ -76,4 +83,5 @@ public class GrupoService {
       return dto;
    }
 }
+
 //força, rapaziada

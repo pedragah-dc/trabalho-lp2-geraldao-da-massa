@@ -17,8 +17,8 @@ public class GrupoController {
     @Autowired
     private GrupoService grupoService;
 
-    @PostMapping("/{idgrupo}")
-    public MembroGrupoResponseDTO addMembro(@PathVariable int idgrupo, int idUser){
+    @PostMapping("/{idgrupo}/usuario/{idUser}")
+    public MembroGrupoResponseDTO addMembro(@PathVariable int idgrupo, @PathVariable int idUser){
         return grupoService.adicionarMembro(idgrupo, idUser);
     }
     @PostMapping("/criar")
