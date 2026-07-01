@@ -8,23 +8,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocenteResponseDTO {
-    private Integer id;
-    private String nome;
-    private String email;
-    private Boolean ativo;
-    private String descricao;
-    private String role;
+public class DocenteResponseDTO extends UsuarioResponseDTO {
     private String siape;
     private String departamento;
 
     DocenteResponseDTO(Docente docente){
-        this.id = docente.getId();
-        this.nome = docente.getNome();
-        this.email = docente.getEmail();
-        this.ativo = docente.getAtivo();
-        this.descricao = docente.getPapel().getDescricao();
-        this.role = docente.getRole().name();
+        super(docente);
+
         this.siape = docente.getSiape();
         this.departamento = docente.getDepartamento();
     }
