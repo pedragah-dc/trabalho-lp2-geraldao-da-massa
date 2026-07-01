@@ -18,7 +18,7 @@ public class DiscenteDiretorResponseDTO extends DiscenteResponseDTO{
     private Date dataFim;
 
 
-    DiscenteDiretorResponseDTO(DiscenteDiretor diretor){
+    public DiscenteDiretorResponseDTO(DiscenteDiretor diretor){
         super(diretor);
         this.nomeGrupo = diretor.getGrupo().getNome();
         this.cargo = diretor.getCargo();

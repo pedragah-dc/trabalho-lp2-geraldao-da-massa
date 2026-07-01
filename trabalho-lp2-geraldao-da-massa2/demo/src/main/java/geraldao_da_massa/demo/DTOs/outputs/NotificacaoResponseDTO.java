@@ -16,7 +16,7 @@ public class NotificacaoResponseDTO {
     private Boolean lida;
 
 
-    NotificacaoResponseDTO(Notificacao noti){
+    public NotificacaoResponseDTO(Notificacao noti){
         this.id = noti.getId();
         this.mensagem = noti.getMensagem();
         this.destinatario = noti.getDestinatario().getNome();

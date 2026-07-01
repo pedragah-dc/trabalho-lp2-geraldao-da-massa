@@ -15,6 +15,9 @@ public class InscricaoRequestDTO {
     @NotNull(message = "O ID da oportunidade é obrigatório.")
     private Integer idOportunidade;
 
+    @NotNull(message = "O ID do discente é obrigatório.")
+    private Integer idDiscente;
+
     @NotBlank(message = "Você precisa escrever uma justificativa/motivação para se inscrever.")
     private String motivacao;
 

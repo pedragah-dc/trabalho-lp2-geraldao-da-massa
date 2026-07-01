@@ -43,7 +43,7 @@ public class Grupo {
         this.tipo = grupoDTO.getTipo();
         this.email = grupoDTO.getEmail();
         this.descricao = grupoDTO.getDescricao();
-        this.status = grupoDTO.getStatus();
+       // this.status = grupoDTO.getStatus();
         this.responsavel = null;//feito mais tarde no service;-;
 //        membros = new ArrayList<>();
     }

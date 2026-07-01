@@ -15,7 +15,7 @@ public class DiscenteResponseDTO extends UsuarioResponseDTO{
     private String nomeCurso;
 
 
-    DiscenteResponseDTO(Discente discente){
+    public DiscenteResponseDTO(Discente discente){
         super(discente);
         this.matricula = discente.getMatricula();
         this.semestreAtual = discente.getSemestreAtual();

@@ -19,7 +19,7 @@ public class AlteracaoPermissaoResponseDTO {
     private String nomePPC;
 
 
-    AlteracaoPermissaoResponseDTO(AlteracaoPermissao alteracao){
+    public AlteracaoPermissaoResponseDTO(AlteracaoPermissao alteracao){
         this.idPermissao = alteracao.getIdPermissao();
         this.usuario = alteracao.getUsuario().getNome();
         this.dataAlteracao = alteracao.getDataAlteracao();

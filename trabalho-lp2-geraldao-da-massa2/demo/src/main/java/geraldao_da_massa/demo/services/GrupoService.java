@@ -41,8 +41,8 @@ public class GrupoService {
          grupo.setResponsavel(responsavel);
 //      responsavel.getGrupos().add(grupo);
 
-      GrupoResponseDTO grupoResponseDTO = new GrupoResponseDTO(grupoDTO);
-      grupoResponseDTO.setNomeDoResponsavel(responsavel.getNome());
+      GrupoResponseDTO grupoResponseDTO = new GrupoResponseDTO(grupo);
+      grupoResponseDTO.setResponsavel(responsavel.getNome());
       //O responsavel pode fazer muitas coisas
       MembroGrupo membroResponsavel = new MembroGrupo(responsavel);
       membroResponsavel.setCargo(CargoNoGrupo.RESPONSAVEL);

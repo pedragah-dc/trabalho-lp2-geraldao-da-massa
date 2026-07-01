@@ -5,8 +5,10 @@ import geraldao_da_massa.demo.entities.Grupo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class GrupoResponseDTO {
@@ -18,7 +20,7 @@ public class GrupoResponseDTO {
     private String responsavel;
 
 
-    GrupoResponseDTO(Grupo grupo){
+    public GrupoResponseDTO(Grupo grupo){
         this.nome = grupo.getNome();
         this.tipo = grupo.getTipo();
         this.email = grupo.getEmail();

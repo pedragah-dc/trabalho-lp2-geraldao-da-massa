@@ -34,7 +34,7 @@ public class InscricaoController {
     public InscricaoResponseDTO criarInscricao(@PathVariable Integer idOportunidade,
                                                 @Valid @RequestBody InscricaoRequestDTO dto) {
         Oportunidade oportunidade = buscarOportunidade(idOportunidade);
-        Discente discente = buscarDiscente(dto.getDiscenteId());
+        Discente discente = buscarDiscente(dto.getIdDiscente());
 
         Inscricao inscricao = inscricaoService.criarInscricao(oportunidade, discente, dto.getMotivacao());
         return new InscricaoResponseDTO(inscricao);

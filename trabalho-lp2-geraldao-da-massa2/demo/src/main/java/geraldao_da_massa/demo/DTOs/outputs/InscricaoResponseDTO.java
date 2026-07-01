@@ -16,7 +16,7 @@ public class InscricaoResponseDTO {
     private String motivacao;
 
 
-    InscricaoResponseDTO(Inscricao inscricao) {
+    public InscricaoResponseDTO(Inscricao inscricao) {
         this.tituloOportunidade = inscricao.getOportunidade().getTitulo();
         this.nomeDiscente = inscricao.getDiscente().getNome();
         this.status = inscricao.getStatus().name();

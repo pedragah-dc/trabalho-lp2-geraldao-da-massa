@@ -18,7 +18,7 @@ public class CertificadoResponseDTO {
     private Boolean assinado;
 
 
-    CertificadoResponseDTO(Certificado certificado) {
+    public CertificadoResponseDTO(Certificado certificado) {
         this.discente = certificado.getDiscente().getNome();
         this.oportunidade = certificado.getOportunidade().getTitulo();
         this.dataEmissao = certificado.getDataEmissao();

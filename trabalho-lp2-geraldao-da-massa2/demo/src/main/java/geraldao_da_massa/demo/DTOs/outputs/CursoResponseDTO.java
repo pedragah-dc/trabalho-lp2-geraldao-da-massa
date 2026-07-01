@@ -18,7 +18,7 @@ public class CursoResponseDTO {
 
 
 
-    CursoResponseDTO(Curso curso) {
+    public CursoResponseDTO(Curso curso) {
         this.idCurso = curso.getIdCurso();
         this.nome = curso.getNome();
         this.codigo = curso.getCodigo();

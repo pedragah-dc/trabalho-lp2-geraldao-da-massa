@@ -17,7 +17,7 @@ public class AproveitamentoResponseDTO {
     private String status;
 
 
-    AproveitamentoResponseDTO(Aproveitamento apro){
+    public AproveitamentoResponseDTO(Aproveitamento apro){
     this.discente = apro.getDiscente().getNome();
     this.descricao = apro.getDescricao();
     this.instituicao = apro.getInstituicao();

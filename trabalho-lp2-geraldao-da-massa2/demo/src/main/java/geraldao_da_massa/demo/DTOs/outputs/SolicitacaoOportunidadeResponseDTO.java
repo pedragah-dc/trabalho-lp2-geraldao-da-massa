@@ -20,7 +20,7 @@ public class SolicitacaoOportunidadeResponseDTO {
     private String status;
 
 
-    SolicitacaoOportunidadeResponseDTO(SolicitacaoOportunidade solOp) {
+    public SolicitacaoOportunidadeResponseDTO(SolicitacaoOportunidade solOp) {
         this.nomeDiscente = solOp.getDiscenteSolicitante().getNome();
         this.tituloOportunidade = solOp.getOportunidadeRequerida().getTitulo();
         this.dataSolicitacao = solOp.getDataSolicitacao();

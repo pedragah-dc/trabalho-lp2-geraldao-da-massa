@@ -27,7 +27,7 @@ public class DiscenteRequestDTO extends UsuarioRequestDTO {
     @NotNull(message = "O ID do curso é obrigatório.")
     private Integer cursoId;
 
-    DiscenteRequestDTO(String nome, String email, String senha, String matricula, Integer semestreAtual, Integer cursoId) {
+    public DiscenteRequestDTO(String nome, String email, String senha, String matricula, Integer semestreAtual, Integer cursoId) {
         super(nome, email, senha);
         this.matricula = matricula;
         this.semestreAtual = semestreAtual;

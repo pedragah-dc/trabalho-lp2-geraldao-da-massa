@@ -12,7 +12,7 @@ public class DocenteResponseDTO extends UsuarioResponseDTO {
     private String siape;
     private String departamento;
 
-    DocenteResponseDTO(Docente docente){
+    public DocenteResponseDTO(Docente docente){
         super(docente);
 
         this.siape = docente.getSiape();
