@@ -26,7 +26,6 @@ public class AlteracaoPermissao {
     private Usuario usuario;
     private LocalDateTime dataAlteracao;
     private TipoOperacao tipoOperacao;
-
     private String nomePPC;
 
     public AlteracaoPermissao(Usuario usuario, LocalDateTime dataAlteracao, TipoOperacao tipoOperacao,  String nomePPC) {

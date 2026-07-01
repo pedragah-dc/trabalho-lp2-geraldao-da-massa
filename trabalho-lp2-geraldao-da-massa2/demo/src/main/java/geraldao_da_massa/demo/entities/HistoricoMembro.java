@@ -5,15 +5,18 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "historico")
+@Table(name = "historico_do_membro")
 public class HistoricoMembro {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        @OneToOne(mappedBy = "membroid")
+        private Integer idHistoricoMembro;
+        @OneToOne(mappedBy = "historico")
         private MembroGrupo membro;
-        private ArrayList<RegistroCargo> registros;
+        @ElementCollection
+        private List<RegistroCargo> registros;
 
         public HistoricoMembro () {
             registros = new ArrayList<>();
@@ -31,7 +34,8 @@ public class HistoricoMembro {
             }
 
         }
-
 }
+//Jesus, quem programou isso
+//ah foi eu
 
 

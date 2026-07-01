@@ -1,6 +1,6 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOs.OportunidadeRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
 import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.Oportunidade;
 import geraldao_da_massa.demo.repositories.DocenteRepository;

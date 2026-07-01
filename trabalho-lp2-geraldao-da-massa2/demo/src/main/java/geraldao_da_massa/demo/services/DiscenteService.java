@@ -1,16 +1,21 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.DiscenteRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.outputs.DiscenteResponseDTO;
+import geraldao_da_massa.demo.DTOs.outputs.SolicitacaoOportunidadeResponseDTO;
 import geraldao_da_massa.demo.entities.*;
 import geraldao_da_massa.demo.entities.enums.RolesUsuario;
 import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;
 import geraldao_da_massa.demo.repositories.CursoRepository;
 import geraldao_da_massa.demo.repositories.DiscenteRepository;
+import geraldao_da_massa.demo.repositories.InscricaoRepository;
 import geraldao_da_massa.demo.repositories.SolicitacaoOportunidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class DiscenteService {
@@ -22,14 +27,20 @@ public class DiscenteService {
     private CursoRepository cursoRepository;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private InscricaoRepository inscricaoRepository;
 
-    public SolicitacaoOportunidade criarSolicitacaoOportunidade(Discente discente, Oportunidade oportunidade){
+
+    //nao sei como isso funciona
+    public SolicitacaoOportunidadeResponseDTO criarSolicitacaoOportunidade(Discente discente, Oportunidade oportunidade){
         try{
-            SolicitacaoOportunidade solicitacao = new SolicitacaoOportunidade(discente, oportunidade);
+            SolicitacaoOportunidade solicitacaoOportunidadeOBJ = new SolicitacaoOportunidade(discente, oportunidade);
+            SolicitacaoOportunidadeResponseDTO solicitacao = new SolicitacaoOportunidadeResponseDTO(solicitacaoOportunidadeOBJ);
             return solicitacao;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public boolean reenviarSolicitacaoOportunidade(SolicitacaoOportunidade solicitacao) throws Exception {
@@ -45,8 +56,14 @@ public class DiscenteService {
         solicitacao.setStatus(StatusSolicitacaoOportunidade.PENDENTE);
         return true;
     }
-    public List<SolicitacaoOportunidade> listarSolicitacoesDoDiscente(Discente discente, SolicitacaoOportunidadeRepository repo){
-        return repo.listarPorDiscente(discente);
+    public List<SolicitacaoOportunidadeResponseDTO> listarSolicitacoesDoDiscente(int discenteId){
+        List<SolicitacaoOportunidadeResponseDTO> lista = new ArrayList<SolicitacaoOportunidadeResponseDTO>();
+        Discente discente = discenteRepository.findById(discenteId).
+                orElseThrow(() -> new RuntimeException("DISCENTE NAO ENCONTRADO COM ESTE ID"));
+        for(SolicitacaoOportunidade documento: inscricaoRepository.findAllByDiscente(discente)){
+            lista.add(new SolicitacaoOportunidadeResponseDTO(documento));
+        }
+        return lista;
     }
     public DiscenteService(DiscenteRepository discenteRepository, UsuarioService usuarioService) {
         this.discenteRepository = discenteRepository;
@@ -54,42 +71,31 @@ public class DiscenteService {
     }
 
 
-    public Discente autocadastroDiscente(String nome, String email, String senha, String matricula) {
-
+    public DiscenteResponseDTO autocadastroDiscente(DiscenteRequestDTO discenteRequestDTO) {
         try{
-
-            UsuarioRequestDTO dto = new UsuarioRequestDTO(nome, email, matricula, null, true, RolesUsuario.DISCENTE);
-
-            Usuario usuario = usuarioService.autocadastroUsuario(dto);
-    
-            Curso curso = verificaCurso(matricula);
-            Discente discente = new Discente(
-                    usuario.getId(),
-                    usuario.getNome(),
-                    usuario.getEmail(),
-                    usuario.getSenha(),
-                    usuario.getPapel(),
-                    usuario.getAtivo(),
-                    null,
-                    matricula,
-                    0,
-                    curso,
-                    RolesUsuario.DISCENTE
-            );
-
-            discenteRepository.save(discente);
-            return discente;
+            Discente discente;
+            Curso curso = verificaCurso(discenteRequestDTO.getMatricula());
+            if(curso != null){
+                discente = new Discente(discenteRequestDTO);
+                discente.setCurso(curso);
+                discenteRepository.save(discente);
+                return new DiscenteResponseDTO(discente);
+            } else {
+                throw new RuntimeException("CURSO NAO ENCONTRADO");
+            }
         } catch (Exception e) {
             throw new RuntimeException("Erro ao criar discente", e);
         }
     }
 
+
+    //isso tem que ir pro controller?
     public Boolean verificaMatriculaDiscente (String matricula, List < Discente > repositorio){
-        for (Discente d : repositorio) {
-            if (d.getMatricula().equals(matricula)) {
-                return true;
-            }
-        }
+//        for (Discente d : repositorio) {
+//            if (d.getMatricula().equals(matricula)) {
+//                return true;
+//            }
+//        }
         return false;
     }
 
@@ -98,7 +104,7 @@ public class DiscenteService {
     //ah ta,  matricula diz qual curso o aluno está, muito foda, sabia disso nao
     public Curso verificaCurso (String matricula){
         //rapaz, eu acho que vamo ter que quebrar essa matricula pra descobrir o codigo do curso e apartir disso pesquisar no banco
-        Integer codigoMatricula = Integer.parseInt(matricula.substring(1, 4));
+        Integer codigoMatricula = Integer.parseInt(matricula.substring(0, 4));
         for(Curso curso: cursoRepository.findAll()){
             if(curso.getCodigo().equals(codigoMatricula)){
                 return curso;

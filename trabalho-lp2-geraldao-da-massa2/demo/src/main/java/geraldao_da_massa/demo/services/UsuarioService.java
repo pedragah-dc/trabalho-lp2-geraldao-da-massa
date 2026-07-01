@@ -1,6 +1,6 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOs.UsuarioRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.UsuarioRequestDTO;
 import geraldao_da_massa.demo.entities.AlteracaoPermissao;
 import geraldao_da_massa.demo.entities.Usuario;
 import geraldao_da_massa.demo.entities.enums.RolesUsuario;
@@ -66,6 +66,6 @@ public class UsuarioService {
 
 
     public Usuario findUsuario(String name){
-        return null;
+        return usuarioRepository.findByNome(name);
     }
 }

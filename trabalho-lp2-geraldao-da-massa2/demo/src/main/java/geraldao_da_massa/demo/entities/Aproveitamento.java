@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "aproveitamento")
+@Table(name = "aproveitamentos")
 @NoArgsConstructor
 
 @Getter
@@ -15,6 +15,7 @@ import lombok.Setter;
 public class Aproveitamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idAproveitamento;
     @OneToOne
     private Discente discente;
     private String descricao;
@@ -30,4 +31,19 @@ public class Aproveitamento {
         this.horas = horas;
         this.status = status;
     }
+
+    public Discente getDiscente() { return discente; }
+    public void setDiscente(Discente discente) { this.discente = discente; }
+
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getInstituicao() { return instituicao; }
+    public void setInstituicao(String instituicao) { this.instituicao = instituicao; }
+
+    public Integer getHoras() { return horas; }
+    public void setHoras(Integer horas) { this.horas = horas; }
+
+    public StatusAproveitamento getStatus() { return status; }
+    public void setStatus(StatusAproveitamento status) { this.status = status; }
 }

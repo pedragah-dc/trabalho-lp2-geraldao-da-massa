@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @Entity
-@Table(name = "administrador")
+@Table(name = "administradores")
 @AllArgsConstructor
 public class Administrador extends Usuario {
 

@@ -1,27 +1,26 @@
 package geraldao_da_massa.demo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Entity
+//
+//@Entity
+//@NoArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor
-
-@Getter
-@Setter
+@Embeddable
 public class Papel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     private String descricao;
 
     public Papel(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 }

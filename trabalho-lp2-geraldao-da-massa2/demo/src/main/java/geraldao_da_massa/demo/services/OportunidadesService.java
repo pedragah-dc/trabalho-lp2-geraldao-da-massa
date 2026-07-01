@@ -1,16 +1,18 @@
 package geraldao_da_massa.demo.services;
 
-import geraldao_da_massa.demo.DTOs.OportunidadeRequestDTO;
+import geraldao_da_massa.demo.DTOs.inputs.OportunidadeRequestDTO;
 import geraldao_da_massa.demo.entities.Discente;
 import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.Oportunidade;
+import geraldao_da_massa.demo.entities.Usuario;
 import geraldao_da_massa.demo.entities.enums.StatusOportunidade;
+import geraldao_da_massa.demo.repositories.DocenteRepository;
 import geraldao_da_massa.demo.repositories.OportunidadeRepository;
+import geraldao_da_massa.demo.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,6 +24,10 @@ public class OportunidadesService {
     private OportunidadeRepository repository;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private UsuarioRepository userRepository;
+    @Autowired
+    private DocenteRepository docenteRepository;
 
     public OportunidadesService(OportunidadeRepository repository) {
         this.repository = repository;
@@ -32,33 +38,41 @@ public class OportunidadesService {
     // -------------------------------------------------------
     // Qualquer usuário (discente diretor ou docente) pode criar.
     // A oportunidade começa como RASCUNHO e não aparece para ninguém ainda.
+    public boolean criarOportunidade(OportunidadeRequestDTO oportunidade, int id) {
 
-    public boolean criarOportunidade(OportunidadeRequestDTO oportunidade) {
-
-        if (oportunidade.titulo == null || oportunidade.titulo.isBlank()) {
+        if (oportunidade.getTitulo() == null || oportunidade.getTitulo().isBlank()) {
             throw new IllegalArgumentException("Título da oportunidade é obrigatório.");
         }
-        if (oportunidade.cargaHoraria == null || oportunidade.cargaHoraria <= 0) {
+        if (oportunidade.getCargaHoraria() == null || oportunidade.getCargaHoraria() <= 0) {
             throw new IllegalArgumentException("Carga horária deve ser maior que zero.");
         }
-        if (oportunidade.vagas == null || oportunidade.vagas <= 0) {
+        if (oportunidade.getVagas() == null || oportunidade.getVagas() <= 0) {
             throw new IllegalArgumentException("Número de vagas deve ser maior que zero.");
         }
 
-        // POderia setar o horario no service... diminuiria o tamanho do DTO
-        if (oportunidade.inicio == null || oportunidade.fim == null || oportunidade.fim.isBefore(oportunidade.inicio)) {
-            //throw new IllegalArgumentException("Datas de início e fim são inválidas.");
+        // Corrigido: validação reativada (estava comentada e não bloqueava nada)
+        if (oportunidade.getInicio() == null || oportunidade.getFim() == null
+                || oportunidade.getFim().isBefore(oportunidade.getInicio())) {
+            throw new IllegalArgumentException("Datas de início e fim são inválidas.");
         }
 
-        //TODO ocorre uma pesquisa pelo nome de alguem que está no banco
+        // Busca o autor (quem está criando) pelo id da rota
+        Usuario responsavel = userRepository.findById(id);
 
-        Oportunidade nova = new Oportunidade(oportunidade.titulo, oportunidade.descricao, oportunidade.tipo, oportunidade.modalidade,
-                oportunidade.cargaHoraria, oportunidade.vagas, oportunidade.inicio, oportunidade.fim,
-                oportunidade.dataInicioInscricoes, oportunidade.dataFimInscricoes,
-                oportunidade.autor, oportunidade.docenteResponsavel);
+        // Corrigido: antes o docente responsável era passado como null.
+        // Agora busca o docente pelo docenteResponsavelId que já vem no DTO.
+        Docente docenteResponsavel = docenteRepository.findById(oportunidade.getDocenteResponsavelId().intValue());
+        if (docenteResponsavel == null) {
+            throw new IllegalArgumentException("Docente responsável não encontrado para o id informado.");
+        }
 
+        Oportunidade nova = new Oportunidade(oportunidade.getTitulo(), oportunidade.getDescricao(), oportunidade.getTipo(), oportunidade.getModalidade(),
+                oportunidade.getCargaHoraria(), oportunidade.getVagas(), oportunidade.getInicio(), oportunidade.getFim(),
+                oportunidade.getDataInicioInscricoes(), oportunidade.getDataFimInscricoes(),
+                responsavel, docenteResponsavel);
         repository.save(nova);
-        System.out.println("[RF011] Oportunidade criada como RASCUNHO: " + oportunidade.titulo);
+
+        System.out.println("[RF011] Oportunidade criada como RASCUNHO: " + oportunidade.getTitulo());
         return true;
     }
 
@@ -74,6 +88,7 @@ public class OportunidadesService {
                     + oportunidade.getStatus());
         }
         oportunidade.setStatus(StatusOportunidade.AGUARDANDO_APROVACAO);
+        repository.save(oportunidade);
         System.out.println("[RF011] Oportunidade '" + oportunidade.getTitulo()
                 + "' submetida. Aguardando aprovação de: "
                 + oportunidade.getDocenteResponsavel().getNome());
@@ -90,7 +105,10 @@ public class OportunidadesService {
                     + oportunidade.getStatus());
         }
         // Verifica se é o docente responsável pela oportunidade
-        if (!oportunidade.getDocenteResponsavel().equals(docente)) {
+        // Comparamos pelo id (não por equals()) porque Docente não tem
+        // equals()/hashCode() customizado — comparar objetos carregados em
+        // consultas diferentes pelo equals() padrão do Java sempre falharia
+        if (!oportunidade.getDocenteResponsavel().getId().equals(docente.getId())) {
             throw new IllegalStateException("Apenas o docente responsável pode aprovar esta oportunidade.");
         }
 
@@ -105,6 +123,8 @@ public class OportunidadesService {
             oportunidade.setStatus(StatusOportunidade.EM_INSCRICOES);
             System.out.println("[RF012] Inscrições abertas automaticamente para: " + oportunidade.getTitulo());
         }
+
+        repository.save(oportunidade);
     }
 
     // -------------------------------------------------------
@@ -117,7 +137,7 @@ public class OportunidadesService {
             throw new IllegalStateException("Oportunidade não está aguardando aprovação. Status: "
                     + oportunidade.getStatus());
         }
-        if (!oportunidade.getDocenteResponsavel().equals(docente)) {
+        if (!oportunidade.getDocenteResponsavel().getId().equals(docente.getId())) {
             throw new IllegalStateException("Apenas o docente responsável pode reprovar esta oportunidade.");
         }
         if (motivo == null || motivo.isBlank()) {
@@ -126,6 +146,7 @@ public class OportunidadesService {
 
         oportunidade.setStatus(StatusOportunidade.REPROVADA);
         oportunidade.setFeedbackReprovacao(motivo);
+        repository.save(oportunidade);
         System.out.println("[RF012] Oportunidade '" + oportunidade.getTitulo()
                 + "' REPROVADA. Motivo: " + motivo);
         System.out.println("[RF012] Notificação enviada ao criador: " + oportunidade.getAutor().getNome());
@@ -137,36 +158,28 @@ public class OportunidadesService {
 
     // Lista todas as oportunidades com inscrições abertas (para discentes verem)
     public List<Oportunidade> listarOportunidadesAbertas() {
-        //TODO MOSTRAR SOMENTE O QUE TA EM CIMA:(
-        return (List<Oportunidade>) repository.findAll();
+        return repository.findAllByStatus(StatusOportunidade.EM_INSCRICOES);
     }
 
     // Lista oportunidades aguardando aprovação (para o docente ver sua fila)
     public List<Oportunidade> listarAguardandoAprovacao(Docente docente) {
-        //TODO mostrar somente os que aguardam aprovacao
-        return (List<Oportunidade>) repository.findAll();
+        return repository.findAllByStatusAndDocenteResponsavel(StatusOportunidade.AGUARDANDO_APROVACAO, docente);
     }
 
     public List<Oportunidade> listarTodas() {
-        return (List<Oportunidade>) repository.findAll();
+        return repository.findAll();
     }
 
     public boolean fecharInscricoes(Oportunidade oportunidade){
         oportunidade.setStatus(StatusOportunidade.ARQUIVADA);
+        repository.save(oportunidade);
         return true;
     }
 
-    public List<Oportunidade> retornaOportunidadeDiscente(List<Oportunidade> lista, Discente discente ){
-        List<Oportunidade> retorno = new ArrayList<>();
-        for(Oportunidade i : lista){
-            for (Oportunidade j : discente.getListaDeOp()){
-                if (i.equals(j)){
-                    retorno.add(j);
-                }
-            }
-        }
-        return retorno;
+    // Usado pelo controller para buscar a oportunidade pelo id antes de submeter/aprovar/reprovar
+    public Oportunidade buscarPorId(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Oportunidade não encontrada com id: " + id));
     }
-
 
 }

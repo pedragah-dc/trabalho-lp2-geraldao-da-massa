@@ -7,10 +7,13 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ * Classe que representa um Certificado emitido para um discente
+ * em uma oportunidade (RF019)
+ */
 @Entity
-@Table(name = "certificado")
+@Table(name = "certificados")
 @NoArgsConstructor
-
 @Getter
 @Setter
 public class Certificado {

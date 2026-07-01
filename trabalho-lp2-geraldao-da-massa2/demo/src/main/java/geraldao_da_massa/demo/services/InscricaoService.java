@@ -6,28 +6,33 @@ import geraldao_da_massa.demo.entities.Oportunidade;
 import geraldao_da_massa.demo.entities.enums.StatusInscricao;
 import geraldao_da_massa.demo.entities.enums.StatusOportunidade;
 import geraldao_da_massa.demo.repositories.InscricaoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class InscricaoService {
-    private InscricaoRepository repository;
+    @Autowired
+    private InscricaoRepository inscricaoRepository;
 
-    public InscricaoService(InscricaoRepository repository) {
-        this.repository = repository;
-    }
 
     // Discente solicita inscrição em oportunidade aberta
     public Inscricao criarInscricao(Oportunidade oportunidade, Discente discente, String motivacao) {
+
         if (oportunidade.getStatus() != StatusOportunidade.EM_INSCRICOES) {
             throw new IllegalStateException("Inscrições não estão abertas para esta oportunidade. Status: "
                     + oportunidade.getStatus());
         }
-        if (repository.buscarPorDiscenteEOportunidade(discente, oportunidade) != null) {
+
+        // Corrigido: agora verifica se ESSE discente já tem inscrição NESSA oportunidade
+        // (antes verificava discente OU oportunidade isoladamente, no banco inteiro)
+        if (inscricaoRepository.existsByOportunidadeAndDiscente(oportunidade, discente)) {
             throw new IllegalStateException("Discente já possui inscrição nesta oportunidade.");
         }
 
         Inscricao inscricao = new Inscricao(oportunidade, discente, motivacao);
-        repository.salvar(inscricao);
+        inscricaoRepository.save(inscricao);
         System.out.println("[INSCRICAO] " + discente.getNome() + " inscrito em '" + oportunidade.getTitulo() + "'");
         return inscricao;
     }
@@ -39,13 +44,18 @@ public class InscricaoService {
                     + inscricao.getStatus());
         }
 
-        long vagasOcupadas = repository.listarAprovadosPorOportunidade(oportunidade).size();
+        // Conta quantos já estão APROVADOS nessa oportunidade para checar vaga
+        long vagasOcupadas = inscricaoRepository
+                .findByOportunidadeAndStatus(oportunidade, StatusInscricao.APROVADO)
+                .size();
+
         if (vagasOcupadas >= oportunidade.getVagas()) {
             throw new IllegalStateException("Não há vagas disponíveis. Vagas: " + oportunidade.getVagas()
                     + ", Aprovados: " + vagasOcupadas);
         }
 
         inscricao.setStatus(StatusInscricao.APROVADO);
+        inscricaoRepository.save(inscricao);
         System.out.println("[RF015] Inscrição de '" + inscricao.getDiscente().getNome() + "' APROVADA.");
     }
 
@@ -56,6 +66,7 @@ public class InscricaoService {
                     + inscricao.getStatus());
         }
         inscricao.setStatus(StatusInscricao.REJEITADO);
+        inscricaoRepository.save(inscricao);
         System.out.println("[RF015] Inscrição de '" + inscricao.getDiscente().getNome() + "' REJEITADA.");
     }
 
@@ -72,6 +83,7 @@ public class InscricaoService {
         }
 
         inscricao.setStatus(StatusInscricao.CANCELADO);
+        inscricaoRepository.save(inscricao);
         System.out.println("[RF016] Inscrição de '" + inscricao.getDiscente().getNome()
                 + "' em '" + inscricao.getOportunidade().getTitulo() + "' CANCELADA.");
     }
@@ -94,7 +106,7 @@ public class InscricaoService {
         }
 
         // O substituto precisa ter inscrição na oportunidade (é da "lista de interessados")
-        Inscricao inscricaoSubstituto = repository.buscarPorDiscenteEOportunidade(novoDiscente, oportunidade);
+        Inscricao inscricaoSubstituto = inscricaoRepository.findByOportunidadeAndDiscente(novoDiscente, oportunidade);
         if (inscricaoSubstituto == null) {
             throw new IllegalStateException("O discente '" + novoDiscente.getNome()
                     + "' não possui inscrição nesta oportunidade. "
@@ -116,17 +128,27 @@ public class InscricaoService {
         // Aprova o substituto
         inscricaoSubstituto.setStatus(StatusInscricao.APROVADO);
 
+        inscricaoRepository.save(inscricaoOriginal);
+        inscricaoRepository.save(inscricaoSubstituto);
+
         System.out.println("[RF017] '" + inscricaoOriginal.getDiscente().getNome()
                 + "' substituído por '" + novoDiscente.getNome()
                 + "' em '" + oportunidade.getTitulo() + "'");
         return inscricaoSubstituto;
     }
 
+    // Reativados: agora funcionam porque o repositório retorna o tipo certo (List<Inscricao>)
     public List<Inscricao> listarPorOportunidade(Oportunidade oportunidade) {
-        return repository.listarPorOportunidade(oportunidade);
+        return inscricaoRepository.findAllByOportunidade(oportunidade);
     }
 
     public List<Inscricao> listarAprovados(Oportunidade oportunidade) {
-        return repository.listarAprovadosPorOportunidade(oportunidade);
+        return inscricaoRepository.findByOportunidadeAndStatus(oportunidade, StatusInscricao.APROVADO);
+    }
+
+    // Usado pelo controller para buscar a inscrição pelo id antes de aprovar/rejeitar/cancelar/substituir
+    public Inscricao buscarPorId(Integer id) {
+        return inscricaoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Inscrição não encontrada com id: " + id));
     }
 }

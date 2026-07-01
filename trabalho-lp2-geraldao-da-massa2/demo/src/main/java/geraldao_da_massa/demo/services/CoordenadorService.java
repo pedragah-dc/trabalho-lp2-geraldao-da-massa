@@ -6,13 +6,16 @@ import geraldao_da_massa.demo.entities.Docente;
 import geraldao_da_massa.demo.entities.SolicitacaoOportunidade;
 import geraldao_da_massa.demo.entities.enums.StatusSolicitacaoOportunidade;
 import geraldao_da_massa.demo.repositories.SolicitacaoOportunidadeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class CoordenadorService {
-
-	private final SolicitacaoOportunidadeRepository solicitacaoRepo;
+    @Autowired
+	private SolicitacaoOportunidadeRepository solicitacaoRepo;
 
 	public CoordenadorService(SolicitacaoOportunidadeRepository solicitacaoRepo) {
 		this.solicitacaoRepo = solicitacaoRepo;
@@ -28,7 +31,8 @@ public class CoordenadorService {
     }
 
 	public List<SolicitacaoOportunidade> listarSolicitacoesPendentesAtrasadas() {
-		return solicitacaoRepo.listarSolicitacoesPendentesAtrasadas();
+		//TODO TEM QUE FILTRAR
+        return solicitacaoRepo.findAll();
 	}
 
     public boolean solicitarReenvio(SolicitacaoOportunidade solicitacao) {

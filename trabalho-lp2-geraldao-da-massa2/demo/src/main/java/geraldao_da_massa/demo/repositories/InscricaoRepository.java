@@ -3,50 +3,25 @@ package geraldao_da_massa.demo.repositories;
 import geraldao_da_massa.demo.entities.Discente;
 import geraldao_da_massa.demo.entities.Inscricao;
 import geraldao_da_massa.demo.entities.Oportunidade;
+import geraldao_da_massa.demo.entities.SolicitacaoOportunidade;
 import geraldao_da_massa.demo.entities.enums.StatusInscricao;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class InscricaoRepository {
+public interface InscricaoRepository extends JpaRepository<Inscricao, Integer> {
 
-    private List<Inscricao> inscricoes = new ArrayList<>();
+    // Corrigido: "exists" retorna boolean de verdade (verifica se já existe
+    // uma inscrição desse discente NESSA oportunidade especifica)
+    boolean existsByOportunidadeAndDiscente(Oportunidade oportunidade, Discente discente);
 
-    public void salvar(Inscricao inscricao) {
-        inscricoes.add(inscricao);
-    }
+    // Corrigido: agora retorna List<Inscricao>, que é o tipo real do resultado
+    List<Inscricao> findAllByOportunidade(Oportunidade oportunidade);
 
-    public List<Inscricao> listarTodas() {
-        return new ArrayList<>(inscricoes);
-    }
+    // Novo: usado pelo RF019 para buscar só quem foi aprovado naquela oportunidade
+    List<Inscricao> findByOportunidadeAndStatus(Oportunidade oportunidade, StatusInscricao status);
 
-    public List<Inscricao> listarPorOportunidade(Oportunidade oportunidade) {
-        List<Inscricao> resultado = new ArrayList<>();
-        for (Inscricao i : inscricoes) {
-            if (i.getOportunidade().equals(oportunidade)) {
-                resultado.add(i);
-            }
-        }
-        return resultado;
-    }
+    Inscricao findByOportunidadeAndDiscente(Discente novoDiscente, Oportunidade oportunidade);
 
-    public List<Inscricao> listarAprovadosPorOportunidade(Oportunidade oportunidade) {
-        List<Inscricao> resultado = new ArrayList<>();
-        for (Inscricao i : inscricoes) {
-            if (i.getOportunidade().equals(oportunidade)
-                    && i.getStatus() == StatusInscricao.APROVADO) {
-                resultado.add(i);
-            }
-        }
-        return resultado;
-    }
-
-    public Inscricao buscarPorDiscenteEOportunidade(Discente discente, Oportunidade oportunidade) {
-        for (Inscricao i : inscricoes) {
-            if (i.getDiscente().equals(discente) && i.getOportunidade().equals(oportunidade)) {
-                return i;
-            }
-        }
-        return null;
-    }
+    List<SolicitacaoOportunidade> findAllByDiscente(Discente discente);
 }

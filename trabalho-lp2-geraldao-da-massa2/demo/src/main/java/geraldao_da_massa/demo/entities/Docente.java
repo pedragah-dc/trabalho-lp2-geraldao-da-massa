@@ -8,17 +8,16 @@ import java.util.HashSet;
 
 @SuperBuilder
 @Entity
-@Table(name = "Docente")
+@Table(name = "docente")
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "chavefk")
+@PrimaryKeyJoinColumn(name = "usuario")
 @Getter
 @Setter
 public class Docente extends Usuario {
 
     private String siape;
     private String departamento;
-    private HashSet<Grupo> grupos;
-    @OneToOne(optional = false)
+//    private HashSet<Grupo> grupos;
+    @OneToOne
     private Oportunidade oportunidade;
-
 }
